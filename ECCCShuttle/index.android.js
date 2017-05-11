@@ -22,6 +22,10 @@ export default class ECCCShuttle extends Component {
           backgroundColor='black'
         />
         <Image source={require('./Assets/logo.png')} style={styles.image} />
+        <View style={styles.line} />
+        <Text style={styles.title}>
+          Park & Ride Reward Program
+        </Text>
       </View>
     );
   }
@@ -39,6 +43,18 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 280,
   },
+  line: {
+    top: -96,
+    width: 280,
+    height: 1.5,
+    backgroundColor: 'white'
+  },
+  title: {
+    top: -91.5,
+    color: 'white',
+    fontFamily: 'Raleway-Light',
+    fontSize: 20,
+  }
 });
 
 AppRegistry.registerComponent('ECCCShuttle', () => ECCCShuttle);
