@@ -9,10 +9,11 @@ import {
   AppRegistry,
   StyleSheet,
   StatusBar,
-  Image,
-  Text,
   View
 } from 'react-native';
+
+import Logo from './app/components/Logo';
+import Login from './app/components/Login';
 
 export default class ECCCShuttle extends Component {
   render() {
@@ -21,19 +22,8 @@ export default class ECCCShuttle extends Component {
         <StatusBar
           backgroundColor='black'
         />
-        <Image source={require('./Assets/logo.png')} style={styles.image} />
-        <View style={styles.line} />
-          <Text style={styles.title}>
-          <Text style={styles.titleFirstHalf}>
-            Park & Ride
-          </Text>
-          <Text style={styles.dummy}>
-             -
-          </Text>
-          <Text style={styles.titleSecondHalf}>
-            Reward Program
-          </Text>
-        </Text>
+        <Logo/>
+        <Login/>
       </View>
     );
   }
@@ -46,31 +36,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'black',
   },
-  image: {
-    top: -101,
-    resizeMode: 'contain',
-    width: 280,
-  },
-  line: {
-    top: -96,
-    width: 280,
-    height: 1.5,
-    backgroundColor: 'white'
-  },
-  title: {
-    top: -92.5,
-    color: 'white',
-    fontSize: 21,
-  },
-  titleFirstHalf: {
-    fontFamily: 'Raleway-LightItalic',
-  },
-  titleSecondHalf: {
-    fontFamily: 'Raleway-Light',
-  },
-  dummy: {
-    color: 'black',
-  }
 });
 
 AppRegistry.registerComponent('ECCCShuttle', () => ECCCShuttle);
