@@ -23,8 +23,16 @@ export default class ECCCShuttle extends Component {
         />
         <Image source={require('./Assets/logo.png')} style={styles.image} />
         <View style={styles.line} />
-        <Text style={styles.title}>
-          Park & Ride Reward Program
+          <Text style={styles.title}>
+          <Text style={styles.titleFirstHalf}>
+            Park & Ride
+          </Text>
+          <Text style={styles.dummy}>
+             -
+          </Text>
+          <Text style={styles.titleSecondHalf}>
+            Reward Program
+          </Text>
         </Text>
       </View>
     );
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   image: {
-    top: -100,
+    top: -101,
     resizeMode: 'contain',
     width: 280,
   },
@@ -50,10 +58,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   title: {
-    top: -91.5,
+    top: -92.5,
     color: 'white',
+    fontSize: 21,
+  },
+  titleFirstHalf: {
+    fontFamily: 'Raleway-LightItalic',
+  },
+  titleSecondHalf: {
     fontFamily: 'Raleway-Light',
-    fontSize: 20,
+  },
+  dummy: {
+    color: 'black',
   }
 });
 
