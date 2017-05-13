@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class TransactionType extends Model
 {
     use SoftDeletes;
 
@@ -18,34 +18,21 @@ class User extends Model
         'updated_at',
         'deleted_at'
     ];
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'password',
-        'license_plate'
+        'type',
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password'
-    ];
-
-    /**
-     * Get the transactions for the user.
+     * Get the transactions for the transaction type.
      */
     public function transactions()
     {
-        return $this->hasMany('App\Transaction');
+        return $this->hasMany('App\Transaction', 'type_id');
     }
 }
