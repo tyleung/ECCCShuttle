@@ -6,7 +6,9 @@ import {
   Image,
   Text,
   TextInput,
+  TouchableHighlight,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View
 } from 'react-native';
 
@@ -79,65 +81,76 @@ export default class Login extends Component {
                         </View>
                     </TouchableOpacity>
                     <Modal isVisible={this.state.isModalVisible}>
-                        <View style={{flex: 1}}>
-                            <View style={styles.signUpContainer}>
-                                <Text style={[styles.ralewayLight, {fontSize:25, padding:28}]}>Sign up</Text>
-                                <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Email:</Text>
-                                <TextInput style={styles.signUpInput}
-                                    keyboardType='email-address'
-                                    multiline={false}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='next'
-                                    underlineColorAndroid={'black'}
-                                />
-                                <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Password:</Text>
-                                <TextInput style={styles.signUpInput}
-                                    keyboardType='default'
-                                    secureTextEntry
-                                    multiline={false}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='next'
-                                    underlineColorAndroid={'black'}
-                                />
-                                <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>First name:</Text>
-                                <TextInput style={styles.signUpInput}
-                                    keyboardType='default'
-                                    multiline={false}
-                                    autoCapitalize='words'
-                                    autoCorrect={false}
-                                    returnKeyType='next'
-                                    underlineColorAndroid={'black'}
-                                />
-                                <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Last name:</Text>
-                                <TextInput style={styles.signUpInput}
-                                    keyboardType='default'
-                                    multiline={false}
-                                    autoCapitalize='words'
-                                    autoCorrect={false}
-                                    returnKeyType='next'
-                                    underlineColorAndroid={'black'}
-                                />
-                                <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>License plate:</Text>
-                                <TextInput style={styles.signUpInput}
-                                    keyboardType='default'
-                                    multiline={false}
-                                    autoCapitalize='characters'
-                                    autoCorrect={false}
-                                    returnKeyType='next'
-                                    underlineColorAndroid={'black'}
-                                />
-                                <View style={styles.signUpPageButtonContainer}>
-                                    <TouchableOpacity onPress={this._hideModal}>
-                                            <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.c3} onPress={this.createOnPress}>
-                                            <Text style={styles.buttonForSignUpPage}>CREATE</Text>
-                                    </TouchableOpacity>
+                        <TouchableOpacity style={{flex: 1}} activeOpacity={1} onPress={this._hideModal}>
+                            <TouchableWithoutFeedback>
+                                <View style={styles.signUpContainer}>
+                                    <Text style={[styles.ralewayLight, {fontSize:25, padding:28}]}>Sign up</Text>
+                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Email:</Text>
+                                    <TextInput style={styles.signUpInput}
+                                        keyboardType='email-address'
+                                        multiline={false}
+                                        autoCapitalize='none'
+                                        autoCorrect={false}
+                                        returnKeyType='next'
+                                        underlineColorAndroid={'black'}
+                                        onSubmitEditing={() => this.signUpPasswordInput.focus()}
+                                    />
+                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Password:</Text>
+                                    <TextInput style={styles.signUpInput}
+                                        keyboardType='default'
+                                        secureTextEntry
+                                        multiline={false}
+                                        autoCapitalize='none'
+                                        autoCorrect={false}
+                                        returnKeyType='next'
+                                        underlineColorAndroid={'black'}
+                                        onSubmitEditing={() => this.signUpFirstNameInput.focus()}
+                                        ref={(input) => this.signUpPasswordInput = input}
+                                    />
+                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>First name:</Text>
+                                    <TextInput style={styles.signUpInput}
+                                        keyboardType='default'
+                                        multiline={false}
+                                        autoCapitalize='words'
+                                        autoCorrect={false}
+                                        returnKeyType='next'
+                                        underlineColorAndroid={'black'}
+                                        onSubmitEditing={() => this.signUpLastNameInput.focus()}
+                                        ref={(input) => this.signUpFirstNameInput = input}
+                                    />
+                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Last name:</Text>
+                                    <TextInput style={styles.signUpInput}
+                                        keyboardType='default'
+                                        multiline={false}
+                                        autoCapitalize='words'
+                                        autoCorrect={false}
+                                        returnKeyType='next'
+                                        underlineColorAndroid={'black'}
+                                        onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
+                                        ref={(input) => this.signUpLastNameInput = input}
+                                    />
+                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>License plate:</Text>
+                                    <TextInput style={styles.signUpInput}
+                                        keyboardType='default'
+                                        multiline={false}
+                                        autoCapitalize='characters'
+                                        autoCorrect={false}
+                                        returnKeyType='next'
+                                        underlineColorAndroid={'black'}
+                                        onSubmitEditing={this.createOnPress}
+                                        ref={(input) => this.signUpLicensePlateInput = input}
+                                    />
+                                    <View style={styles.signUpPageButtonContainer}>
+                                        <TouchableOpacity onPress={this._hideModal}>
+                                                <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.c3} onPress={this.createOnPress}>
+                                                <Text style={styles.buttonForSignUpPage}>CREATE</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
+                            </TouchableWithoutFeedback>
+                        </TouchableOpacity>
                     </Modal>
                     <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
                         <View>
