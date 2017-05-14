@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('points')->default(0);
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('type_id')->references('id')->on('transaction_type');
+            $table->foreign('type_id')->references('id')->on('transaction_types');
         });
     }
 

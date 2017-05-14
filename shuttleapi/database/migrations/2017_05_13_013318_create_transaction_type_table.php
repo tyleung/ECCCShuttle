@@ -12,7 +12,7 @@ class CreateTransactionTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_type', function (Blueprint $table) {
+        Schema::create('transaction_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type', 255)->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTransactionTypeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('transaction_type');
+        Schema::drop('transaction_types');
     }
 }
