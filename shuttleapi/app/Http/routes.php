@@ -15,4 +15,12 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('/api/test1', 'TestController@index');
+$app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function() use ($app) {
+    $app->get('users', 'UserController@index');
+    $app->get('users/{id}', 'UserController@getUser');
+    $app->get('users/{id}/transactions', 'UserController@getUserTransactions');
+    $app->post('users', 'UserController@createUser');
+    $app->get('transactions', 'TransactionController@index');
+    $app->get('transactions/types/{id}', 'TransactionController@getTransactionsByType');    
+    $app->post('transactions', 'TransactionController@createTransaction');
+});
