@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
   View
 } from 'react-native';
 
@@ -135,7 +136,7 @@ export default class Login extends Component {
                                         multiline={false}
                                         autoCapitalize='characters'
                                         autoCorrect={false}
-                                        returnKeyType='next'
+                                        returnKeyType='go'
                                         underlineColorAndroid={'black'}
                                         onSubmitEditing={this.createOnPress}
                                         ref={(input) => this.signUpLicensePlateInput = input}
@@ -169,12 +170,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'black',
+        backgroundColor: 'black'
     },
     image: {
         top: -81,
         resizeMode: 'contain',
-        width: 280,
+        width: 280
     },
     logoLine: {
         top: -76,
@@ -185,13 +186,13 @@ const styles = StyleSheet.create({
     title: {
         top: -72.5,
         color: 'white',
-        fontSize: 21,
+        fontSize: 21
     },
     ralewayLightItalic: {
-        fontFamily: 'Raleway-LightItalic',
+        fontFamily: 'Raleway-LightItalic'
     },
     ralewayLight: {
-        fontFamily: 'Raleway-Light',
+        fontFamily: 'Raleway-Light'
     },
     emailInput: {
         top: 5,
