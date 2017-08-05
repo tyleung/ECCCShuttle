@@ -43,7 +43,7 @@ export default class Login extends Component {
             backgroundColor='black'
             />
             <View>
-                <Image source={require('./../../assets/logo.png')} style={styles.image} />
+                <Image source={require('./../../Assets/logo.png')} style={styles.image} />
                 <View style={styles.logoLine}/>
                 <Text style={styles.title}>
                     <Text style={styles.ralewayLightItalic}>

@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ToolbarAndroid,
   Image
 } from 'react-native';
 
@@ -14,15 +15,24 @@ export default class ECCCShuttle extends Component {
   render() {
     return (
         <View style={styles.container}>
+          <ToolbarAndroid
+            style={styles.toolbar}
+            title=" QR Scanner"
+            titleColor='white'
+            navIcon={require('./../../Assets/navicon.png')}
+            onActionSelected={this.onActionSelected}
+            />
           <StatusBar
             backgroundColor='black'
             />
           <TouchableOpacity style={styles.buttonContainer}>
+              <View style={{flex: 1}}>
               <Text style={[styles.ralewayLight, styles.QRButtonText]}>
                 Scan QR Code
               </Text>
-              <View style={{marginLeft: 200}}>
-                  <Image source={require('./../../assets/qricon.png')} style={styles.image} />
+              </View>
+              <View style={{flex: 1, alignItems: 'flex-end', marginRight: 15}}>
+                  <Image source={require('./../../Assets/qricon.png')} style={styles.image} />
               </View>
           </TouchableOpacity>
           <Text style={[styles.ralewayLightItalic, styles.pointText]}>
@@ -32,8 +42,13 @@ export default class ECCCShuttle extends Component {
                 last updated: just now
           </Text>
           <TouchableOpacity style={styles.refresh}>
-                  <Image source={require('./../../assets/refresh.png')} style={styles.refreshImage}/>
-                  <Text style={[styles.ralewayLight, styles.refreshButtonText]}>Refresh</Text>
+                  <View style={{flex: 0.5}}>
+                    <Image source={require('./../../Assets/refresh.png')} style={styles.refreshImage}/>
+                  </View>
+                  <View style={{flex: 1}}>
+                    <Text style={[styles.ralewayLight, styles.refreshButtonText]}>Refresh</Text>
+                  </View>
+                  <View style={{flex: 0.5}}></View>
           </TouchableOpacity>
         </View>
     );
@@ -83,6 +98,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   refresh:{
+    flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 105,
     borderRadius: 23,
@@ -91,7 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   refreshButtonText: {
-  marginLeft: 23,
+  marginLeft: 10,
   fontSize: 22,
   color: 'black'
   },
@@ -100,7 +116,12 @@ const styles = StyleSheet.create({
   resizeMode: 'contain',
   width: 30,
   height: 30
-  }
+},
+  toolbar: {
+   backgroundColor: 'black',
+   height: 56,
+   alignSelf: 'stretch',
+  }  
 });
 
 AppRegistry.registerComponent('Main', () => Main);
