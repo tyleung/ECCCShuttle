@@ -4,6 +4,7 @@
  * @flow
  */
 
+import App from './App';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -12,24 +13,12 @@ import {
   View
 } from 'react-native';
 
-import Login from './app/components/Login';
-import Main from './app/components/Main';
-
 export default class ECCCShuttle extends Component {
   render() {
     return (
-        <Main/>
+        <App/>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'blue'
-    }
-});
 
 AppRegistry.registerComponent('ECCCShuttle', () => ECCCShuttle);
