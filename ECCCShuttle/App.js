@@ -12,6 +12,7 @@ import { DrawerItems } from 'react-navigation';
 import Login from './app/components/Login';
 import QRScanner from './app/components/QRScanner';
 import RideHistory from './app/components/RideHistory';
+import About from'./app/components/About';
 
 const DrawerExample = DrawerNavigator(
     {
@@ -21,8 +22,12 @@ const DrawerExample = DrawerNavigator(
         },
         RideHistoryScreen: {
             path:'/sent',
-            screen: RideHistory
+            screen: RideHistory,
         },
+        AboutScreen: {
+            path:'/sent',
+            screen: About,
+        }
     },
     {
         initialRouteName: 'QRScannerScreen',
