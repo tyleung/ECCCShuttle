@@ -14,6 +14,7 @@ import QRScanner from './app/components/QRScanner';
 import RideHistory from './app/components/RideHistory';
 import About from'./app/components/About';
 import Settings from'./app/components/Settings';
+import ScanScreen from'./app/components/ScanScreen';
 
 const DrawerExample = DrawerNavigator(
     {
@@ -36,6 +37,10 @@ const DrawerExample = DrawerNavigator(
         LoginScreen: {
             path: '/sent',
             screen: Login
+        },
+        ScanScreen: {
+            path: '/sent',
+            screen: ScanScreen
         },
     },
     {
