@@ -75,7 +75,7 @@ export default class Settings extends Component {
                 <TouchableWithoutFeedback>
                     <View style={styles.modalContainer}>
                         <Text style={styles.modalTitle}>Remove Account?</Text>
-                        <Text style={styles.modalText}>Removing this account will permanently delete all of data from the datebase. This includes all ride history, collected points, license plate number, etc. Do you want to continue?</Text>
+                        <Text style={styles.modalText}>Removing this account will permanently delete all of its data from the datebase. This includes all ride history, collected points, license plate number, etc. Do you want to continue?</Text>
                         <View style={styles.modalButtonsContainer}>
                             <View style={{flex:1}}>
                                 <View style={styles.modalButtonContainer}>
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway-Medium',
         fontSize: 22,
         padding: 15,
+        paddingTop: 20,
         color: 'red'
   },
   modalText: {
