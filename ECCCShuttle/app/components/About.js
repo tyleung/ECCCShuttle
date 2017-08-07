@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 
-export default class QRScanner extends Component {
+export default class About extends Component {
   static navigationOptions = {
     drawerLabel: '  About',
   };

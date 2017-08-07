@@ -13,6 +13,7 @@ import Login from './app/components/Login';
 import QRScanner from './app/components/QRScanner';
 import RideHistory from './app/components/RideHistory';
 import About from'./app/components/About';
+import Settings from'./app/components/Settings';
 
 const DrawerExample = DrawerNavigator(
     {
@@ -27,7 +28,11 @@ const DrawerExample = DrawerNavigator(
         AboutScreen: {
             path:'/sent',
             screen: About,
-        }
+        },
+        SettingsScreen: {
+            path:'/sent',
+            screen: Settings
+        },
     },
     {
         initialRouteName: 'QRScannerScreen',
@@ -47,10 +52,10 @@ const DrawerExample = DrawerNavigator(
         contentComponent: props => 
             <View style={styles.container}>
                 <View style={styles.profile}>
-                    <View style={{flex:0.4, justifyContent:'center'}}>
-                        <Image source={require('./Assets/profile.png')} style={styles.image}/>
+                    <View style={{flex:0.4, justifyContent:'center', paddingVertical: 10}}>
+                        <Image source={require('./Assets/profileBlack.png')} style={styles.image}/>
                     </View>
-                    <View style={{flex:1, justifyContent:'center'}}>
+                    <View style={{flex:1, justifyContent:'center', paddingVertical: 10}}>
                         <Text style={styles.text}>Canopus Tong</Text>
                     </View>
                 </View>
@@ -64,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profile: {
-    flex:0.12,
     borderBottomWidth: 2,
     marginBottom: 8,
     flexDirection: 'row',

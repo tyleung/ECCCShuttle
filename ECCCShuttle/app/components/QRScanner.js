@@ -35,7 +35,7 @@ export default class RideHistory extends Component {
                 Scan QR Code
               </Text>
               </View>
-              <View style={{flex: 1, alignItems: 'flex-end', marginRight: 15}}>
+              <View style={{flex: 1, alignItems: 'flex-end', marginRight: 15, justifyContent: 'center'}}>
                   <Image source={require('./../../Assets/qricon.png')} style={styles.image} />
               </View>
           </TouchableOpacity>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   image: {
     resizeMode: 'contain',
     width: 30,
-    height: 58
+    height: 30
   },
   ralewayLightItalic: {
     fontFamily: 'Raleway-LightItalic'

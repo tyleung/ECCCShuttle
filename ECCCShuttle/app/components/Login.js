@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         marginVertical: 75,
         marginHorizontal: 24,
         backgroundColor: 'white',
-        borderRadius: 10
+        borderRadius: 5
     },
     signUpInput: {
         color: 'black',
