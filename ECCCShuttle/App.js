@@ -11,13 +11,17 @@ import { DrawerItems } from 'react-navigation';
 
 import Login from './app/components/Login';
 import QRScanner from './app/components/QRScanner';
-
+import RideHistory from './app/components/RideHistory';
 
 const DrawerExample = DrawerNavigator(
     {
         QRScannerScreen: {
             path:'/',
             screen: QRScanner,
+        },
+        RideHistoryScreen: {
+            path:'/sent',
+            screen: RideHistory
         },
     },
     {

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 
-export default class QRScanner extends Component {
+export default class RideHistory extends Component {
   static navigationOptions = {
     drawerLabel: '  QR Scanner',
   };
@@ -46,7 +46,7 @@ export default class QRScanner extends Component {
                 last updated: just now
           </Text>
           <TouchableOpacity style={styles.refresh}>
-                  <View style={{flex: 0.5}}>
+                  <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
                     <Image source={require('./../../Assets/refresh.png')} style={styles.refreshImage}/>
                   </View>
                   <View style={{flex: 1}}>
@@ -111,19 +111,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   refreshButtonText: {
-  marginLeft: 10,
-  fontSize: 22,
-  color: 'black'
+    textAlign: 'center',
+    fontSize: 22,
+    color: 'black'
   },
   refreshImage: {
-  marginLeft: 10,
-  resizeMode: 'contain',
-  width: 30,
-  height: 30
-},
+    resizeMode: 'contain',
+    width: 30,
+    height: 30
+  },
   toolbar: {
-   backgroundColor: 'black',
-   height: 56,
-   alignSelf: 'stretch',
+    backgroundColor: 'black',
+    height: 56,
+    alignSelf: 'stretch',
   }  
 });
