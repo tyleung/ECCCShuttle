@@ -52,10 +52,10 @@ const DrawerExample = DrawerNavigator(
         contentComponent: props => 
             <View style={styles.container}>
                 <View style={styles.profile}>
-                    <View style={{flex:0.4, justifyContent:'center', paddingVertical: 10}}>
+                    <View style={{flex:0.4, justifyContent:'center', paddingVertical: 16}}>
                         <Image source={require('./Assets/profileBlack.png')} style={styles.image}/>
                     </View>
-                    <View style={{flex:1, justifyContent:'center', paddingVertical: 10}}>
+                    <View style={{flex:1, justifyContent:'center', paddingVertical: 16}}>
                         <Text style={styles.text}>Canopus Tong</Text>
                     </View>
                 </View>
