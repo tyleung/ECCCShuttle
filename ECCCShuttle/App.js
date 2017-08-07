@@ -33,6 +33,10 @@ const DrawerExample = DrawerNavigator(
             path:'/sent',
             screen: Settings
         },
+        LoginScreen: {
+            path: '/sent',
+            screen: Login
+        },
     },
     {
         initialRouteName: 'QRScannerScreen',

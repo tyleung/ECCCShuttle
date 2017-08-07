@@ -17,6 +17,10 @@ import Modal from 'react-native-modal'
 
 export default class Login extends Component {
 
+  static navigationOptions = {
+    drawerLabel: '  Logout',
+  };
+
   state = {
     isModalVisible: false
   }
@@ -279,5 +283,3 @@ const styles = StyleSheet.create({
         paddingHorizontal:28
     }
 });
-
-AppRegistry.registerComponent('Login', () => Login);
