@@ -30,7 +30,7 @@ export default class ScanScreen extends Component {
             cameraStyle={styles.cameraContainer}
             topViewStyle={styles.zeroContainer}
             bottomViewStyle={styles.zeroContainer}
-            showMarker={true}
+            showCustomMarker={true}
             fadeIn={false}
           /> 
         </View>
