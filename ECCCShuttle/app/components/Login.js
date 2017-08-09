@@ -85,78 +85,6 @@ export default class Login extends Component {
                             <Text style={styles.button}>Sign up</Text>
                         </View>
                     </TouchableOpacity>
-                    <Modal isVisible={this.state.isModalVisible}>
-                        <TouchableOpacity style={{flex: 1}} activeOpacity={1} onPress={this._hideModal}>
-                            <TouchableWithoutFeedback>
-                                <View style={styles.signUpContainer}>
-                                    <Text style={[styles.ralewayLight, {fontSize:25, padding:28}]}>Sign up</Text>
-                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Email:</Text>
-                                    <TextInput style={styles.signUpInput}
-                                        keyboardType='email-address'
-                                        multiline={false}
-                                        autoCapitalize='none'
-                                        autoCorrect={false}
-                                        returnKeyType='next'
-                                        underlineColorAndroid={'black'}
-                                        onSubmitEditing={() => this.signUpPasswordInput.focus()}
-                                    />
-                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Password:</Text>
-                                    <TextInput style={styles.signUpInput}
-                                        keyboardType='default'
-                                        secureTextEntry
-                                        multiline={false}
-                                        autoCapitalize='none'
-                                        autoCorrect={false}
-                                        returnKeyType='next'
-                                        underlineColorAndroid={'black'}
-                                        onSubmitEditing={() => this.signUpFirstNameInput.focus()}
-                                        ref={(input) => this.signUpPasswordInput = input}
-                                    />
-                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>First name:</Text>
-                                    <TextInput style={styles.signUpInput}
-                                        keyboardType='default'
-                                        multiline={false}
-                                        autoCapitalize='words'
-                                        autoCorrect={false}
-                                        returnKeyType='next'
-                                        underlineColorAndroid={'black'}
-                                        onSubmitEditing={() => this.signUpLastNameInput.focus()}
-                                        ref={(input) => this.signUpFirstNameInput = input}
-                                    />
-                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Last name:</Text>
-                                    <TextInput style={styles.signUpInput}
-                                        keyboardType='default'
-                                        multiline={false}
-                                        autoCapitalize='words'
-                                        autoCorrect={false}
-                                        returnKeyType='next'
-                                        underlineColorAndroid={'black'}
-                                        onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
-                                        ref={(input) => this.signUpLastNameInput = input}
-                                    />
-                                    <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>License plate:</Text>
-                                    <TextInput style={styles.signUpInput}
-                                        keyboardType='default'
-                                        multiline={false}
-                                        autoCapitalize='characters'
-                                        autoCorrect={false}
-                                        returnKeyType='go'
-                                        underlineColorAndroid={'black'}
-                                        onSubmitEditing={this.createOnPress}
-                                        ref={(input) => this.signUpLicensePlateInput = input}
-                                    />
-                                    <View style={styles.signUpPageButtonContainer}>
-                                        <TouchableOpacity onPress={this._hideModal}>
-                                                <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.c3} onPress={this.createOnPress}>
-                                                <Text style={styles.buttonForSignUpPage}>CREATE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </TouchableOpacity>
-                    </Modal>
                     <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
                         <View>
                             <Text style={styles.button}>Login</Text>
@@ -184,8 +112,9 @@ const styles = StyleSheet.create({
     logoLine: {
         top: -76,
         width: 280,
-        height: 1.5,
-        backgroundColor: 'white'
+        height: 0,
+        borderBottomWidth: 1.5,
+        borderColor: 'white',
     },
     title: {
         top: -72.5,
@@ -283,3 +212,67 @@ const styles = StyleSheet.create({
         paddingHorizontal:28
     }
 });
+
+
+
+                    // <Modal isVisible={this.state.isModalVisible}>
+                    //     <TouchableOpacity style={{flex: 1}} activeOpacity={1} onPress={this._hideModal}>
+                    //         <TouchableWithoutFeedback>
+                    //             <View style={styles.signUpContainer}>
+                    //                 <Text style={[styles.ralewayLight, {fontSize:25, padding:28}]}>Sign up</Text>
+                    //                 <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Email:</Text>
+                    //                 <TextInput style={styles.signUpInput}
+                    //                     keyboardType='email-address'
+                    //                     multiline={false}
+                    //                     autoCapitalize='none'
+                    //                     autoCorrect={false}
+                    //                     returnKeyType='next'
+                    //                     underlineColorAndroid={'black'}
+                    //                     onSubmitEditing={() => this.signUpPasswordInput.focus()}
+                    //                 />
+                    //                 <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Password:</Text>
+                    //                 <TextInput style={styles.signUpInput}
+                    //                     keyboardType='default'
+                    //                     secureTextEntry
+                    //                     multiline={false}
+                    //                     autoCapitalize='none'
+                    //                     autoCorrect={false}
+                    //                     returnKeyType='next'
+                    //                     underlineColorAndroid={'black'}
+                    //                     onSubmitEditing={() => this.signUpNameInput.focus()}
+                    //                     ref={(input) => this.signUpPasswordInput = input}
+                    //                 />
+                    //                 <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Name:</Text>
+                    //                 <TextInput style={styles.signUpInput}
+                    //                     keyboardType='default'
+                    //                     multiline={false}
+                    //                     autoCapitalize='words'
+                    //                     autoCorrect={false}
+                    //                     returnKeyType='next'
+                    //                     underlineColorAndroid={'black'}
+                    //                     onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
+                    //                     ref={(input) => this.signUpNameInput = input}
+                    //                 />
+                    //                 <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>License plate:</Text>
+                    //                 <TextInput style={styles.signUpInput}
+                    //                     keyboardType='default'
+                    //                     multiline={false}
+                    //                     autoCapitalize='characters'
+                    //                     autoCorrect={false}
+                    //                     returnKeyType='go'
+                    //                     underlineColorAndroid={'black'}
+                    //                     onSubmitEditing={this.createOnPress}
+                    //                     ref={(input) => this.signUpLicensePlateInput = input}
+                    //                 />
+                    //                 <View style={styles.signUpPageButtonContainer}>
+                    //                     <TouchableOpacity onPress={this._hideModal}>
+                    //                             <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
+                    //                     </TouchableOpacity>
+                    //                     <TouchableOpacity style={styles.c3} onPress={this.createOnPress}>
+                    //                             <Text style={styles.buttonForSignUpPage}>CREATE</Text>
+                    //                     </TouchableOpacity>
+                    //                 </View>
+                    //             </View>
+                    //         </TouchableWithoutFeedback>
+                    //     </TouchableOpacity>
+                    // </Modal>

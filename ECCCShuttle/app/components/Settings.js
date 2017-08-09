@@ -58,6 +58,16 @@ export default class Settings extends Component {
                   <Image source={require('./../../Assets/pencil.png')} style={styles.pencilIcon} />
               </View>
           </TouchableOpacity>
+          <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]}>
+              <View style={{flex: 1}}>
+                <Text style={[styles.ralewayLight, styles.profileText]}>
+                    AA 1201
+                </Text>
+              </View>
+              <View style={{alignItems: 'flex-end', marginHorizontal: 15, justifyContent: 'center'}}>
+                  <Image source={require('./../../Assets/pencil.png')} style={styles.pencilIcon} />
+              </View>
+          </TouchableOpacity>
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <TouchableOpacity style={[styles.profileContainer, {borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 30}]} onPress={this._showModal}>
                 <View style={{flex: 1}}>
