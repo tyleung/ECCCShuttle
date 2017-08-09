@@ -79,16 +79,16 @@ export default class Settings extends Component {
                         <View style={styles.modalButtonsContainer}>
                             <View style={{flex:1}}>
                                 <View style={styles.modalButtonContainer}>
-                                <TouchableOpacity onPress={this._hideModal}>
-                                    <Text style={styles.modalButtonText}>CANCEL</Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity onPress={this._hideModal}>
+                                        <Text style={styles.modalButtonText}>CANCEL</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={{flex:1}}>
                                 <View style={styles.modalButtonContainer}>
-                                <TouchableOpacity>
-                                    <Text style={styles.modalButtonText}>REMOVE</Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <Text style={styles.modalButtonText}>REMOVE</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>

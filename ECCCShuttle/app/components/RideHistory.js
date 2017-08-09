@@ -14,7 +14,8 @@ import {
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
 
 
-export default class QRScanner extends Component {
+export default class RideHistory extends Component {
+  
   static navigationOptions = {
     drawerLabel: '  Ride History',
   };

@@ -1,128 +1,96 @@
 import React, { Component } from 'react';
+
 import {
   AppRegistry,
   StyleSheet,
-  StatusBar,
-  View,
   Text,
   TouchableOpacity,
-  ToolbarAndroid,
-  Image
+  Linking,
+  View,
+  Dimensions
 } from 'react-native';
 
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export default class RideHistory extends Component {
+export default class QRScanner extends Component {
+
   static navigationOptions = {
-    drawerLabel: '  QR Scanner',
   };
 
+  onSuccess(e) {
+    Linking.openURL(e.data).catch(err => console.error('An error occured', err));
+  }
+
   render() {
+    var {navigate} = this.props.navigation;
     return (
-        <View style={styles.container}>
-          <ToolbarAndroid
-            style={styles.toolbar}
-            title=" QR Scanner"
-            titleColor='white'
-            navIcon={require('./../../Assets/navicon.png')}
-            onIconClicked={() => this.props.navigation.navigate('DrawerOpen')}
-            />
-          <StatusBar
-            backgroundColor='black'
-            />
-          <TouchableOpacity style={styles.buttonContainer}>
-              <View style={{flex: 1}}>
-              <Text style={[styles.ralewayLight, styles.QRButtonText]}>
-                Scan QR Code
-              </Text>
-              </View>
-              <View style={{flex: 1, alignItems: 'flex-end', marginRight: 15, justifyContent: 'center'}}>
-                  <Image source={require('./../../Assets/qricon.png')} style={styles.image} />
-              </View>
-          </TouchableOpacity>
-          <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-                You have 1000 points!
-          </Text>
-          <Text style={[styles.ralewayLight, styles.updateText]}>
-                last updated: just now
-          </Text>
-          <TouchableOpacity style={styles.refresh}>
-                  <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
-                    <Image source={require('./../../Assets/refresh.png')} style={styles.refreshImage}/>
+        <View style={{flex:1}}>
+          <QRCodeScanner
+            onRead={() => alert('Success')}
+            cameraStyle={styles.cameraContainer}
+            topViewStyle={styles.zeroContainer}
+            bottomViewStyle={styles.zeroContainer}
+            showCustomMarker={true}
+            fadeIn={false}
+            cameraOverlay={(
+              <View style={styles.customRectangleContainer}>
+                <View style={styles.customOutsideMarker}>
+                  <Text style={styles.customTitleText}>Scan QR Code</Text>
+                </View>
+                <View style={{height: 250, flexDirection:'row'}}>
+                  <View style={styles.customOutsideMarker}>
                   </View>
-                  <View style={{flex: 1}}>
-                    <Text style={[styles.ralewayLight, styles.refreshButtonText]}>Refresh</Text>
+                  <View style={styles.customRectangle}/> 
+                  <View style={styles.customOutsideMarker}>
                   </View>
-                  <View style={{flex: 0.5}}></View>
-          </TouchableOpacity>
+                </View>
+                <View style={[styles.customOutsideMarker, {justifyContent:'flex-end', alignItems: 'center'}]}>
+                  <TouchableOpacity style={{marginBottom: 50}} onPress={() => navigate("MainScreen")}>
+                      <Text style={styles.customBottomText}>Cancel</Text>
+                  </TouchableOpacity> 
+                </View>
+              </View>
+            )}
+          /> 
         </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor: '#F5F5F5'
+  zeroContainer: {
+    height: 0,
+    flex: 0,
   },
-  buttonContainer:{
-    marginTop: 200,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderColor: '#223E4A',
-    borderTopWidth: 1,
-    borderBottomWidth: 1
+  cameraContainer: {
+    height: Dimensions.get('window').height,
   },
-  QRButtonText: {
-    fontSize: 22,
-    color: 'black', 
-    paddingLeft: 21, 
-    paddingVertical: 17
+    customRectangleContainer: {
+    flex: 0,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    flexDirection: 'column',
   },
-  ralewayLight: {
-    fontFamily: 'Raleway-Light'
-  },
-  image: {
-    resizeMode: 'contain',
-    width: 30,
-    height: 30
-  },
-  ralewayLightItalic: {
-    fontFamily: 'Raleway-LightItalic'
-  },
-  pointText: {
-    marginTop: 46,
-    fontSize: 22,
-    color: 'black',
-    textAlign: 'center',
-  },
-  updateText: {
-    marginTop: 8,
-    fontSize: 15,
-    color: 'black',
-    textAlign: 'center',
-  },
-  refresh:{
-    flexDirection: 'row',
-    marginTop: 15,
-    marginHorizontal: 105,
-    borderRadius: 23,
+
+  customRectangle: {
+    height: 250,
+    width: 250,
     borderWidth: 1,
-    paddingVertical: 7,
-    flexDirection: 'row'
+    borderColor: 'white',
+    backgroundColor: 'transparent',
   },
-  refreshButtonText: {
-    textAlign: 'center',
+  customOutsideMarker: {
+    flex:1,
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  customTitleText: {
+    color: 'white',
     fontSize: 22,
-    color: 'black'
+    textAlign: 'center',
+    marginTop: 20
   },
-  refreshImage: {
-    resizeMode: 'contain',
-    width: 30,
-    height: 30
+  customBottomText: {
+    color: 'white',
+    fontSize: 22,
   },
-  toolbar: {
-    backgroundColor: 'black',
-    height: 56,
-    alignSelf: 'stretch',
-  }  
 });

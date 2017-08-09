@@ -6,45 +6,54 @@
 
 import React from 'react';
 import {Button, Text, Platform, ScrollView, StyleSheet, View, Image} from 'react-native';
-import {DrawerNavigator} from 'react-navigation';
+import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import { DrawerItems } from 'react-navigation';
 
 import Login from './app/components/Login';
-import QRScanner from './app/components/QRScanner';
+import Main from './app/components/Main';
 import RideHistory from './app/components/RideHistory';
 import About from'./app/components/About';
 import Settings from'./app/components/Settings';
-import ScanScreen from'./app/components/ScanScreen';
+import QRScanner from'./app/components/QRScanner';
 
-const DrawerExample = DrawerNavigator(
+const StackNav = StackNavigator(
     {
-        QRScannerScreen: {
-            path:'/',
+        MainScreen: {
+                screen: Main,
+                header: { visible:false }
+            },
+        ScannerScreen: {
             screen: QRScanner,
-        },
-        RideHistoryScreen: {
-            path:'/sent',
-            screen: RideHistory,
-        },
-        AboutScreen: {
-            path:'/sent',
-            screen: About,
-        },
-        SettingsScreen: {
-            path:'/sent',
-            screen: Settings
-        },
-        LoginScreen: {
-            path: '/sent',
-            screen: Login
-        },
-        ScanScreen: {
-            path: '/sent',
-            screen: ScanScreen
+            header: { visible:false }
         },
     },
     {
-        initialRouteName: 'QRScannerScreen',
+        initialRouteName: 'MainScreen',
+        mode: 'card',
+        headerMode: 'none',
+    }
+);
+
+export default DrawerNav = DrawerNavigator(
+    {
+        StackNavScreen: {
+            screen: StackNav,
+        },
+        RideHistoryScreen: {
+            screen: RideHistory,
+        },
+        AboutScreen: {
+            screen: About,
+        },
+        SettingsScreen: {
+            screen: Settings
+        },
+        LoginScreen: {
+            screen: Login
+        },
+    },
+    {
+        initialRouteName: 'StackNavScreen',
         drawerPosition: 'left',
         drawerWidth: 320,
         contentOptions: {
@@ -93,5 +102,3 @@ const styles = StyleSheet.create({
     marginLeft: 25
   }
 });
-
-export default DrawerExample;
