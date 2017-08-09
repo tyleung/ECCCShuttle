@@ -1,0 +1,20 @@
+Library used:
+https://github.com/react-community/react-navigation
+https://github.com/react-native-community/react-native-modal
+https://github.com/moaazsidat/react-native-qrcode-scanner
+
+npm install --save react-navigation
+npm install --save react-native-modal
+npm install react-native-camera --save
+react-native link react-native-camera
+npm install react-native-qrcode-scanner --save
+react-native link react-native-qrcode-scanner
+
+- How to add custom font
+https://medium.com/@danielskripnik/how-to-add-and-remove-custom-fonts-in-react-native-b2830084b0e4
+
+- unable to load script from assets index.android.bundle on windows
+https://stackoverflow.com/questions/44446523/unable-to-load-script-from-assets-index-android-bundle-on-windows
+solution:
+mkdir android/app/src/main/assets
+react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
