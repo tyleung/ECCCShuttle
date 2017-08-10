@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_e19e8a2d409931163b0d6d4e428f4ed458bd59d8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-1.0.1_7b6a2475b7dd384655b3a163d822d1d01c1a3bd1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\javax.inject-1_30243309c42b6e9708b80b2d0f4cd73163c5c9cb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_0fb1e455dfaa561bf048a9ab9be41719b50bf258.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1_b09b0435a712f47311c04bca4fd6728f491bb00d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\okhttp-3.6.0_a90f8b84a448dd6f69b05a5be8295d90fbe89896.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.47.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="576b5113887747a7592650ae14d980e1c57983c4">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.react-react-native-0.47.1_ddd26bf86c0accc15315d315e6cf7eb271c12f6f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-1.0.1_2248ecb176a4a6077b2db68cb5fd4261c8877b01.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\bolts-tasks-1.4.0_61dc96a662f22496d47dc05ebdb4460a490d984c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_b89d3326bec94ce787a6654710331d3168033fd5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-3.6.0_24e0b983caadb4688170f0a33dcb00c2897c6c31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\staticlayout-proxy-1.0_6b80aa83a95355f7df7d2e0298b15c639124136c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.0.1_10fcfe52a8672b798fe8aba07f9e3a6cb5399714.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0_680fc50f727e40c785af2e9520dbcce1bdbb0fb7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.drewnoakes\metadata-extractor\2.9.1\53fdf22be10c9d426ec63431c7342895bc642261\metadata-extractor-2.9.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="53fdf22be10c9d426ec63431c7342895bc642261">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\metadata-extractor-2.9.1_d12e9e856db8fc69e94255224af6ab89997de0b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.adobe.xmp\xmpcore\5.1.2\55615fa2582424e38705487d1d3969af8554f637\xmpcore-5.1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="55615fa2582424e38705487d1d3969af8554f637">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\xmpcore-5.1.2_2d95b0d718a3ce06214fc61aefb09bccf69eefe7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-drawee-1.0.1_a8b1ed94b2b5ed045dd9e2752357fcee6076b5e4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.47.1\jars\libs\infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_d2053997fe6ef94bbcd32ad4c1efc67a02e3e311.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-okhttp3-1.0.1_db49e961a76c9b56543f405b42e65ba5fd14e196.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_29bf9e56cf9c8aed63cd4db7ab53c888d1f53874.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_a9e2aec0459914dfe96dd73c98503fb3587287e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.0.1_1383e26c71caad5603ed3cf9a40c65b4b74b0da0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.2.1\2287494d4f5f9f3a9a2bb6980e3f32053721b315\core-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\core-3.2.1_b9a49b37fff7b571d8c111122abd48d2934432cc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\ECCCShuttle\react-native-camera\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9161da891dd3c9ae10d21b1a1f9f1b0ff683cfe">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\ECCCShuttle-react-native-camera-unspecified_71519b4120110cb15a6125f1c735a2ebdaf5b7f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
+        <dex dex="C:\Users\Canopy\Desktop\E3C\ECCCShuttle\ECCCShuttle\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fresco-1.0.1_490a6fcf74e9820aa71d7bd91b307ce060731362.jar" />
+    </item>
+
+</items>
