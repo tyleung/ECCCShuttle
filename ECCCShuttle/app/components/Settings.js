@@ -10,18 +10,24 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
+
+// https://github.com/react-native-community/react-native-modal
 import Modal from 'react-native-modal'
 
 
 export default class Settings extends Component {
+
+  // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: '  Settings',
   };
 
+  // Modal not visible by default
   state = {
     isModalVisible: false
   }
   
+  // Modal's show and hide methods
   _showModal = () => this.setState({ isModalVisible: true })
   _hideModal = () => this.setState({ isModalVisible: false })
 
@@ -38,9 +44,12 @@ export default class Settings extends Component {
           <StatusBar
             backgroundColor='black'
             />
+          {/* Profile icon */}
           <View style={{marginVertical: 30, marginLeft: 40}}>
             <Image source={require('./../../Assets/profileGrey.png')} style={styles.profileIcon} />
           </View>
+
+          {/* Show user's email address */}
           <TouchableOpacity style={[styles.profileContainer, {borderTopWidth: 1, borderBottomWidth: 1}]}>
               <View style={{flex: 1}}>
                 <Text style={[styles.ralewayLight, styles.profileText]}>
@@ -48,6 +57,8 @@ export default class Settings extends Component {
                 </Text>
               </View>
           </TouchableOpacity>
+
+          {/* Shower user's name */}
           <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]}>
               <View style={{flex: 1}}>
                 <Text style={[styles.ralewayLight, styles.profileText]}>
@@ -58,6 +69,8 @@ export default class Settings extends Component {
                   <Image source={require('./../../Assets/pencil.png')} style={styles.pencilIcon} />
               </View>
           </TouchableOpacity>
+
+          {/* Show user's license plate */}
           <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]}>
               <View style={{flex: 1}}>
                 <Text style={[styles.ralewayLight, styles.profileText]}>
@@ -68,6 +81,8 @@ export default class Settings extends Component {
                   <Image source={require('./../../Assets/pencil.png')} style={styles.pencilIcon} />
               </View>
           </TouchableOpacity>
+
+          {/* Remove account button */}
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <TouchableOpacity style={[styles.profileContainer, {borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 30}]} onPress={this._showModal}>
                 <View style={{flex: 1}}>
@@ -80,6 +95,8 @@ export default class Settings extends Component {
                 </View>
             </TouchableOpacity>
           </View>
+
+        {/* Modal for account removal confirmation */}
         <Modal isVisible={this.state.isModalVisible}>
             <TouchableOpacity style={{flex: 1, justifyContent: 'center'}} activeOpacity={1} onPress={this._hideModal}>
                 <TouchableWithoutFeedback>
@@ -89,6 +106,8 @@ export default class Settings extends Component {
                         <View style={styles.modalButtonsContainer}>
                             <View style={{flex:1}}>
                                 <View style={styles.modalButtonContainer}>
+
+                                    {/* Cancel button */}
                                     <TouchableOpacity onPress={this._hideModal}>
                                         <Text style={styles.modalButtonText}>CANCEL</Text>
                                     </TouchableOpacity>
@@ -96,6 +115,8 @@ export default class Settings extends Component {
                             </View>
                             <View style={{flex:1}}>
                                 <View style={styles.modalButtonContainer}>
+
+                                    {/* Remove button */}
                                     <TouchableOpacity>
                                         <Text style={styles.modalButtonText}>REMOVE</Text>
                                     </TouchableOpacity>

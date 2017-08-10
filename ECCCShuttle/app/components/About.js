@@ -10,6 +10,7 @@ import {
 
 
 export default class About extends Component {
+  // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: '  About',
   };

@@ -13,17 +13,21 @@ import {
   View
 } from 'react-native';
 
+// https://github.com/react-native-community/react-native-modal
 import Modal from 'react-native-modal'
 
 export default class Login extends Component {
+  // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: '  Logout',
   };
 
+  // Modal not Visible by default
   state = {
     isModalVisible: false
   }
 
+  // Modal's show and hide methods
   _showModal = () => this.setState({ isModalVisible: true })
   _hideModal = () => this.setState({ isModalVisible: false })
 
@@ -45,6 +49,8 @@ export default class Login extends Component {
             <StatusBar
             backgroundColor='black'
             />
+
+            {/* Logo */}
             <Image source={require('./../../Assets/logo.png')} style={styles.image} />
             <View style={styles.logoLine}/>
             <Text style={styles.title}>
@@ -55,6 +61,8 @@ export default class Login extends Component {
                     &nbsp;Reward Program
                 </Text>
             </Text>  
+
+            {/* Email input field */}
             <TextInput style={styles.emailInput}
                 placeholder='Email address'
                 keyboardType='email-address'
@@ -66,6 +74,8 @@ export default class Login extends Component {
                 blurOnSubmit={ false }
                 onSubmitEditing={() => this.passwordInput.focus()}
             />
+
+            {/* Password input field */}
             <TextInput style={styles.PWInput}
                 placeholder='Password'
                 keyboardType='default'
@@ -78,6 +88,8 @@ export default class Login extends Component {
                 onSubmitEditing={this.loginOnPress}
                 ref={(input) => this.passwordInput = input}
             />
+
+            {/* Signup and Login buttons */}
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.c1} onPress={this._showModal}>
                     <Text style={styles.button}>Sign up</Text>
@@ -86,12 +98,16 @@ export default class Login extends Component {
                     <Text style={styles.button}>Login</Text>
                 </TouchableOpacity>
             </View>
+
+            {/* Modal for signup page */}
             <Modal isVisible={this.state.isModalVisible}>
                 <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems: 'center', flexDirection:'row'}} activeOpacity={1} onPress={this._hideModal}>
                      <TouchableWithoutFeedback>
                         <View style={styles.signUpContainer}>
                             <Text style={[styles.ralewayLight, {fontSize:25, padding:28}]}>Sign up</Text>
                             <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Email:</Text>
+
+                            {/* Email input field */}
                             <TextInput style={styles.signUpInput}
                                 keyboardType='email-address'
                                 multiline={false}
@@ -102,6 +118,8 @@ export default class Login extends Component {
                                 underlineColorAndroid={'black'}
                                 onSubmitEditing={() => this.signUpPasswordInput.focus()}
                             />
+
+                            {/* Password input field */}
                             <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Password:</Text>
                             <TextInput style={styles.signUpInput}
                                 keyboardType='default'
@@ -115,6 +133,8 @@ export default class Login extends Component {
                                 onSubmitEditing={() => this.signUpNameInput.focus()}
                                 ref={(input) => this.signUpPasswordInput = input}
                             />
+
+                            {/* Name input field */}
                             <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>Name:</Text>
                             <TextInput style={styles.signUpInput}
                                 keyboardType='default'
@@ -127,6 +147,8 @@ export default class Login extends Component {
                                 onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
                                 ref={(input) => this.signUpNameInput = input}
                             />
+
+                            {/* License plate input field */}
                             <Text style={[styles.ralewayLight, {fontSize:18, paddingLeft:28}]}>License plate:</Text>
                             <TextInput style={styles.signUpInput}
                                 keyboardType='default'
@@ -137,6 +159,8 @@ export default class Login extends Component {
                                 underlineColorAndroid={'black'}
                                 ref={(input) => this.signUpLicensePlateInput = input}
                             />
+
+                            {/* Cancel and Create account buttons */}
                             <View style={styles.signUpPageButtonsContainer}>
                                 <TouchableOpacity style={{paddingRight: 20}} onPress={this._hideModal}>
                                     <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
@@ -149,6 +173,7 @@ export default class Login extends Component {
                     </TouchableWithoutFeedback> 
                 </TouchableOpacity>
             </Modal>
+
         </KeyboardAvoidingView>
     );
   }

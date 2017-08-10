@@ -16,26 +16,37 @@ import About from'./app/components/About';
 import Settings from'./app/components/Settings';
 import QRScanner from'./app/components/QRScanner';
 
+
+// https://reactnavigation.org/docs/navigators/stack
+// A stack navigator that wraps inside of the drawer navigator
+// Only for navigation between Main page and QR Scanner
 const StackNav = StackNavigator(
     {
+        // Stack RouteConfigs 
         MainScreen: {
-                screen: Main,
-                header: { visible:false }
+            screen: Main,
+            // Hide header
+            header: { visible:false } 
             },
         ScannerScreen: {
             screen: QRScanner,
+            // Hide header
             header: { visible:false }
         },
     },
     {
+        // Stack configs
         initialRouteName: 'MainScreen',
         mode: 'card',
         headerMode: 'none',
     }
 );
 
+// https://reactnavigation.org/docs/navigators/drawer
+// A drawer navigation for Main, Ride History, About, Settings and Login page
 export default DrawerNav = DrawerNavigator(
     {
+        // Drawer Route Configs 
         StackNavScreen: {
             screen: StackNav,
         },
@@ -53,9 +64,12 @@ export default DrawerNav = DrawerNavigator(
         },
     },
     {
+        // Drawer configs
         initialRouteName: 'StackNavScreen',
         drawerPosition: 'left',
         drawerWidth: 320,
+
+        // Drawer stylings
         contentOptions: {
             activeTintColor: 'black',
             style: {
@@ -67,6 +81,8 @@ export default DrawerNav = DrawerNavigator(
                 fontWeight: 'normal'
             },
         },
+        
+        // Moew Drawer stylings
         contentComponent: props => 
             <View style={styles.container}>
                 <View style={styles.profile}>

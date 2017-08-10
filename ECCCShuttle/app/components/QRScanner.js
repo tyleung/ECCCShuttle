@@ -10,6 +10,7 @@ import {
   Dimensions
 } from 'react-native';
 
+// https://github.com/moaazsidat/react-native-qrcode-scanner
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class QRScanner extends Component {
@@ -24,6 +25,8 @@ export default class QRScanner extends Component {
   render() {
     var {navigate} = this.props.navigation;
     return (
+
+        // QRScanner's style
         <View style={{flex:1}}>
           <QRCodeScanner
             onRead={() => alert('Success')}
@@ -44,6 +47,8 @@ export default class QRScanner extends Component {
                   <View style={styles.customOutsideMarker}>
                   </View>
                 </View>
+
+                {/* Cancel button that navigates to Main page */}
                 <View style={[styles.customOutsideMarker, {justifyContent:'flex-end', alignItems: 'center'}]}>
                   <TouchableOpacity style={{marginBottom: 50}} onPress={() => navigate("MainScreen")}>
                       <Text style={styles.customBottomText}>Cancel</Text>

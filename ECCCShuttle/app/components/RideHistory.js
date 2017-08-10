@@ -11,18 +11,22 @@ import {
 } from 'react-native';
 
 
+// ListView stuff, some kind of comparing object
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
 
 
 export default class RideHistory extends Component {
   
+  // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: '  Ride History',
   };
 
+  // A constructor for the ListView
   constructor() {
       super();
       this.state = {
+          // Data source for the ListView
           dataSource: ds.cloneWithRows([
             {
                 date: "May 7, 2017",
@@ -36,6 +40,7 @@ export default class RideHistory extends Component {
       }
   }
 
+  // A method for rending the styling of each row in the ListView
   _renderRow(rowData) {
       return (
         <View>

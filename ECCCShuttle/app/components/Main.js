@@ -12,6 +12,7 @@ import {
 
 
 export default class Main extends Component {
+  // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: '  QR Scanner',
   };
@@ -30,6 +31,8 @@ export default class Main extends Component {
           <StatusBar
             backgroundColor='black'
             />
+
+          {/* A button that navigates to QRScanner */}
           <TouchableOpacity style={styles.buttonContainer}  onPress={() => navigate("ScannerScreen")}>
               <View style={{flex: 1}}>
               <Text style={[styles.ralewayLight, styles.QRButtonText]}>
@@ -40,12 +43,18 @@ export default class Main extends Component {
                   <Image source={require('./../../Assets/qricon.png')} style={styles.image} />
               </View>
           </TouchableOpacity>
+
+          {/* Point */}
           <Text style={[styles.ralewayLightItalic, styles.pointText]}>
                 You have 1000 points!
           </Text>
+
+          {/* Update timer */}
           <Text style={[styles.ralewayLight, styles.updateText]}>
                 last updated: just now
           </Text>
+
+          {/* Refresh button */}
           <TouchableOpacity style={styles.refresh}>
                   <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
                     <Image source={require('./../../Assets/refresh.png')} style={styles.refreshImage}/>
