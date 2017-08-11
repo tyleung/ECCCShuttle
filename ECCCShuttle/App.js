@@ -15,12 +15,14 @@ import RideHistory from './app/components/RideHistory';
 import About from'./app/components/About';
 import Settings from'./app/components/Settings';
 import QRScanner from'./app/components/QRScanner';
+import EditName from './app/components/EditName';
+import EditLicensePlate from './app/components/EditLicensePlate';
 
 
 // https://reactnavigation.org/docs/navigators/stack
 // A stack navigator that wraps inside of the drawer navigator
 // Only for navigation between Main page and QR Scanner
-const StackNav = StackNavigator(
+const MainPageStackNav = StackNavigator(
     {
         // Stack RouteConfigs 
         MainScreen: {
@@ -42,13 +44,44 @@ const StackNav = StackNavigator(
     }
 );
 
+// https://reactnavigation.org/docs/navigators/stack
+// A stack navigator that wraps inside of the drawer navigator
+// Only for navigation between Settings, EditName and Edit license plate page
+const SettingPageStackNav = StackNavigator(
+    {
+        // Stack RouteConfigs 
+        SettingsScreen: {
+            screen: Settings,
+            // Hide header
+            header: { visible:false } 
+            },
+        EditNameScreen: {
+            screen: EditName,
+            // Hide header
+            header: { visible:false }
+        },
+        EditLicensePlateScreen: {
+            screen: EditLicensePlate,
+            // Hide header
+            header: { visible:false }
+        },
+    },
+    {
+        // Stack configs
+        initialRouteName: 'SettingsScreen',
+        mode: 'card',
+        headerMode: 'none',
+    }
+);
+
+
 // https://reactnavigation.org/docs/navigators/drawer
 // A drawer navigation for Main, Ride History, About, Settings and Login page
 export default DrawerNav = DrawerNavigator(
     {
         // Drawer Route Configs 
         StackNavScreen: {
-            screen: StackNav,
+            screen: MainPageStackNav,
         },
         RideHistoryScreen: {
             screen: RideHistory,
@@ -57,7 +90,7 @@ export default DrawerNav = DrawerNavigator(
             screen: About,
         },
         SettingsScreen: {
-            screen: Settings
+            screen: SettingPageStackNav
         },
         LoginScreen: {
             screen: Login

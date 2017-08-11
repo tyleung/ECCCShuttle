@@ -32,6 +32,7 @@ export default class Settings extends Component {
   _hideModal = () => this.setState({ isModalVisible: false })
 
   render() {
+    var {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
           <ToolbarAndroid
@@ -52,14 +53,14 @@ export default class Settings extends Component {
           {/* Show user's email address */}
           <TouchableOpacity style={[styles.profileContainer, {borderTopWidth: 1, borderBottomWidth: 1}]}>
               <View style={{flex: 1}}>
-                <Text style={[styles.ralewayLight, styles.profileText]}>
+                <Text style={[styles.ralewayLight, styles.profileText, {paddingRight:21}]}>
                     tongtongcanopus@gmail.com
                 </Text>
               </View>
           </TouchableOpacity>
 
-          {/* Shower user's name */}
-          <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]}>
+          {/* Show user's name and button that navigates to EditName*/}
+          <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]} onPress={() => navigate("EditNameScreen")}>
               <View style={{flex: 1}}>
                 <Text style={[styles.ralewayLight, styles.profileText]}>
                     Canopus Tong
@@ -70,8 +71,8 @@ export default class Settings extends Component {
               </View>
           </TouchableOpacity>
 
-          {/* Show user's license plate */}
-          <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]}>
+          {/* Show user's license plate and button that navigates to EditLicensePlate */}
+          <TouchableOpacity style={[styles.profileContainer, {borderBottomWidth: 1}]} onPress={() => navigate("EditLicensePlateScreen")}>
               <View style={{flex: 1}}>
                 <Text style={[styles.ralewayLight, styles.profileText]}>
                     AA 1201
