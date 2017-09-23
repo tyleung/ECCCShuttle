@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  StatusBar,
-  View,
-  Text,
-  TouchableOpacity,
-  ToolbarAndroid,
-  Image
-} from 'react-native';
+import { StyleSheet, StatusBar, View, Text, TouchableOpacity, ToolbarAndroid, Image } from 'react-native';
+
+import Navicon from './../../assets/navicon.png';
+import QRIcon from './../../assets/qricon.png';
+import Refresh from './../../assets/refresh.png';
 
 export default class Main extends Component {
   // Name the drawerLabel for this page
@@ -17,86 +12,80 @@ export default class Main extends Component {
   };
 
   render() {
-    var {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
-        <View style={styles.container}>
-          <ToolbarAndroid
-            style={styles.toolbar}
-            title=" QR Scanner"
-            titleColor='white'
-            navIcon={require('./../../assets/navicon.png')}
-            onIconClicked={() => this.props.navigation.navigate('DrawerOpen')}
-            />
-          <StatusBar
-            backgroundColor='black'
-            />
+      <View style={styles.container}>
+        <ToolbarAndroid
+          style={styles.toolbar}
+          title=" QR Scanner"
+          titleColor="white"
+          navIcon={Navicon}
+          onIconClicked={() => this.props.navigation.navigate('DrawerOpen')}
+        />
+        <StatusBar backgroundColor="black" />
 
-          {/* A button that navigates to QRScanner */}
-          <TouchableOpacity style={styles.buttonContainer}  onPress={() => navigate("ScannerScreen")}>
-              <View style={{flex: 1}}>
-              <Text style={[styles.ralewayLight, styles.QRButtonText]}>
-                Scan QR Code
-              </Text>
-              </View>
-              <View style={{flex: 1, alignItems: 'flex-end', marginRight: 15, justifyContent: 'center'}}>
-                  <Image source={require('./../../assets/qricon.png')} style={styles.image} />
-              </View>
-          </TouchableOpacity>
+        {/* A button that navigates to QRScanner */}
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('ScannerScreen')}>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.ralewayLight, styles.QRButtonText]}>Scan QR Code</Text>
+          </View>
+          <View
+            style={{ flex: 1, alignItems: 'flex-end', marginRight: 15, justifyContent: 'center' }}
+          >
+            <Image source={QRIcon} style={styles.image} />
+          </View>
+        </TouchableOpacity>
 
-          {/* Point */}
-          <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-                You have 1000 points!
-          </Text>
+        {/* Point */}
+        <Text style={[styles.ralewayLightItalic, styles.pointText]}>You have 1000 points!</Text>
 
-          {/* Update timer */}
-          <Text style={[styles.ralewayLight, styles.updateText]}>
-                last updated: just now
-          </Text>
+        {/* Update timer */}
+        <Text style={[styles.ralewayLight, styles.updateText]}>last updated: just now</Text>
 
-          {/* Refresh button */}
-          <TouchableOpacity style={styles.refresh}>
-                  <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
-                    <Image source={require('./../../assets/refresh.png')} style={styles.refreshImage}/>
-                  </View>
-                  <View style={{flex: 1}}>
-                    <Text style={[styles.ralewayLight, styles.refreshButtonText]}>Refresh</Text>
-                  </View>
-                  <View style={{flex: 0.5}}></View>
-          </TouchableOpacity>
-        </View>
+        {/* Refresh button */}
+        <TouchableOpacity style={styles.refresh}>
+          <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
+            <Image source={Refresh} style={styles.refreshImage} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.ralewayLight, styles.refreshButtonText]}>Refresh</Text>
+          </View>
+          <View style={{ flex: 0.5 }} />
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor: '#F5F5F5'
+    flex: 1,
+    backgroundColor: '#F5F5F5',
   },
-  buttonContainer:{
+  buttonContainer: {
     marginTop: 200,
     flexDirection: 'row',
     backgroundColor: 'white',
     borderColor: '#223E4A',
     borderTopWidth: 1,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   QRButtonText: {
     fontSize: 22,
-    color: 'black', 
-    paddingLeft: 21, 
-    paddingVertical: 17
+    color: 'black',
+    paddingLeft: 21,
+    paddingVertical: 17,
   },
   ralewayLight: {
-    //fontFamily: 'Raleway-Light'
+    // fontFamily: 'Raleway-Light'
   },
   image: {
     resizeMode: 'contain',
     width: 30,
-    height: 30
+    height: 30,
   },
   ralewayLightItalic: {
-    //fontFamily: 'Raleway-LightItalic'
+    // fontFamily: 'Raleway-LightItalic'
   },
   pointText: {
     marginTop: 46,
@@ -110,28 +99,27 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
   },
-  refresh:{
+  refresh: {
     flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 105,
     borderRadius: 23,
     borderWidth: 1,
     paddingVertical: 7,
-    flexDirection: 'row'
   },
   refreshButtonText: {
     textAlign: 'center',
     fontSize: 22,
-    color: 'black'
+    color: 'black',
   },
   refreshImage: {
     resizeMode: 'contain',
     width: 30,
-    height: 30
+    height: 30,
   },
   toolbar: {
     backgroundColor: 'black',
     height: 56,
     alignSelf: 'stretch',
-  }  
+  },
 });
