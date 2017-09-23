@@ -21,7 +21,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
-    "eslint": "eslint"
+    "eslint": "eslint app/"
   },
   "jest": {
     "preset": "jest-expo"
