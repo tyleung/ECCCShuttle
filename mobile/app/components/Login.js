@@ -35,6 +35,7 @@ export default class Login extends Component {
 
   loginOnPress = () => {
     console.log('Login pressed');
+    this.props.navigation.navigate('MainScreen');
   };
 
   createOnPress = () => {
