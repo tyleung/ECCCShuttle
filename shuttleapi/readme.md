@@ -14,6 +14,7 @@ Adminer:\
 - Login to the FTP server
 - Transfer everything from local shuttleapi folder to server shuttleapi folder EXCEPT for the .env file
 - Copy over changes to the server .env file if there are any
+- Copy over the public/.htaccess file to the server root if there are any changes
 
 To make api calls to the ECCC server:\
 `http://shuttle.eccc.ca/api/v1/*`
