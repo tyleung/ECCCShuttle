@@ -27,7 +27,12 @@ export default class Login extends Component {
     this.state = {
       isModalVisible: false,
       email: "",
-      password: ""
+      password: "",
+      emailSignUp: "",
+      passwordSignUp: "",
+      first_name: "",
+      last_name: "",
+      license_plate: ""
     };
   }
 
@@ -52,6 +57,7 @@ export default class Login extends Component {
   createOnPress = async () => {
     // TODO create user, but we'll use this to clear the api token for now
     console.log("Create pressed");
+    console.log(this.state);
     try {
       const value = await AsyncStorage.getItem(UserApi.API_TOKEN);
       if (value !== null) {
@@ -141,6 +147,8 @@ export default class Login extends Component {
                 >
                   Sign up
                 </Text>
+
+                {/* Email input field */}
                 <Text
                   style={[
                     styles.ralewayLight,
@@ -149,8 +157,6 @@ export default class Login extends Component {
                 >
                   Email:
                 </Text>
-
-                {/* Email input field */}
                 <TextInput
                   style={styles.signUpInput}
                   keyboardType="email-address"
@@ -161,6 +167,8 @@ export default class Login extends Component {
                   returnKeyType="next"
                   underlineColorAndroid={"black"}
                   onSubmitEditing={() => this.signUpPasswordInput.focus()}
+                  value={this.state.emailSignUp}
+                  onChangeText={text => this.setState({ emailSignUp: text })}
                 />
 
                 {/* Password input field */}
@@ -182,20 +190,48 @@ export default class Login extends Component {
                   blurOnSubmit={false}
                   returnKeyType="next"
                   underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpNameInput.focus()}
+                  onSubmitEditing={() => this.signUpFirstNameInput.focus()}
                   ref={input => {
                     this.signUpPasswordInput = input;
                   }}
+                  value={this.state.passwordSignUp}
+                  onChangeText={text => this.setState({ passwordSignUp: text })}
                 />
 
-                {/* Name input field */}
+                {/* First name input field */}
                 <Text
                   style={[
                     styles.ralewayLight,
                     { fontSize: 18, paddingLeft: 28 }
                   ]}
                 >
-                  Name:
+                  First name:
+                </Text>
+                <TextInput
+                  style={styles.signUpInput}
+                  keyboardType="default"
+                  multiline={false}
+                  autoCapitalize="words"
+                  autoCorrect={false}
+                  blurOnSubmit={false}
+                  returnKeyType="next"
+                  underlineColorAndroid={"black"}
+                  onSubmitEditing={() => this.signUpLastNameInput.focus()}
+                  ref={input => {
+                    this.signUpFirstNameInput = input;
+                  }}
+                  value={this.state.first_name}
+                  onChangeText={text => this.setState({ first_name: text })}
+                />
+
+                {/* Last name input field */}
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
+                  Last name:
                 </Text>
                 <TextInput
                   style={styles.signUpInput}
@@ -208,8 +244,10 @@ export default class Login extends Component {
                   underlineColorAndroid={"black"}
                   onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
                   ref={input => {
-                    this.signUpNameInput = input;
+                    this.signUpLastNameInput = input;
                   }}
+                  value={this.state.last_name}
+                  onChangeText={text => this.setState({ last_name: text })}
                 />
 
                 {/* License plate input field */}
@@ -232,6 +270,8 @@ export default class Login extends Component {
                   ref={input => {
                     this.signUpLicensePlateInput = input;
                   }}
+                  value={this.state.license_plate}
+                  onChangeText={text => this.setState({ license_plate: text })}
                 />
 
                 {/* Cancel and Create account buttons */}
