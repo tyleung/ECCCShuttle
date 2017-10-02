@@ -4,6 +4,7 @@ import {
   StyleSheet,
   StatusBar,
   Image,
+  Keyboard,
   Text,
   TextInput,
   TouchableOpacity,
@@ -42,10 +43,12 @@ export default class Login extends Component {
 
   signUpOnPress = () => {
     console.log("Sign up pressed");
+    Keyboard.dismiss();
   };
 
   loginOnPress = () => {
     console.log("Login pressed");
+    Keyboard.dismiss();
     if (this.state.email && this.state.password) {
       UserApi.login(this.state.email, this.state.password);
       this.props.navigation.navigate("MainScreen");
@@ -58,6 +61,7 @@ export default class Login extends Component {
     // TODO create user, but we'll use this to clear the api token for now
     console.log("Create pressed");
     console.log(this.state);
+    Keyboard.dismiss();
     try {
       const value = await AsyncStorage.getItem(UserApi.API_TOKEN);
       if (value !== null) {
