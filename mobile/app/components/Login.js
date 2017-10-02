@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
+  AsyncStorage,
   StyleSheet,
   StatusBar,
   Image,
@@ -8,38 +9,59 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  View,
-} from 'react-native';
-import Modal from 'react-native-modal';
+  View
+} from "react-native";
+import Modal from "react-native-modal";
+import UserApi from "../services/userApi";
 
-import Logo from './../../assets/logo.png';
+import Logo from "./../../assets/logo.png";
 
 export default class Login extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: '  Logout',
+    drawerLabel: "  Logout"
   };
 
-  // Modal not Visible by default
-  state = {
-    isModalVisible: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalVisible: false,
+      email: "",
+      password: ""
+    };
+  }
 
   // Modal's show and hide methods
   showModal = () => this.setState({ isModalVisible: true });
   hideModal = () => this.setState({ isModalVisible: false });
 
   signUpOnPress = () => {
-    console.log('Sign up pressed');
+    console.log("Sign up pressed");
   };
 
   loginOnPress = () => {
-    console.log('Login pressed');
-    this.props.navigation.navigate('MainScreen');
+    console.log("Login pressed");
+    if (this.state.email && this.state.password) {
+      UserApi.login(this.state.email, this.state.password);
+      this.props.navigation.navigate("MainScreen");
+    } else {
+      console.log("Empty email or password");
+    }
   };
 
-  createOnPress = () => {
-    console.log('Create pressed');
+  createOnPress = async () => {
+    // TODO create user, but we'll use this to clear the api token for now
+    console.log("Create pressed");
+    try {
+      const value = await AsyncStorage.getItem(UserApi.API_TOKEN);
+      if (value !== null) {
+        console.log(value);
+      }
+
+      await AsyncStorage.removeItem(UserApi.API_TOKEN);
+    } catch (error) {
+      // do nothing
+    }
   };
 
   render() {
@@ -63,10 +85,12 @@ export default class Login extends Component {
           multiline={false}
           autoCapitalize="none"
           autoCorrect={false}
-          underlineColorAndroid={'transparent'}
+          underlineColorAndroid={"transparent"}
           returnKeyType="next"
           blurOnSubmit={false}
           onSubmitEditing={() => this.passwordInput.focus()}
+          value={this.state.email}
+          onChangeText={text => this.setState({ email: text })}
         />
 
         {/* Password input field */}
@@ -78,12 +102,14 @@ export default class Login extends Component {
           multiline={false}
           autoCapitalize="none"
           autoCorrect={false}
-          underlineColorAndroid={'transparent'}
+          underlineColorAndroid={"transparent"}
           returnKeyType="go"
           onSubmitEditing={this.loginOnPress}
-          ref={(input) => {
+          ref={input => {
             this.passwordInput = input;
           }}
+          value={this.state.password}
+          onChangeText={text => this.setState({ password: text })}
         />
 
         {/* Signup and Login buttons */}
@@ -101,17 +127,28 @@ export default class Login extends Component {
           <TouchableOpacity
             style={{
               flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row"
             }}
             activeOpacity={1}
             onPress={this.hideModal}
           >
             <TouchableWithoutFeedback>
               <View style={styles.signUpContainer}>
-                <Text style={[styles.ralewayLight, { fontSize: 25, padding: 28 }]}>Sign up</Text>
-                <Text style={[styles.ralewayLight, { fontSize: 18, paddingLeft: 28 }]}>Email:</Text>
+                <Text
+                  style={[styles.ralewayLight, { fontSize: 25, padding: 28 }]}
+                >
+                  Sign up
+                </Text>
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
+                  Email:
+                </Text>
 
                 {/* Email input field */}
                 <TextInput
@@ -122,12 +159,17 @@ export default class Login extends Component {
                   autoCorrect={false}
                   blurOnSubmit={false}
                   returnKeyType="next"
-                  underlineColorAndroid={'black'}
+                  underlineColorAndroid={"black"}
                   onSubmitEditing={() => this.signUpPasswordInput.focus()}
                 />
 
                 {/* Password input field */}
-                <Text style={[styles.ralewayLight, { fontSize: 18, paddingLeft: 28 }]}>
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
                   Password:
                 </Text>
                 <TextInput
@@ -139,15 +181,22 @@ export default class Login extends Component {
                   autoCorrect={false}
                   blurOnSubmit={false}
                   returnKeyType="next"
-                  underlineColorAndroid={'black'}
+                  underlineColorAndroid={"black"}
                   onSubmitEditing={() => this.signUpNameInput.focus()}
-                  ref={(input) => {
+                  ref={input => {
                     this.signUpPasswordInput = input;
                   }}
                 />
 
                 {/* Name input field */}
-                <Text style={[styles.ralewayLight, { fontSize: 18, paddingLeft: 28 }]}>Name:</Text>
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
+                  Name:
+                </Text>
                 <TextInput
                   style={styles.signUpInput}
                   keyboardType="default"
@@ -156,15 +205,20 @@ export default class Login extends Component {
                   autoCorrect={false}
                   blurOnSubmit={false}
                   returnKeyType="next"
-                  underlineColorAndroid={'black'}
+                  underlineColorAndroid={"black"}
                   onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
-                  ref={(input) => {
+                  ref={input => {
                     this.signUpNameInput = input;
                   }}
                 />
 
                 {/* License plate input field */}
-                <Text style={[styles.ralewayLight, { fontSize: 18, paddingLeft: 28 }]}>
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
                   License plate:
                 </Text>
                 <TextInput
@@ -174,15 +228,18 @@ export default class Login extends Component {
                   autoCapitalize="characters"
                   autoCorrect={false}
                   returnKeyType="go"
-                  underlineColorAndroid={'black'}
-                  ref={(input) => {
+                  underlineColorAndroid={"black"}
+                  ref={input => {
                     this.signUpLicensePlateInput = input;
                   }}
                 />
 
                 {/* Cancel and Create account buttons */}
                 <View style={styles.signUpPageButtonsContainer}>
-                  <TouchableOpacity style={{ paddingRight: 20 }} onPress={this.hideModal}>
+                  <TouchableOpacity
+                    style={{ paddingRight: 20 }}
+                    onPress={this.hideModal}
+                  >
                     <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={this.createOnPress}>
@@ -201,25 +258,25 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "black"
   },
   image: {
-    resizeMode: 'contain',
-    width: 280,
+    resizeMode: "contain",
+    width: 280
   },
   logoLine: {
     marginTop: 2,
     width: 280,
     height: 0,
     borderBottomWidth: 1.5,
-    borderColor: 'white',
+    borderColor: "white"
   },
   title: {
     marginTop: 2,
-    color: 'white',
-    fontSize: 21,
+    color: "white",
+    fontSize: 21
   },
   ralewayLightItalic: {
     // fontFamily: 'Raleway-LightItalic'
@@ -231,75 +288,75 @@ const styles = StyleSheet.create({
     marginTop: 50,
     width: 280,
     height: 39.5,
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: "white",
+    color: "black",
     // fontFamily: 'Raleway-Light',
     fontSize: 17,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    borderRadius: 5,
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderRadius: 5
   },
   PWInput: {
     marginTop: 10,
     width: 280,
     height: 39.5,
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: "white",
+    color: "black",
     // fontFamily: 'Raleway-Light',
     fontSize: 17,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    borderRadius: 5,
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderRadius: 5
   },
   buttonContainer: {
     marginTop: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     width: 280,
-    height: 39.5,
+    height: 39.5
   },
   c1: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
-    marginRight: 5,
+    marginRight: 5
   },
   c2: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
-    marginLeft: 5,
+    marginLeft: 5
   },
   button: {
-    height: '100%',
-    backgroundColor: 'white',
+    height: "100%",
+    backgroundColor: "white",
     borderRadius: 5,
-    color: 'black',
+    color: "black",
     // fontFamily: 'Raleway-Light',
     fontSize: 17,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center"
   },
   signUpContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
-    marginHorizontal: 5,
+    marginHorizontal: 5
   },
   signUpInput: {
-    color: 'black',
+    color: "black",
     // fontFamily: 'Raleway-Light',
     marginHorizontal: 28,
-    textAlign: 'center',
-    fontSize: 17,
+    textAlign: "center",
+    fontSize: 17
   },
   signUpPageButtonsContainer: {
     padding: 28,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end"
   },
   buttonForSignUpPage: {
-    color: 'black',
+    color: "black",
     // fontFamily: 'Raleway-Light',
-    fontSize: 17,
-  },
+    fontSize: 17
+  }
 });
