@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Platform, StatusBar } from "react-native";
-import LoginStackNav from "./app/components/Navigation";
+import LoginStackNav, { DrawerNav } from "./app/components/Navigation";
+import UserApi from "./app/services/userApi";
 
 class App extends React.Component {
   constructor(props) {
@@ -10,12 +11,22 @@ class App extends React.Component {
     };
   }
 
-  // TODO: handle login page here
+  componentWillMount() {
+    UserApi.isLoggedIn().then(res => this.setState({ isLoggedIn: res }));
+  }
+
   render() {
+    let mainpage;
+    if (this.state.isLoggedIn) {
+      mainpage = <DrawerNav />;
+    } else {
+      mainpage = <LoginStackNav />;
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.statusBar} />
-        <LoginStackNav />
+        {mainpage}
       </View>
     );
   }

@@ -15,9 +15,8 @@ export default class UserApi {
         password
       })
     };
-    console.log(email, password);
 
-    fetch("http://shuttle.eccc.ca/api/v1/auth/login", fetchOptions)
+    return fetch("http://shuttle.eccc.ca/api/v1/auth/login", fetchOptions)
       .then(response => response.json())
       .then(responseData => {
         if (responseData.token) {
@@ -27,8 +26,18 @@ export default class UserApi {
         return responseData;
       })
       .catch(e => {
-        console.log('Login error.');
-        console.log(e);
+        console.log("Login error.");
+        throw (e);
+      });
+  };
+
+  static isLoggedIn = () => {
+    return AsyncStorage.getItem(UserApi.API_TOKEN)
+      .then(res => {
+        return res !== null;
+      })
+      .catch(e => {
+        throw (e);
       });
   };
 

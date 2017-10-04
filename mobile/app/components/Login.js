@@ -46,11 +46,16 @@ export default class Login extends Component {
   };
 
   loginOnPress = () => {
-    console.log("Login pressed");
     Keyboard.dismiss();
-    this.props.navigation.navigate("MainScreen");
     if (this.state.email && this.state.password) {
-      UserApi.login(this.state.email, this.state.password);
+      UserApi.login(
+        this.state.email,
+        this.state.password
+      ).then(responseData => {
+        if (responseData.token) {
+          this.props.navigation.navigate("MainScreen");
+        }
+      });
     } else {
       console.log("Empty email or password");
     }
