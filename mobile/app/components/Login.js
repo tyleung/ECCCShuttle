@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   AsyncStorage,
   StyleSheet,
-  StatusBar,
   Image,
   Keyboard,
   Text,
@@ -49,9 +48,9 @@ export default class Login extends Component {
   loginOnPress = () => {
     console.log("Login pressed");
     Keyboard.dismiss();
+    this.props.navigation.navigate("MainScreen");
     if (this.state.email && this.state.password) {
       UserApi.login(this.state.email, this.state.password);
-      this.props.navigation.navigate("MainScreen");
     } else {
       console.log("Empty email or password");
     }
@@ -77,8 +76,6 @@ export default class Login extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <StatusBar backgroundColor="black" />
-
         {/* Logo */}
         <Image source={Logo} style={styles.image} />
         <View style={styles.logoLine} />

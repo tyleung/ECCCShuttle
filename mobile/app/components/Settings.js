@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   StyleSheet,
-  StatusBar,
   View,
   Text,
   ToolbarAndroid,
   TouchableOpacity,
   Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import Modal from 'react-native-modal';
+  TouchableWithoutFeedback
+} from "react-native";
+import Modal from "react-native-modal";
 
-import Navicon from './../../assets/navicon.png';
-import ProfileGrey from './../../assets/profileGrey.png';
-import Pencil from './../../assets/pencil.png';
-import DeleteAccount from './../../assets/deleteAccount.png';
+import Navicon from "./../../assets/navicon.png";
+import ProfileGrey from "./../../assets/profileGrey.png";
+import Pencil from "./../../assets/pencil.png";
+import DeleteAccount from "./../../assets/deleteAccount.png";
 
 export default class Settings extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: '  Settings',
+    drawerLabel: "  Settings"
   };
 
   // Modal not visible by default
   state = {
-    isModalVisible: false,
+    isModalVisible: false
   };
 
   // Modal's show and hide methods
@@ -40,9 +39,8 @@ export default class Settings extends Component {
           title=" Settings"
           titleColor="white"
           navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate('DrawerOpen')}
+          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        <StatusBar backgroundColor="black" />
         {/* Profile icon */}
         <View style={{ marginVertical: 30, marginLeft: 40 }}>
           <Image source={ProfileGrey} style={styles.profileIcon} />
@@ -50,10 +48,19 @@ export default class Settings extends Component {
 
         {/* Show user's email address */}
         <TouchableOpacity
-          style={[styles.profileContainer, { borderTopWidth: 1, borderBottomWidth: 1 }]}
+          style={[
+            styles.profileContainer,
+            { borderTopWidth: 1, borderBottomWidth: 1 }
+          ]}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText, { paddingRight: 21 }]}>
+            <Text
+              style={[
+                styles.ralewayLight,
+                styles.profileText,
+                { paddingRight: 21 }
+              ]}
+            >
               tongtongcanopus@gmail.com
             </Text>
           </View>
@@ -62,12 +69,20 @@ export default class Settings extends Component {
         {/* Show user's name and button that navigates to EditName */}
         <TouchableOpacity
           style={[styles.profileContainer, { borderBottomWidth: 1 }]}
-          onPress={() => navigate('EditNameScreen')}
+          onPress={() => navigate("EditNameScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText]}>Canopus Tong</Text>
+            <Text style={[styles.ralewayLight, styles.profileText]}>
+              Canopus Tong
+            </Text>
           </View>
-          <View style={{ alignItems: 'flex-end', marginHorizontal: 15, justifyContent: 'center' }}>
+          <View
+            style={{
+              alignItems: "flex-end",
+              marginHorizontal: 15,
+              justifyContent: "center"
+            }}
+          >
             <Image source={Pencil} style={styles.pencilIcon} />
           </View>
         </TouchableOpacity>
@@ -75,22 +90,30 @@ export default class Settings extends Component {
         {/* Show user's license plate and button that navigates to EditLicensePlate */}
         <TouchableOpacity
           style={[styles.profileContainer, { borderBottomWidth: 1 }]}
-          onPress={() => navigate('EditLicensePlateScreen')}
+          onPress={() => navigate("EditLicensePlateScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText]}>AA 1201</Text>
+            <Text style={[styles.ralewayLight, styles.profileText]}>
+              AA 1201
+            </Text>
           </View>
-          <View style={{ alignItems: 'flex-end', marginHorizontal: 15, justifyContent: 'center' }}>
+          <View
+            style={{
+              alignItems: "flex-end",
+              marginHorizontal: 15,
+              justifyContent: "center"
+            }}
+          >
             <Image source={Pencil} style={styles.pencilIcon} />
           </View>
         </TouchableOpacity>
 
         {/* Remove account button */}
-        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <TouchableOpacity
             style={[
               styles.profileContainer,
-              { borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 30 },
+              { borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 30 }
             ]}
             onPress={this.showModal}
           >
@@ -98,19 +121,25 @@ export default class Settings extends Component {
               <Text
                 style={[
                   styles.ralewayLight,
-                  { fontSize: 17, color: 'red', paddingLeft: 21, paddingVertical: 13 },
+                  {
+                    fontSize: 17,
+                    color: "red",
+                    paddingLeft: 21,
+                    paddingVertical: 13
+                  }
                 ]}
               >
                 Remove My Account
               </Text>
             </View>
             <View
-              style={{ alignItems: 'flex-end', marginHorizontal: 15, justifyContent: 'center' }}
+              style={{
+                alignItems: "flex-end",
+                marginHorizontal: 15,
+                justifyContent: "center"
+              }}
             >
-              <Image
-                source={DeleteAccount}
-                style={styles.pencilIcon}
-              />
+              <Image source={DeleteAccount} style={styles.pencilIcon} />
             </View>
           </TouchableOpacity>
         </View>
@@ -118,7 +147,7 @@ export default class Settings extends Component {
         {/* Modal for account removal confirmation */}
         <Modal isVisible={this.state.isModalVisible}>
           <TouchableOpacity
-            style={{ flex: 1, justifyContent: 'center' }}
+            style={{ flex: 1, justifyContent: "center" }}
             activeOpacity={1}
             onPress={this.hideModal}
           >
@@ -126,9 +155,9 @@ export default class Settings extends Component {
               <View style={styles.modalContainer}>
                 <Text style={styles.modalTitle}>Remove Account?</Text>
                 <Text style={styles.modalText}>
-                  Removing this account will permanently delete all of its data from the datebase.
-                  This includes all ride history, collected points, license plate number, etc. Do
-                  you want to continue?
+                  Removing this account will permanently delete all of its data
+                  from the datebase. This includes all ride history, collected
+                  points, license plate number, etc. Do you want to continue?
                 </Text>
                 <View style={styles.modalButtonsContainer}>
                   <View style={{ flex: 1 }}>
@@ -160,12 +189,12 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5"
   },
   profileContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderColor: '#223E4A',
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderColor: "#223E4A"
   },
   ralewayLight: {
     // fontFamily: 'Raleway-Light'
@@ -174,52 +203,52 @@ const styles = StyleSheet.create({
     // fontFamily: 'Raleway-LightItalic'
   },
   toolbar: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     height: 56,
-    alignSelf: 'stretch',
+    alignSelf: "stretch"
   },
   profileText: {
     fontSize: 22,
-    color: 'black',
+    color: "black",
     paddingLeft: 21,
-    paddingVertical: 17,
+    paddingVertical: 17
   },
   pencilIcon: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
     width: 30,
-    height: 30,
+    height: 30
   },
   profileIcon: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
     width: 70,
-    height: 70,
+    height: 70
   },
   modalContainer: {
-    backgroundColor: 'white',
-    borderRadius: 5,
+    backgroundColor: "white",
+    borderRadius: 5
   },
   modalTitle: {
     // fontFamily: 'Raleway-Medium',
     fontSize: 22,
     padding: 15,
     paddingTop: 20,
-    color: 'red',
+    color: "red"
   },
   modalText: {
     // fontFamily: 'Raleway-Light',
     fontSize: 18,
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
   },
   modalButtonsContainer: {
-    flexDirection: 'row',
-    paddingVertical: 15,
+    flexDirection: "row",
+    paddingVertical: 15
   },
   modalButtonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
   },
   modalButtonText: {
     // fontFamily: 'Raleway-Medium',
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { StyleSheet, StatusBar, View, ToolbarAndroid, TextInput } from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, View, ToolbarAndroid, TextInput } from "react-native";
 
-import BackIcon from './../../assets/backIcon.png';
+import BackIcon from "./../../assets/backIcon.png";
 
 export default class EditLicensePlate extends Component {
   // Name the drawerLabel for this page
@@ -18,7 +18,6 @@ export default class EditLicensePlate extends Component {
           navIcon={BackIcon}
           onIconClicked={() => goBack()}
         />
-        <StatusBar backgroundColor="black" />
 
         {/* Text input for license plate */}
         <View style={styles.editContainer}>
@@ -30,7 +29,7 @@ export default class EditLicensePlate extends Component {
             autoCapitalize="words"
             autoCorrect={false}
             returnKeyType="go"
-            underlineColorAndroid={'transparent'}
+            underlineColorAndroid={"transparent"}
           />
         </View>
       </View>
@@ -41,28 +40,28 @@ export default class EditLicensePlate extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5"
   },
   ralewayLight: {
     // fontFamily: 'Raleway-Light'
   },
   toolbar: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     height: 56,
-    alignSelf: 'stretch',
+    alignSelf: "stretch"
   },
   editContainer: {
-    backgroundColor: 'white',
-    borderColor: '#223E4A',
+    backgroundColor: "white",
+    borderColor: "#223E4A",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    marginTop: 180,
+    marginTop: 180
   },
   editText: {
     // fontFamily: 'Raleway-Light',
     fontSize: 22,
-    color: 'black',
+    color: "black",
     paddingHorizontal: 21,
-    paddingVertical: 17,
-  },
+    paddingVertical: 17
+  }
 });

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { StyleSheet, StatusBar, View, ToolbarAndroid } from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, View, ToolbarAndroid } from "react-native";
 
-import Navicon from './../../assets/navicon.png';
+import Navicon from "./../../assets/navicon.png";
 
 export default class About extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: '  About',
+    drawerLabel: "  About"
   };
 
   render() {
@@ -17,9 +17,8 @@ export default class About extends Component {
           title=" About"
           titleColor="white"
           navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate('DrawerOpen')}
+          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        <StatusBar backgroundColor="black" />
       </View>
     );
   }
@@ -28,7 +27,7 @@ export default class About extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5"
   },
   ralewayLight: {
     // fontFamily: 'Raleway-Light'
@@ -37,8 +36,8 @@ const styles = StyleSheet.create({
     // fontFamily: 'Raleway-LightItalic'
   },
   toolbar: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     height: 56,
-    alignSelf: 'stretch',
-  },
+    alignSelf: "stretch"
+  }
 });
