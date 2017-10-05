@@ -52,11 +52,6 @@ export default class Login extends Component {
   showModal = () => this.setState({ isModalVisible: true });
   hideModal = () => this.setState({ isModalVisible: false });
 
-  signUpOnPress = () => {
-    console.log("Sign up pressed");
-    Keyboard.dismiss();
-  };
-
   loginOnPress = () => {
     Keyboard.dismiss();
     if (this.state.email && this.state.password) {
@@ -73,21 +68,27 @@ export default class Login extends Component {
     }
   };
 
-  createOnPress = async () => {
-    // TODO create user, but we'll use this to clear the api token for now
-    console.log("Create pressed");
-    console.log(this.state);
+  signUpOnPress = () => {
     Keyboard.dismiss();
-    try {
-      const value = await AsyncStorage.getItem(UserApi.API_TOKEN);
-      if (value !== null) {
-        console.log(value);
-      }
-
-      await AsyncStorage.removeItem(UserApi.API_TOKEN);
-    } catch (error) {
-      // do nothing
+    if (
+      !this.state.first_name ||
+      !this.state.last_name ||
+      !this.state.emailSignUp ||
+      !this.state.passwordSignUp ||
+      !this.state.license_plate
+    ) {
+      console.log("Empty fields");
+      return;
     }
+
+    const user = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.emailSignUp,
+      password: this.state.password,
+      license_plate: this.state.license_plate
+    };
+    UserApi.signUp(user).then(this.hideModal());
   };
 
   render() {
@@ -166,56 +167,6 @@ export default class Login extends Component {
                   Sign up
                 </Text>
 
-                {/* Email input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  Email:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  keyboardType="email-address"
-                  multiline={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpPasswordInput.focus()}
-                  value={this.state.emailSignUp}
-                  onChangeText={text => this.setState({ emailSignUp: text })}
-                />
-
-                {/* Password input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  Password:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  keyboardType="default"
-                  secureTextEntry
-                  multiline={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpFirstNameInput.focus()}
-                  ref={input => {
-                    this.signUpPasswordInput = input;
-                  }}
-                  value={this.state.passwordSignUp}
-                  onChangeText={text => this.setState({ passwordSignUp: text })}
-                />
-
                 {/* First name input field */}
                 <Text
                   style={[
@@ -227,7 +178,6 @@ export default class Login extends Component {
                 </Text>
                 <TextInput
                   style={styles.signUpInput}
-                  keyboardType="default"
                   multiline={false}
                   autoCapitalize="words"
                   autoCorrect={false}
@@ -253,19 +203,71 @@ export default class Login extends Component {
                 </Text>
                 <TextInput
                   style={styles.signUpInput}
-                  keyboardType="default"
                   multiline={false}
                   autoCapitalize="words"
                   autoCorrect={false}
                   blurOnSubmit={false}
                   returnKeyType="next"
                   underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
+                  onSubmitEditing={() => this.signUpEmailInput.focus()}
                   ref={input => {
                     this.signUpLastNameInput = input;
                   }}
                   value={this.state.last_name}
                   onChangeText={text => this.setState({ last_name: text })}
+                />
+
+                {/* Email input field */}
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
+                  Email:
+                </Text>
+                <TextInput
+                  style={styles.signUpInput}
+                  keyboardType="email-address"
+                  multiline={false}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  blurOnSubmit={false}
+                  returnKeyType="next"
+                  underlineColorAndroid={"black"}
+                  onSubmitEditing={() => this.signUpPasswordInput.focus()}
+                  ref={input => {
+                    this.signUpEmailInput = input;
+                  }}
+                  value={this.state.emailSignUp}
+                  onChangeText={text => this.setState({ emailSignUp: text })}
+                />
+
+                {/* Password input field */}
+                <Text
+                  style={[
+                    styles.ralewayLight,
+                    { fontSize: 18, paddingLeft: 28 }
+                  ]}
+                >
+                  Password:
+                </Text>
+                <TextInput
+                  style={styles.signUpInput}
+                  keyboardType="default"
+                  secureTextEntry
+                  multiline={false}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  blurOnSubmit={false}
+                  returnKeyType="next"
+                  underlineColorAndroid={"black"}
+                  onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
+                  ref={input => {
+                    this.signUpPasswordInput = input;
+                  }}
+                  value={this.state.passwordSignUp}
+                  onChangeText={text => this.setState({ passwordSignUp: text })}
                 />
 
                 {/* License plate input field */}
@@ -279,7 +281,6 @@ export default class Login extends Component {
                 </Text>
                 <TextInput
                   style={styles.signUpInput}
-                  keyboardType="default"
                   multiline={false}
                   autoCapitalize="characters"
                   autoCorrect={false}
@@ -292,7 +293,7 @@ export default class Login extends Component {
                   onChangeText={text => this.setState({ license_plate: text })}
                 />
 
-                {/* Cancel and Create account buttons */}
+                {/* Cancel and Sign Up account buttons */}
                 <View style={styles.signUpPageButtonsContainer}>
                   <TouchableOpacity
                     style={{ paddingRight: 20 }}
@@ -300,8 +301,8 @@ export default class Login extends Component {
                   >
                     <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={this.createOnPress}>
-                    <Text style={styles.buttonForSignUpPage}>CREATE</Text>
+                  <TouchableOpacity onPress={this.signUpOnPress}>
+                    <Text style={styles.buttonForSignUpPage}>SIGN UP</Text>
                   </TouchableOpacity>
                 </View>
               </View>

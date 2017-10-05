@@ -44,4 +44,25 @@ export default class UserApi {
   static logout = async () => {
     await AsyncStorage.removeItem(UserApi.API_TOKEN);
   };
+
+  static signUp = user => {
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    };
+
+    return fetch("http://shuttle.eccc.ca/api/v1/users", fetchOptions)
+      .then(response => response.json())
+      .then(responseData => {
+        return responseData;
+      })
+      .catch(e => {
+        console.log("Sign up error.");
+        throw e;
+      });
+  };
 }
