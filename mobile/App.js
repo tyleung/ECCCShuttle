@@ -7,26 +7,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      mainpage: null
     };
   }
 
   componentWillMount() {
-    UserApi.isLoggedIn().then(res => this.setState({ isLoggedIn: res }));
+    UserApi.isLoggedIn().then(res => {
+      if (res) {
+        this.setState({ isLoggedIn: res, mainpage: <DrawerNav /> });
+      } else {
+        this.setState({ isLoggedIn: res, mainpage: <LoginStackNav /> });
+      }
+    });
   }
 
   render() {
-    let mainpage;
-    if (this.state.isLoggedIn) {
-      mainpage = <DrawerNav />;
-    } else {
-      mainpage = <LoginStackNav />;
-    }
-
     return (
       <View style={styles.container}>
         <View style={styles.statusBar} />
-        {mainpage}
+        {this.state.mainpage}
       </View>
     );
   }
