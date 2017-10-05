@@ -34,6 +34,7 @@ export default class Login extends Component {
       last_name: "",
       license_plate: ""
     };
+    UserApi.logout();
   }
 
   // Modal's show and hide methods

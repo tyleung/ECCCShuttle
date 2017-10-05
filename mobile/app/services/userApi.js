@@ -27,7 +27,7 @@ export default class UserApi {
       })
       .catch(e => {
         console.log("Login error.");
-        throw (e);
+        throw e;
       });
   };
 
@@ -37,27 +37,11 @@ export default class UserApi {
         return res !== null;
       })
       .catch(e => {
-        throw (e);
+        throw e;
       });
   };
 
-  /*
-  onSignIn = () => AsyncStorage.setItem(UserApi.API_TOKEN, "true");
-
-  onSignOut = () => AsyncStorage.removeItem(USER_KEY);
-
-  isSignedIn = () => {
-    return new Promise((resolve, reject) => {
-      AsyncStorage.getItem(USER_KEY)
-        .then(res => {
-          if (res !== null) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        })
-        .catch(err => reject(err));
-    });
+  static logout = async () => {
+    await AsyncStorage.removeItem(UserApi.API_TOKEN);
   };
-  */
 }
