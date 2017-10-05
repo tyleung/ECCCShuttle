@@ -5,7 +5,8 @@ import {
   Text,
   TouchableOpacity,
   ToolbarAndroid,
-  Image
+  Image,
+  BackHandler
 } from "react-native";
 
 import Navicon from "./../../assets/navicon.png";
@@ -17,6 +18,16 @@ export default class Main extends Component {
   static navigationOptions = {
     drawerLabel: "  QR Scanner"
   };
+
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      BackHandler.exitApp();
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress");
+  }
 
   render() {
     const { navigate } = this.props.navigation;

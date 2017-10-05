@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  View
+  View,
+  BackHandler
 } from "react-native";
 import Modal from "react-native-modal";
 import UserApi from "../services/userApi";
@@ -35,6 +36,16 @@ export default class Login extends Component {
       license_plate: ""
     };
     UserApi.logout();
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      BackHandler.exitApp();
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress");
   }
 
   // Modal's show and hide methods
