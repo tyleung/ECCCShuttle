@@ -5,8 +5,9 @@ import {
   Text,
   TouchableOpacity,
   ToolbarAndroid,
-  ListView
+  FlatList
 } from "react-native";
+import UserApi from "../services/userApi";
 
 import Navicon from "./../../assets/navicon.png";
 
@@ -18,34 +19,31 @@ export default class RideHistory extends Component {
 
   constructor() {
     super();
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          date: "May 7, 2017",
-          point: "50"
-        },
-        {
-          date: "Apr 23, 2017",
-          point: "50"
-        }
-      ])
+      user: {},
+      transactions: []
     };
   }
 
-  renderRow = rowData => (
+  componentDidMount() {
+    UserApi.getStoredUser().then(user => {
+      UserApi.getUserTransactions(user.id).then(transactions => {
+        this.setState({ user, transactions });
+      });
+    });
+  }
+
+  renderItem = ({ item }) => (
     <View>
       <TouchableOpacity style={styles.historyContainer}>
         <View style={{ flex: 1 }}>
           <Text style={[styles.ralewayLight, styles.historyText]}>
-            {rowData.date}
+            {item.transaction_date}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={[styles.ralewayLight, styles.historyText]}>
-            {rowData.point} {rowData.point > 1 ? "pts" : "pt"}
+            {item.points} {item.points > 1 ? "pts" : "pt"}
           </Text>
         </View>
       </TouchableOpacity>
@@ -62,9 +60,10 @@ export default class RideHistory extends Component {
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
+        <FlatList
+          data={this.state.transactions}
+          keyExtractor={item => item.id}
+          renderItem={this.renderItem}
         />
       </View>
     );

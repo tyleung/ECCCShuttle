@@ -3,6 +3,7 @@ import { AsyncStorage } from "react-native";
 export default class UserApi {
   static API_TOKEN = "API_TOKEN";
   static USER = "USER";
+  static USER_TRANSACTIONS = "USER_TRANSACTIONS";
 
   static login = (email, password) => {
     const fetchOptions = {
@@ -100,5 +101,29 @@ export default class UserApi {
       console.log(e);
       return false;
     }
+  };
+
+  static getUserTransactions = async userId => {
+    const token = await AsyncStorage.getItem(UserApi.API_TOKEN);
+    const fetchOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    };
+
+    return fetch(`http://shuttle.eccc.ca/api/v1/users/${userId}/transactions`, fetchOptions)
+      .then(response => response.json())
+      .then(responseData => {
+        if (responseData) {
+          AsyncStorage.setItem(UserApi.USER_TRANSACTIONS, JSON.stringify(responseData));
+          return responseData;
+        } else {
+          throw Error("Get user transactions error.");
+        }
+      })
+      .catch(e => console.log(e));
   };
 }
