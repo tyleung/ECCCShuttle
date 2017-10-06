@@ -35,16 +35,6 @@ export default class RideHistory extends Component {
     };
   }
 
-  componentWillMount() {
-    UserApi.isLoggedIn().then(res => {
-      if (res) {
-        this.setState({ isLoggedIn: res, mainpage: <DrawerNav /> });
-      } else {
-        this.setState({ isLoggedIn: res, mainpage: <LoginStackNav /> });
-      }
-    });
-  }
-
   renderRow = rowData => (
     <View>
       <TouchableOpacity style={styles.historyContainer}>

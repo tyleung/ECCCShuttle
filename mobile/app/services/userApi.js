@@ -87,4 +87,18 @@ export default class UserApi {
       })
       .catch(e => console.log(e));
   };
+
+  static getStoredUser = async () => {
+    try {
+      const user = await AsyncStorage.getItem(UserApi.USER);
+      if (user !== null) {
+        return JSON.parse(user);
+      } else {
+        throw Error("User not found in localstorage.");
+      }
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
 }

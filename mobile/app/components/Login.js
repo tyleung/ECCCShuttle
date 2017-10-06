@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  AsyncStorage,
   StyleSheet,
   Image,
   Keyboard,

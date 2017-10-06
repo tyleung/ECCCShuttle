@@ -4,9 +4,10 @@
  * @flow
  */
 
-import React from "react";
+import React, { Component } from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
+import UserApi from "../services/userApi";
 
 import Login from "./Login";
 import Main from "./Main";
@@ -74,6 +75,41 @@ const SettingPageStackNav = StackNavigator(
   }
 );
 
+class DrawerContent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
+  }
+
+  componentDidMount() {
+    UserApi.getStoredUser().then(user => this.setState({ user }));
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.profile}>
+          <View
+            style={{ flex: 0.4, justifyContent: "center", paddingVertical: 16 }}
+          >
+            <Image source={ProfileBlack} style={styles.image} />
+          </View>
+          <View
+            style={{ flex: 1, justifyContent: "center", paddingVertical: 16 }}
+          >
+            <Text style={styles.text}>
+              {this.state.user.first_name} {this.state.user.last_name}
+            </Text>
+          </View>
+        </View>
+        <DrawerItems {...this.props} />
+      </View>
+    );
+  }
+}
+
 // https://reactnavigation.org/docs/navigators/drawer
 // A drawer navigation for Main, Ride History, About, Settings and Login page
 export const DrawerNav = DrawerNavigator(
@@ -113,23 +149,7 @@ export const DrawerNav = DrawerNavigator(
     },
 
     // Moew Drawer stylings
-    contentComponent: props => (
-      <View style={styles.container}>
-        <View style={styles.profile}>
-          <View
-            style={{ flex: 0.4, justifyContent: "center", paddingVertical: 16 }}
-          >
-            <Image source={ProfileBlack} style={styles.image} />
-          </View>
-          <View
-            style={{ flex: 1, justifyContent: "center", paddingVertical: 16 }}
-          >
-            <Text style={styles.text}>Canopus Tong</Text>
-          </View>
-        </View>
-        <DrawerItems {...props} />
-      </View>
-    )
+    contentComponent: DrawerContent
   }
 );
 
