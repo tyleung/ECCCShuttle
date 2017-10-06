@@ -15,5 +15,6 @@
     "arrow-parens": 0,
     "quotes": 0,
     "arrow-body-style": 0,
+    "no-else-return": 0
   }
 }

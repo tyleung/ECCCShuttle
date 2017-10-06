@@ -16,6 +16,7 @@ $app->get('/', function () use ($app) {
 });
 
 $app->group(['prefix' => 'api/v1', 'middleware' => 'auth:api', 'namespace' => 'App\Http\Controllers'], function() use ($app) {
+    $app->get('user', 'AuthController@getAuthenticatedUser');
     $app->get('users/{id}', 'UserController@getUser');
     $app->get('users/{id}/transactions', 'UserController@getUserTransactions');
     $app->post('users/{id}', 'UserController@updateUser');

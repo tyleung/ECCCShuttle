@@ -2,6 +2,7 @@ import { AsyncStorage } from "react-native";
 
 export default class UserApi {
   static API_TOKEN = "API_TOKEN";
+  static USER = "USER";
 
   static login = (email, password) => {
     const fetchOptions = {
@@ -21,14 +22,12 @@ export default class UserApi {
       .then(responseData => {
         if (responseData.token) {
           AsyncStorage.setItem(UserApi.API_TOKEN, responseData.token);
+          return responseData.token;
+        } else {
+          throw Error("Login error.");
         }
-
-        return responseData;
       })
-      .catch(e => {
-        console.log("Login error.");
-        throw e;
-      });
+      .catch(e => console.log(e));
   };
 
   static isLoggedIn = () => {
@@ -64,5 +63,28 @@ export default class UserApi {
         console.log("Sign up error.");
         throw e;
       });
+  };
+
+  static getUser = token => {
+    const fetchOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    };
+
+    return fetch("http://shuttle.eccc.ca/api/v1/user", fetchOptions)
+      .then(response => response.json())
+      .then(responseData => {
+        if (responseData.user) {
+          AsyncStorage.setItem(UserApi.USER, JSON.stringify(responseData.user));
+          return responseData.user;
+        } else {
+          throw Error("Get user error.");
+        }
+      })
+      .catch(e => console.log(e));
   };
 }

@@ -10,20 +10,18 @@ import {
 
 import Navicon from "./../../assets/navicon.png";
 
-// ListView stuff, some kind of comparing object
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
 export default class RideHistory extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: "  Ride History"
   };
 
-  // A constructor for the ListView
   constructor() {
     super();
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
     this.state = {
-      // Data source for the ListView
       dataSource: ds.cloneWithRows([
         {
           date: "May 7, 2017",
@@ -37,7 +35,16 @@ export default class RideHistory extends Component {
     };
   }
 
-  // A method for rending the styling of each row in the ListView
+  componentWillMount() {
+    UserApi.isLoggedIn().then(res => {
+      if (res) {
+        this.setState({ isLoggedIn: res, mainpage: <DrawerNav /> });
+      } else {
+        this.setState({ isLoggedIn: res, mainpage: <LoginStackNav /> });
+      }
+    });
+  }
+
   renderRow = rowData => (
     <View>
       <TouchableOpacity style={styles.historyContainer}>
@@ -48,7 +55,7 @@ export default class RideHistory extends Component {
         </View>
         <View style={{ flex: 1 }}>
           <Text style={[styles.ralewayLight, styles.historyText]}>
-            {rowData.point} pts
+            {rowData.point} {rowData.point > 1 ? "pts" : "pt"}
           </Text>
         </View>
       </TouchableOpacity>
