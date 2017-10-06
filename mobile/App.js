@@ -12,7 +12,7 @@ class App extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     UserApi.isLoggedIn().then(res => {
       if (res) {
         this.setState({ isLoggedIn: res, mainpage: <DrawerNav /> });
