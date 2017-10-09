@@ -5,30 +5,18 @@ import {
   Text,
   ToolbarAndroid,
   TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback
+  Image
 } from "react-native";
-import Modal from "react-native-modal";
 
 import Navicon from "./../../assets/navicon.png";
 import ProfileGrey from "./../../assets/profileGrey.png";
 import Pencil from "./../../assets/pencil.png";
-import DeleteAccount from "./../../assets/deleteAccount.png";
 
 export default class Settings extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: "  Settings"
   };
-
-  // Modal not visible by default
-  state = {
-    isModalVisible: false
-  };
-
-  // Modal's show and hide methods
-  showModal = () => this.setState({ isModalVisible: true });
-  hideModal = () => this.setState({ isModalVisible: false });
 
   render() {
     const { navigate } = this.props.navigation;
@@ -107,80 +95,6 @@ export default class Settings extends Component {
             <Image source={Pencil} style={styles.pencilIcon} />
           </View>
         </TouchableOpacity>
-
-        {/* Remove account button */}
-        <View style={{ flex: 1, justifyContent: "flex-end" }}>
-          <TouchableOpacity
-            style={[
-              styles.profileContainer,
-              { borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 30 }
-            ]}
-            onPress={this.showModal}
-          >
-            <View style={{ flex: 1 }}>
-              <Text
-                style={[
-                  styles.ralewayLight,
-                  {
-                    fontSize: 17,
-                    color: "red",
-                    paddingLeft: 21,
-                    paddingVertical: 13
-                  }
-                ]}
-              >
-                Remove My Account
-              </Text>
-            </View>
-            <View
-              style={{
-                alignItems: "flex-end",
-                marginHorizontal: 15,
-                justifyContent: "center"
-              }}
-            >
-              <Image source={DeleteAccount} style={styles.pencilIcon} />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* Modal for account removal confirmation */}
-        <Modal isVisible={this.state.isModalVisible}>
-          <TouchableOpacity
-            style={{ flex: 1, justifyContent: "center" }}
-            activeOpacity={1}
-            onPress={this.hideModal}
-          >
-            <TouchableWithoutFeedback>
-              <View style={styles.modalContainer}>
-                <Text style={styles.modalTitle}>Remove Account?</Text>
-                <Text style={styles.modalText}>
-                  Removing this account will permanently delete all of its data
-                  from the datebase. This includes all ride history, collected
-                  points, license plate number, etc. Do you want to continue?
-                </Text>
-                <View style={styles.modalButtonsContainer}>
-                  <View style={{ flex: 1 }}>
-                    <View style={styles.modalButtonContainer}>
-                      {/* Cancel button */}
-                      <TouchableOpacity onPress={this.hideModal}>
-                        <Text style={styles.modalButtonText}>CANCEL</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <View style={styles.modalButtonContainer}>
-                      {/* Remove button */}
-                      <TouchableOpacity>
-                        <Text style={styles.modalButtonText}>REMOVE</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </TouchableWithoutFeedback>
-          </TouchableOpacity>
-        </Modal>
       </View>
     );
   }
