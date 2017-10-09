@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
+import UserApi from "../services/userApi";
 
 import Navicon from "./../../assets/navicon.png";
 import ProfileGrey from "./../../assets/profileGrey.png";
@@ -17,6 +18,19 @@ export default class Settings extends Component {
   static navigationOptions = {
     drawerLabel: "  Settings"
   };
+
+  constructor() {
+    super();
+    this.state = {
+      user: {}
+    };
+  }
+
+  componentDidMount() {
+    UserApi.getStoredUser().then(user => {
+      this.setState({ user });
+    });
+  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -49,19 +63,40 @@ export default class Settings extends Component {
                 { paddingRight: 21 }
               ]}
             >
-              tongtongcanopus@gmail.com
+              {this.state.user.email}
             </Text>
           </View>
         </TouchableOpacity>
 
-        {/* Show user's name and button that navigates to EditName */}
+        {/* Show user's first name and button that navigates to EditName */}
         <TouchableOpacity
           style={[styles.profileContainer, { borderBottomWidth: 1 }]}
           onPress={() => navigate("EditNameScreen")}
         >
           <View style={{ flex: 1 }}>
             <Text style={[styles.ralewayLight, styles.profileText]}>
-              Canopus Tong
+              {this.state.user.first_name}
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: "flex-end",
+              marginHorizontal: 15,
+              justifyContent: "center"
+            }}
+          >
+            <Image source={Pencil} style={styles.pencilIcon} />
+          </View>
+        </TouchableOpacity>
+
+        {/* Show user's last name and button that navigates to EditName */}
+        <TouchableOpacity
+          style={[styles.profileContainer, { borderBottomWidth: 1 }]}
+          onPress={() => navigate("EditNameScreen")}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.ralewayLight, styles.profileText]}>
+              {this.state.user.last_name}
             </Text>
           </View>
           <View
@@ -82,7 +117,7 @@ export default class Settings extends Component {
         >
           <View style={{ flex: 1 }}>
             <Text style={[styles.ralewayLight, styles.profileText]}>
-              AA 1201
+              {this.state.user.license_plate}
             </Text>
           </View>
           <View
