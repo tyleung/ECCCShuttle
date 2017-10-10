@@ -14,7 +14,7 @@ import Main from "./Main";
 import RideHistory from "./RideHistory";
 import About from "./About";
 import Settings from "./Settings";
-import QRScanner from "./QRScanner";
+import BarcodeScanner from "./BarcodeScanner";
 import EditName from "./EditName";
 import EditLicensePlate from "./EditLicensePlate";
 
@@ -32,7 +32,7 @@ const MainPageStackNav = StackNavigator(
       header: { visible: false }
     },
     ScannerScreen: {
-      screen: QRScanner,
+      screen: BarcodeScanner,
       // Hide header
       header: { visible: false }
     }

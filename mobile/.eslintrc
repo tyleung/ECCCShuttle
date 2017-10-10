@@ -3,7 +3,8 @@
   "extends": "airbnb",
   "plugins": ["react", "jsx-a11y", "import"],
   "globals": {
-    "fetch": false
+    "fetch": false,
+    "alert": false
   },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
@@ -15,6 +16,8 @@
     "arrow-parens": 0,
     "quotes": 0,
     "arrow-body-style": 0,
-    "no-else-return": 0
+    "no-else-return": 0,
+    "no-alert": 0,
+    "no-underscore-dangle": 0
   }
 }
