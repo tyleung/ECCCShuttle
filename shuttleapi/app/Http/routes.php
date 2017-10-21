@@ -29,4 +29,5 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->get('transactions/types/{id}', 'TransactionController@getTransactionsByType');    
     $app->post('transactions', 'TransactionController@createTransaction');
     $app->post('auth/login', 'AuthController@postLogin');
+    $app->get('test', 'UserController@test');
 });
