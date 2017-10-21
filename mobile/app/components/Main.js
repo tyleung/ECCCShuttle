@@ -34,9 +34,9 @@ export default class Main extends Component {
 
   something = () => {
     const encrypted = JSON.stringify({
-      ct: "/VBcZFUFHm0VZ7HDDwb+zg==",
-      iv: "98ea8d17762320662997a7a37b6ac5bd",
-      s: "12841a48b62d8b0f"
+      ken: "/VBcZFUFHm0VZ7HDDwb+zg==",
+      da: "98ea8d17762320662997a7a37b6ac5bd",
+      ma: "12841a48b62d8b0f"
     });
     console.log(encrypted);
     const decrypted = JSON.parse(

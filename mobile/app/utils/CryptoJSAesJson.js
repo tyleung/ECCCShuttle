@@ -8,18 +8,18 @@ const CryptoJS = require("crypto-js");
 */
 const CryptoJSAesJson = {
   stringify(cipherParams) {
-    const j = { ct: cipherParams.ciphertext.toString(CryptoJS.enc.Base64) };
-    if (cipherParams.iv) j.iv = cipherParams.iv.toString();
-    if (cipherParams.salt) j.s = cipherParams.salt.toString();
+    const j = { ken: cipherParams.ciphertext.toString(CryptoJS.enc.Base64) };
+    if (cipherParams.iv) j.da = cipherParams.iv.toString();
+    if (cipherParams.salt) j.ma = cipherParams.salt.toString();
     return JSON.stringify(j);
   },
   parse(jsonStr) {
     const j = JSON.parse(jsonStr);
     const cipherParams = CryptoJS.lib.CipherParams.create({
-      ciphertext: CryptoJS.enc.Base64.parse(j.ct)
+      ciphertext: CryptoJS.enc.Base64.parse(j.ken)
     });
-    if (j.iv) cipherParams.iv = CryptoJS.enc.Hex.parse(j.iv);
-    if (j.s) cipherParams.salt = CryptoJS.enc.Hex.parse(j.s);
+    if (j.da) cipherParams.iv = CryptoJS.enc.Hex.parse(j.da);
+    if (j.ma) cipherParams.salt = CryptoJS.enc.Hex.parse(j.ma);
     return cipherParams;
   }
 };

@@ -22,10 +22,10 @@ class Crypto
     static function cryptoJsAesDecrypt($passphrase, $jsonString){
         $jsondata = json_decode($jsonString, true);
         try {
-            $salt = hex2bin($jsondata["s"]);
-            $iv  = hex2bin($jsondata["iv"]);
+            $salt = hex2bin($jsondata["ma"]);
+            $iv  = hex2bin($jsondata["da"]);
         } catch(Exception $e) { return null; }
-        $ct = base64_decode($jsondata["ct"]);
+        $ct = base64_decode($jsondata["ken"]);
         $concatedPassphrase = $passphrase.$salt;
         $md5 = array();
         $md5[0] = md5($concatedPassphrase, true);
@@ -57,7 +57,7 @@ class Crypto
         $key = substr($salted, 0, 32);
         $iv  = substr($salted, 32,16);
         $encrypted_data = openssl_encrypt(json_encode($value), 'aes-256-cbc', $key, true, $iv);
-        $data = array("ct" => base64_encode($encrypted_data), "iv" => bin2hex($iv), "s" => bin2hex($salt));
+        $data = array("ken" => base64_encode($encrypted_data), "da" => bin2hex($iv), "ma" => bin2hex($salt));
         return json_encode($data);
     }
 }
