@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
+import CryptoJSAesJson, { CRYPTO_KEY } from "../utils/CryptoJSAesJson";
+
+const CryptoJS = require("crypto-js");
 
 export default class BarcodeScannerExample extends React.Component {
   state = {
@@ -13,7 +16,15 @@ export default class BarcodeScannerExample extends React.Component {
   }
 
   _handleBarCodeRead = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    const decrypted = JSON.parse(
+      CryptoJS.AES
+        .decrypt(data, CRYPTO_KEY, {
+          format: CryptoJSAesJson
+        })
+        .toString(CryptoJS.enc.Utf8)
+    );
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    alert(`type: ${type}, decrypted: ${decrypted}`);
   };
 
   render() {

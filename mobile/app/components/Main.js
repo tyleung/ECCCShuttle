@@ -8,13 +8,10 @@ import {
   Image,
   BackHandler
 } from "react-native";
-import CryptoJSAesJson, { CRYPTO_KEY } from "../utils/CryptoJSAesJson";
 
 import Navicon from "./../../assets/navicon.png";
 import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
-
-const CryptoJS = require("crypto-js");
 
 export default class Main extends Component {
   // Name the drawerLabel for this page
@@ -31,24 +28,6 @@ export default class Main extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress");
   }
-
-  something = () => {
-    const encrypted = JSON.stringify({
-      ken: "/VBcZFUFHm0VZ7HDDwb+zg==",
-      da: "98ea8d17762320662997a7a37b6ac5bd",
-      ma: "12841a48b62d8b0f"
-    });
-    console.log(encrypted);
-    const decrypted = JSON.parse(
-      CryptoJS.AES
-        .decrypt(encrypted, CRYPTO_KEY, {
-          format: CryptoJSAesJson
-        })
-        .toString(CryptoJS.enc.Utf8)
-    );
-    console.log("decrypted");
-    console.log(decrypted);
-  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -111,11 +90,6 @@ export default class Main extends Component {
             </Text>
           </View>
           <View style={{ flex: 0.5 }} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.something}>
-          <Text style={[styles.ralewayLight, styles.refreshButtonText]}>
-            Good stuff
-          </Text>
         </TouchableOpacity>
       </View>
     );
