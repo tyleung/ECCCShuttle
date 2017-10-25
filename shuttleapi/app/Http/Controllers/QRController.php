@@ -10,7 +10,7 @@ class QRController extends Controller
 {
     public function index()
     {
-        $sunday = Carbon::parse("this sunday")->toDateString();
+        $sunday = Carbon::today()->startOfWeek()->addDays(6)->toDateString();
         $encrypted = Crypto::cryptoJsAesEncrypt(env("APP_KEY"), $sunday);
         $qrCode = new QrCode($encrypted);
         
