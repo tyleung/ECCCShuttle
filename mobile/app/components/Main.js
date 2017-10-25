@@ -8,7 +8,7 @@ import {
   Image,
   BackHandler
 } from "react-native";
-import CryptoJSAesJson from "../utils/CryptoJSAesJson";
+import CryptoJSAesJson, { CRYPTO_KEY } from "../utils/CryptoJSAesJson";
 
 import Navicon from "./../../assets/navicon.png";
 import QRIcon from "./../../assets/qricon.png";
@@ -41,7 +41,7 @@ export default class Main extends Component {
     console.log(encrypted);
     const decrypted = JSON.parse(
       CryptoJS.AES
-        .decrypt(encrypted, "BF96CBBADD10D910C0581AD1537C2934", {
+        .decrypt(encrypted, CRYPTO_KEY, {
           format: CryptoJSAesJson
         })
         .toString(CryptoJS.enc.Utf8)

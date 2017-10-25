@@ -1,5 +1,7 @@
 const CryptoJS = require("crypto-js");
 
+export const CRYPTO_KEY = "BF96CBBADD10D910C0581AD1537C2934";
+
 /**
 * AES JSON formatter for CryptoJS
 *
