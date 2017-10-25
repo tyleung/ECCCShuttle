@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Crypto;
 
 class UserController extends Controller
 {
@@ -41,15 +40,5 @@ class UserController extends Controller
         } finally {
             return response()->json($user);
         }
-    }
-
-    public function test()
-    {
-        $test = Crypto::cryptoJsAesEncrypt(env("APP_KEY"), "hello");
-        echo "encrypted<br>";
-        echo $test . "<br>";
-        $decrypted = Crypto::cryptoJsAesDecrypt(env("APP_KEY"), $test);
-        echo "decrypted<br>";
-        echo $decrypted . "<br>";
     }
 }
