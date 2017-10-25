@@ -15,6 +15,8 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+$app->get('qr', 'QRController@index');
+
 $app->group(['prefix' => 'api/v1', 'middleware' => 'auth:api', 'namespace' => 'App\Http\Controllers'], function() use ($app) {
     $app->get('user', 'AuthController@getAuthenticatedUser');
     $app->get('users/{id}', 'UserController@getUser');
