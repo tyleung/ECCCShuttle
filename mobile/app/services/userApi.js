@@ -35,7 +35,7 @@ export default class UserApi {
           errorMessage = error.message;
         }
 
-        return errorMessage;
+        throw errorMessage;
       });
   };
 
@@ -86,7 +86,6 @@ export default class UserApi {
       })
       .catch(error => {
         console.log(error);
-        return error;
       });
   };
 

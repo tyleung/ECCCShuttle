@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
   Image,
   Keyboard,
@@ -54,13 +55,17 @@ export default class Login extends Component {
   loginOnPress = () => {
     Keyboard.dismiss();
     if (this.state.email && this.state.password) {
-      UserApi.login(this.state.email, this.state.password).then(token => {
-        UserApi.getUser(token).then(() =>
-          this.props.navigation.navigate("MainScreen")
-        );
-      });
+      UserApi.login(this.state.email, this.state.password)
+        .then(token => {
+          UserApi.getUser(token).then(() =>
+            this.props.navigation.navigate("MainScreen")
+          );
+        })
+        .catch(error => {
+          Alert.alert("Login", error);
+        });
     } else {
-      console.log("Empty email or password");
+      Alert.alert("Login", "Empty email or password");
     }
   };
 
