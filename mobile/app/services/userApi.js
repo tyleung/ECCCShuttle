@@ -1,4 +1,5 @@
 import { AsyncStorage } from "react-native";
+import axios from "axios";
 
 export default class UserApi {
   static API_TOKEN = "API_TOKEN";
@@ -6,29 +7,18 @@ export default class UserApi {
   static USER_TRANSACTIONS = "USER_TRANSACTIONS";
 
   static login = (email, password) => {
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+    return axios
+      .post("http://shuttle.eccc.ca/api/v1/auth/login", {
         email,
         password
       })
-    };
-
-    return fetch("http://shuttle.eccc.ca/api/v1/auth/login", fetchOptions)
-      .then(response => response.json())
-      .then(responseData => {
-        if (responseData.token) {
-          AsyncStorage.setItem(UserApi.API_TOKEN, responseData.token);
-          return responseData.token;
-        } else {
-          throw Error("Login error.");
-        }
+      .then(response => {
+        AsyncStorage.setItem(UserApi.API_TOKEN, response.data.token);
+        return response.data.token;
       })
-      .catch(e => console.log(e));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   static isLoggedIn = () => {
@@ -46,6 +36,7 @@ export default class UserApi {
   };
 
   static signUp = user => {
+    /*
     const fetchOptions = {
       method: "POST",
       headers: {
@@ -64,29 +55,41 @@ export default class UserApi {
         console.log("Sign up error.");
         throw e;
       });
+      */
+
+    return axios
+      .post("http://shuttle.eccc.ca/api/v1/users", user)
+      .then(response => {
+        console.log("alsdhakhdakjdhasiSINGUPO");
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   static getUser = token => {
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    };
-
-    return fetch("http://shuttle.eccc.ca/api/v1/user", fetchOptions)
-      .then(response => response.json())
-      .then(responseData => {
-        if (responseData.user) {
-          AsyncStorage.setItem(UserApi.USER, JSON.stringify(responseData.user));
-          return responseData.user;
+    return axios
+      .get("http://shuttle.eccc.ca/api/v1/user", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if (response.data.user) {
+          AsyncStorage.setItem(
+            UserApi.USER,
+            JSON.stringify(response.data.user)
+          );
+          return response.data.user;
         } else {
           throw Error("Get user error.");
         }
       })
-      .catch(e => console.log(e));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   static getStoredUser = async () => {
@@ -105,25 +108,22 @@ export default class UserApi {
 
   static getUserTransactions = async userId => {
     const token = await AsyncStorage.getItem(UserApi.API_TOKEN);
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    };
-
-    return fetch(`http://shuttle.eccc.ca/api/v1/users/${userId}/transactions`, fetchOptions)
-      .then(response => response.json())
-      .then(responseData => {
-        if (responseData) {
-          AsyncStorage.setItem(UserApi.USER_TRANSACTIONS, JSON.stringify(responseData));
-          return responseData;
-        } else {
-          throw Error("Get user transactions error.");
+    return axios
+      .get(`http://shuttle.eccc.ca/api/v1/users/${userId}/transactions`, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       })
-      .catch(e => console.log(e));
+      .then(response => {
+        AsyncStorage.setItem(
+          UserApi.USER_TRANSACTIONS,
+          JSON.stringify(response.data)
+        );
+
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }
