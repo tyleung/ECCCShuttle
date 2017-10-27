@@ -113,4 +113,12 @@ export default class UserApi {
         console.log(error);
       });
   };
+
+  static getLastUserTransaction = async () => {
+    const userTransactions = await AsyncStorage.getItem(USER_TRANSACTIONS);
+    const lastUserTransaction = userTransactions.reduce(
+      (latest, t) => (latest.transaction_date > t.transaction_date ? latest : t)
+    );
+    return lastUserTransaction;
+  };
 }
