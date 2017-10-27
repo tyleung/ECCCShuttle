@@ -1,11 +1,8 @@
 import { AsyncStorage } from "react-native";
 import axios from "axios";
+import { API_TOKEN, USER, USER_TRANSACTIONS } from "../utils/constants";
 
 export default class UserApi {
-  static API_TOKEN = "API_TOKEN";
-  static USER = "USER";
-  static USER_TRANSACTIONS = "USER_TRANSACTIONS";
-
   static login = (email, password) => {
     return axios
       .post("http://shuttle.eccc.ca/api/v1/auth/login", {
@@ -13,7 +10,7 @@ export default class UserApi {
         password
       })
       .then(response => {
-        AsyncStorage.setItem(UserApi.API_TOKEN, response.data.token);
+        AsyncStorage.setItem(API_TOKEN, response.data.token);
         return response.data.token;
       })
       .catch(error => {
@@ -40,7 +37,7 @@ export default class UserApi {
   };
 
   static isLoggedIn = () => {
-    return AsyncStorage.getItem(UserApi.API_TOKEN)
+    return AsyncStorage.getItem(API_TOKEN)
       .then(res => {
         return res !== null;
       })
@@ -50,9 +47,9 @@ export default class UserApi {
   };
 
   static logout = async () => {
-    await AsyncStorage.removeItem(UserApi.API_TOKEN);
-    await AsyncStorage.removeItem(UserApi.USER);
-    await AsyncStorage.removeItem(UserApi.USER_TRANSACTIONS);
+    await AsyncStorage.removeItem(API_TOKEN);
+    await AsyncStorage.removeItem(USER);
+    await AsyncStorage.removeItem(USER_TRANSACTIONS);
   };
 
   static signUp = user => {
@@ -75,10 +72,7 @@ export default class UserApi {
       })
       .then(response => {
         if (response.data.user) {
-          AsyncStorage.setItem(
-            UserApi.USER,
-            JSON.stringify(response.data.user)
-          );
+          AsyncStorage.setItem(USER, JSON.stringify(response.data.user));
           return response.data.user;
         } else {
           throw Error("Get user error.");
@@ -91,7 +85,7 @@ export default class UserApi {
 
   static getStoredUser = async () => {
     try {
-      const user = await AsyncStorage.getItem(UserApi.USER);
+      const user = await AsyncStorage.getItem(USER);
       if (user !== null) {
         return JSON.parse(user);
       } else {
@@ -104,7 +98,7 @@ export default class UserApi {
   };
 
   static getUserTransactions = async userId => {
-    const token = await AsyncStorage.getItem(UserApi.API_TOKEN);
+    const token = await AsyncStorage.getItem(API_TOKEN);
     return axios
       .get(`http://shuttle.eccc.ca/api/v1/users/${userId}/transactions`, {
         headers: {
@@ -112,11 +106,7 @@ export default class UserApi {
         }
       })
       .then(response => {
-        AsyncStorage.setItem(
-          UserApi.USER_TRANSACTIONS,
-          JSON.stringify(response.data)
-        );
-
+        AsyncStorage.setItem(USER_TRANSACTIONS, JSON.stringify(response.data));
         return response.data;
       })
       .catch(error => {
