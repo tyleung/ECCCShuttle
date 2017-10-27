@@ -17,7 +17,25 @@ export default class UserApi {
         return response.data.token;
       })
       .catch(error => {
-        console.log(error);
+        let errorMessage = "";
+        if (error.response) {
+          if (error.response.status === 404) {
+            errorMessage = "Incorrect email or password.";
+          } else if (
+            error.response.status === 422 &&
+            error.response.data.email
+          ) {
+            errorMessage = error.response.data.email[0];
+          } else {
+            errorMessage = "Login error.";
+          }
+        } else if (error.request) {
+          errorMessage = error.request;
+        } else {
+          errorMessage = error.message;
+        }
+
+        return errorMessage;
       });
   };
 
@@ -68,6 +86,7 @@ export default class UserApi {
       })
       .catch(error => {
         console.log(error);
+        return error;
       });
   };
 
