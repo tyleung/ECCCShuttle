@@ -33,35 +33,14 @@ export default class UserApi {
 
   static logout = async () => {
     await AsyncStorage.removeItem(UserApi.API_TOKEN);
+    await AsyncStorage.removeItem(UserApi.USER);
+    await AsyncStorage.removeItem(UserApi.USER_TRANSACTIONS);
   };
 
   static signUp = user => {
-    /*
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    };
-
-    return fetch("http://shuttle.eccc.ca/api/v1/users", fetchOptions)
-      .then(response => response.json())
-      .then(responseData => {
-        return responseData;
-      })
-      .catch(e => {
-        console.log("Sign up error.");
-        throw e;
-      });
-      */
-
     return axios
       .post("http://shuttle.eccc.ca/api/v1/users", user)
       .then(response => {
-        console.log("alsdhakhdakjdhasiSINGUPO");
-        console.log(response.data);
         return response.data;
       })
       .catch(error => {
