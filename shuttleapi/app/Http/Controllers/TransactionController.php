@@ -20,10 +20,13 @@ class TransactionController extends Controller
 
     public function createTransaction(Request $request)
     {
+        $dt = Carbon::createFromTimestampUTC($request->transaction_date);
+        $dt->timezone = 'America/Edmonton';
+
         $transaction = new Transaction;
         $transaction->user_id = $request->user_id;
         $transaction->type_id = $request->type_id;
-        $transaction->transaction_date = $request->transaction_date;
+        $transaction->transaction_date = $dt->toDateTimeString();
         $transaction->points = $request->points;
         $transaction->save();
         return $transaction;

@@ -22,6 +22,7 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'auth:api', 'namespace' => 'A
     $app->get('users/{id}', 'UserController@getUser');
     $app->get('users/{id}/transactions', 'UserController@getUserTransactions');
     $app->post('users/{id}', 'UserController@updateUser');
+    $app->post('transactions', 'TransactionController@createTransaction');
 });
 
 $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], function() use ($app) {
@@ -29,7 +30,6 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->post('users', 'UserController@createUser');
     $app->get('transactions', 'TransactionController@index');
     $app->get('transactions/types/{id}', 'TransactionController@getTransactionsByType');    
-    $app->post('transactions', 'TransactionController@createTransaction');
     $app->post('auth/login', 'AuthController@postLogin');
-    $app->get('test', 'UserController@test');
+    $app->get('test', 'QRController@test');
 });

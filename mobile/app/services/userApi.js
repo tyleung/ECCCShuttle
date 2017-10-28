@@ -114,11 +114,30 @@ export default class UserApi {
       });
   };
 
+  static getStoredUserTransactions = async () => {
+    try {
+      const userTransactions = await AsyncStorage.getItem(USER_TRANSACTIONS);
+      if (userTransactions !== null) {
+        return JSON.parse(userTransactions);
+      } else {
+        throw Error("User transactions not found in localstorage.");
+      }
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
+
   static getLastUserTransaction = async () => {
-    const userTransactions = await AsyncStorage.getItem(USER_TRANSACTIONS);
-    const lastUserTransaction = userTransactions.reduce(
-      (latest, t) => (latest.transaction_date > t.transaction_date ? latest : t)
-    );
-    return lastUserTransaction;
+    const userTransactions = await UserApi.getStoredUserTransactions();
+    if (userTransactions.length > 0) {
+      const lastUserTransaction = userTransactions.reduce(
+        (latest, t) =>
+          latest.transaction_date > t.transaction_date ? latest : t
+      );
+      return lastUserTransaction;
+    }
+
+    return {};
   };
 }

@@ -20,11 +20,17 @@ class QRController extends Controller
     
     public function test()
     {
+        /*
         $test = Crypto::cryptoJsAesEncrypt(env("APP_KEY"), "hello");
         echo "encrypted<br>";
         echo $test . "<br>";
         $decrypted = Crypto::cryptoJsAesDecrypt(env("APP_KEY"), $test);
         echo "decrypted<br>";
         echo $decrypted . "<br>";
+        */
+        $dt = Carbon::createFromTimestampUTC(1509186442);
+        $dt->timezone = 'America/Edmonton';
+        echo $dt;
+        
     }
 }

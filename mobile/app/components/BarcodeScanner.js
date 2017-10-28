@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   Dimensions,
   StyleSheet,
   Text,
@@ -7,14 +8,20 @@ import {
   View
 } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
-import CryptoJSAesJson, { CRYPTO_KEY } from "../utils/CryptoJSAesJson";
+import TransactionApi from "../services/transactionApi";
+import UserApi from "../services/userApi";
+import { CRYPTO_KEY, TransactionType } from "../utils/constants";
+import CryptoJSAesJson from "../utils/CryptoJSAesJson";
 
 const CryptoJS = require("crypto-js");
 
-export default class BarcodeScannerExample extends React.Component {
-  state = {
-    hasCameraPermission: null
-  };
+export default class BarcodeScanner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCameraPermission: null
+    };
+  }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -22,6 +29,7 @@ export default class BarcodeScannerExample extends React.Component {
   }
 
   _handleBarCodeRead = ({ type, data }) => {
+    this.props.navigation.goBack();
     const decrypted = JSON.parse(
       CryptoJS.AES
         .decrypt(data, CRYPTO_KEY, {
@@ -29,8 +37,25 @@ export default class BarcodeScannerExample extends React.Component {
         })
         .toString(CryptoJS.enc.Utf8)
     );
-    
+
     alert(`type: ${type}, decrypted: ${decrypted}`);
+    //todo: make use of decrypted date
+    UserApi.getLastUserTransaction()
+      .then(async lastUserTransaction => {
+        // If there's no previous transaction found, or if the last transaction wasn't today, save a new transaction.
+        if (
+          !lastUserTransaction.transaction_date ||
+          lastUserTransaction.transaction_date < new Date()
+        ) {
+          await TransactionApi.createTransaction(TransactionType.RIDE);
+          Alert.alert("Alert", "Success! Thank you for taking the shuttle!");
+        } else {
+          Alert.alert("Alert", "You've already scanned the code today!");
+        }
+      })
+      .catch(error => {
+        Alert.alert("Scanner", error);
+      });
   };
 
   render() {
