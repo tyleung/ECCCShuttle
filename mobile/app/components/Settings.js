@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import UserApi from "../services/userApi";
+import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
 import ProfileGrey from "./../../assets/profileGrey.png";
@@ -27,7 +27,7 @@ export default class Settings extends Component {
   }
 
   componentDidMount() {
-    UserApi.getStoredUser().then(user => {
+    Storage.getStoredUser().then(user => {
       this.setState({ user });
     });
   }

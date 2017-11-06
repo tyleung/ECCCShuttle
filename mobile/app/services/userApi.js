@@ -1,5 +1,5 @@
-import { AsyncStorage } from "react-native";
 import axios from "axios";
+import Storage from "./storage";
 import { API_TOKEN, USER, USER_TRANSACTIONS } from "../utils/constants";
 
 export default class UserApi {
@@ -10,7 +10,7 @@ export default class UserApi {
         password
       })
       .then(response => {
-        AsyncStorage.setItem(API_TOKEN, response.data.token);
+        Storage.setItem(API_TOKEN, response.data.token);
         return response.data.token;
       })
       .catch(error => {
@@ -37,19 +37,13 @@ export default class UserApi {
   };
 
   static isLoggedIn = () => {
-    return AsyncStorage.getItem(API_TOKEN)
-      .then(res => {
-        return res !== null;
-      })
-      .catch(e => {
-        throw e;
-      });
+    return Storage.getStoredApiToken().then(token => {
+      return token !== null;
+    });
   };
 
   static logout = async () => {
-    await AsyncStorage.removeItem(API_TOKEN);
-    await AsyncStorage.removeItem(USER);
-    await AsyncStorage.removeItem(USER_TRANSACTIONS);
+    Storage.removeAll();
   };
 
   static signUp = user => {
@@ -72,7 +66,7 @@ export default class UserApi {
       })
       .then(response => {
         if (response.data.user) {
-          AsyncStorage.setItem(USER, JSON.stringify(response.data.user));
+          Storage.setItem(USER, JSON.stringify(response.data.user));
           return response.data.user;
         } else {
           throw Error("Get user error.");
@@ -83,22 +77,8 @@ export default class UserApi {
       });
   };
 
-  static getStoredUser = async () => {
-    try {
-      const user = await AsyncStorage.getItem(USER);
-      if (user !== null) {
-        return JSON.parse(user);
-      } else {
-        throw Error("User not found in localstorage.");
-      }
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-  };
-
   static getUserTransactions = async userId => {
-    const token = await AsyncStorage.getItem(API_TOKEN);
+    const token = await Storage.getStoredApiToken();
     return axios
       .get(`http://shuttle.eccc.ca/api/v1/users/${userId}/transactions`, {
         headers: {
@@ -106,7 +86,7 @@ export default class UserApi {
         }
       })
       .then(response => {
-        AsyncStorage.setItem(USER_TRANSACTIONS, JSON.stringify(response.data));
+        Storage.setItem(USER_TRANSACTIONS, JSON.stringify(response.data));
         return response.data;
       })
       .catch(error => {
@@ -114,22 +94,8 @@ export default class UserApi {
       });
   };
 
-  static getStoredUserTransactions = async () => {
-    try {
-      const userTransactions = await AsyncStorage.getItem(USER_TRANSACTIONS);
-      if (userTransactions !== null) {
-        return JSON.parse(userTransactions);
-      } else {
-        throw Error("User transactions not found in localstorage.");
-      }
-    } catch (e) {
-      console.log(e);
-      return [];
-    }
-  };
-
   static getLastUserTransaction = async () => {
-    const userTransactions = await UserApi.getStoredUserTransactions();
+    const userTransactions = await Storage.getStoredUserTransactions();
     if (userTransactions.length > 0) {
       const lastUserTransaction = userTransactions.reduce(
         (latest, t) =>

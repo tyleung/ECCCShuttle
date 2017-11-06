@@ -7,7 +7,7 @@ import {
   ToolbarAndroid,
   FlatList
 } from "react-native";
-import UserApi from "../services/userApi";
+import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
 
@@ -26,8 +26,8 @@ export default class RideHistory extends Component {
   }
 
   componentDidMount() {
-    UserApi.getStoredUser().then(user => {
-      UserApi.getStoredUserTransactions().then(transactions => {
+    Storage.getStoredUser().then(user => {
+      Storage.getStoredUserTransactions().then(transactions => {
         this.setState({ user, transactions });
       });
     });

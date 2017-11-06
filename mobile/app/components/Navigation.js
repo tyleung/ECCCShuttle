@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
-import UserApi from "../services/userApi";
+import Storage from "../services/storage";
 
 import Login from "./Login";
 import Main from "./Main";
@@ -84,7 +84,7 @@ class DrawerContent extends Component {
   }
 
   componentDidMount() {
-    UserApi.getStoredUser().then(user => this.setState({ user }));
+    Storage.getStoredUser().then(user => this.setState({ user }));
   }
 
   render() {

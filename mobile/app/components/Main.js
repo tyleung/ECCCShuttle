@@ -8,7 +8,7 @@ import {
   Image,
   BackHandler
 } from "react-native";
-import UserApi from "../services/userApi";
+import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
 import QRIcon from "./../../assets/qricon.png";
@@ -32,7 +32,7 @@ export default class Main extends Component {
       BackHandler.exitApp();
     });
 
-    UserApi.getStoredUser().then(user => {
+    Storage.getStoredUser().then(user => {
       this.setState({ user });
     });
   }

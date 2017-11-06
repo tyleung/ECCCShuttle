@@ -44,7 +44,8 @@ export default class BarcodeScanner extends React.Component {
       if (decrypted === now.format("YYYY-MM-DD")) {
         UserApi.getLastUserTransaction()
           .then(async lastUserTransaction => {
-            // If there's no previous transaction found, or if the last transaction wasn't today, save a new transaction.
+            // If there's no previous transaction found, or if the last
+            // transaction wasn't today, save a new transaction.
             if (
               !lastUserTransaction.transaction_date ||
               lastUserTransaction.transaction_date <
