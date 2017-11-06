@@ -8,6 +8,7 @@ import {
   Image,
   BackHandler
 } from "react-native";
+import UserApi from "../services/userApi";
 
 import Navicon from "./../../assets/navicon.png";
 import QRIcon from "./../../assets/qricon.png";
@@ -19,9 +20,20 @@ export default class Main extends Component {
     drawerLabel: "  QR Scanner"
   };
 
+  constructor() {
+    super();
+    this.state = {
+      user: {}
+    };
+  }
+
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", () => {
       BackHandler.exitApp();
+    });
+
+    UserApi.getStoredUser().then(user => {
+      this.setState({ user });
     });
   }
 
@@ -65,7 +77,7 @@ export default class Main extends Component {
 
         {/* Point */}
         <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-          You have 1000 points!
+          You have {this.state.user.current_points} points!
         </Text>
 
         {/* Update timer */}
