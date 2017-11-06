@@ -30,37 +30,44 @@ export default class BarcodeScanner extends React.Component {
 
   _handleBarCodeRead = ({ data }) => {
     this.props.navigation.goBack();
-    const decrypted = JSON.parse(
-      CryptoJS.AES
-        .decrypt(data, CRYPTO_KEY, {
-          format: CryptoJSAesJson
-        })
-        .toString(CryptoJS.enc.Utf8)
-    );
+    try {
+      const decrypted = JSON.parse(
+        CryptoJS.AES
+          .decrypt(data, CRYPTO_KEY, {
+            format: CryptoJSAesJson
+          })
+          .toString(CryptoJS.enc.Utf8)
+      );
 
-    const now = new Date();
-    const todayUTC = new Date(
-      Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
-    );
-    const d = todayUTC.toISOString().slice(0, 10);
-    if (decrypted === d) {
-      UserApi.getLastUserTransaction()
-        .then(async lastUserTransaction => {
-          // If there's no previous transaction found, or if the last transaction wasn't today, save a new transaction.
-          if (
-            !lastUserTransaction.transaction_date ||
-            lastUserTransaction.transaction_date < now
-          ) {
-            await TransactionApi.createTransaction(TransactionType.RIDE);
-            Alert.alert("Alert", "Success! Thank you for taking the shuttle!");
-          } else {
-            Alert.alert("Alert", "You've already scanned the code today!");
-          }
-        })
-        .catch(error => {
-          Alert.alert("Scanner", error);
-        });
-    } else {
+      const now = new Date();
+      const todayUTC = new Date(
+        Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
+      );
+      const d = todayUTC.toISOString().slice(0, 10);
+      if (decrypted === d) {
+        UserApi.getLastUserTransaction()
+          .then(async lastUserTransaction => {
+            // If there's no previous transaction found, or if the last transaction wasn't today, save a new transaction.
+            if (
+              !lastUserTransaction.transaction_date ||
+              lastUserTransaction.transaction_date < now
+            ) {
+              await TransactionApi.createTransaction(TransactionType.RIDE);
+              Alert.alert(
+                "Alert",
+                "Success! Thank you for taking the shuttle!"
+              );
+            } else {
+              Alert.alert("Alert", "You've already scanned the code today!");
+            }
+          })
+          .catch(error => {
+            Alert.alert("Scanner", error);
+          });
+      } else {
+        Alert.alert("Alert", "The code is expired!");
+      }
+    } catch (e) {
       Alert.alert("Alert", "The code is invalid!");
     }
   };
