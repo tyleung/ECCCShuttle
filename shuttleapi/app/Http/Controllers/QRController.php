@@ -28,7 +28,7 @@ class QRController extends Controller
         echo "decrypted<br>";
         echo $decrypted . "<br>";
         */
-        $dt = Carbon::createFromTimestampUTC(1509186442);
+        $dt = Carbon::createFromTimestampUTC(1509940780);
         $dt->timezone = 'America/Edmonton';
         echo $dt;
         

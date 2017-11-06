@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import Storage from "../services/storage";
 import { USER_TRANSACTIONS } from "../utils/constants";
 
@@ -8,7 +9,7 @@ export default class TransactionApi {
       const transaction = {
         user_id: user.id,
         type_id: transactionType,
-        transaction_date: Math.floor(new Date().getTime() / 1000),
+        transaction_date: moment().unix(),
         points: 1
       };
       return TransactionApi.saveTransaction(transaction);
