@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Transaction;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,10 @@ class TransactionController extends Controller
 
     public function createTransaction(Request $request)
     {
+        $user = User::findOrFail($request->user_id);
+        $user->current_points += $request->points;
+        $user->save();
+
         $dt = Carbon::createFromTimestampUTC($request->transaction_date);
         $dt->timezone = 'America/Edmonton';
 

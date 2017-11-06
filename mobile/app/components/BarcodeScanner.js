@@ -8,6 +8,7 @@ import {
   View
 } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
+import moment from "moment";
 import TransactionApi from "../services/transactionApi";
 import UserApi from "../services/userApi";
 import { CRYPTO_KEY, TransactionType } from "../utils/constants";
@@ -39,18 +40,15 @@ export default class BarcodeScanner extends React.Component {
           .toString(CryptoJS.enc.Utf8)
       );
 
-      const now = new Date();
-      const todayUTC = new Date(
-        Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
-      );
-      const d = todayUTC.toISOString().slice(0, 10);
-      if (decrypted === d) {
+      const now = moment();
+      if (decrypted === now.format("YYYY-MM-DD")) {
         UserApi.getLastUserTransaction()
           .then(async lastUserTransaction => {
             // If there's no previous transaction found, or if the last transaction wasn't today, save a new transaction.
             if (
               !lastUserTransaction.transaction_date ||
-              lastUserTransaction.transaction_date < now
+              lastUserTransaction.transaction_date <
+                now.format("YYYY-MM-DD hh:mm:ss")
             ) {
               await TransactionApi.createTransaction(TransactionType.RIDE);
               Alert.alert(
