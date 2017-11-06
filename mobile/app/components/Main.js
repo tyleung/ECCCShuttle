@@ -89,19 +89,18 @@ export default class Main extends Component {
         <TouchableOpacity style={styles.refresh}>
           <View
             style={{
-              flex: 0.5,
+              flex: 0.25,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
             <Image source={Refresh} style={styles.refreshImage} />
           </View>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 0.65 }}>
             <Text style={[styles.ralewayLight, styles.refreshButtonText]}>
               Refresh
             </Text>
           </View>
-          <View style={{ flex: 0.5 }} />
         </TouchableOpacity>
       </View>
     );
