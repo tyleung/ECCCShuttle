@@ -56,10 +56,10 @@ export default class Login extends Component {
     Keyboard.dismiss();
     if (this.state.email && this.state.password) {
       UserApi.login(this.state.email, this.state.password)
-        .then(token => {
-          UserApi.getUser(token).then(() =>
-            this.props.navigation.navigate("MainScreen")
-          );
+        .then(async token => {
+          const user = await UserApi.getUser(token);
+          await UserApi.getUserTransactions(user.id);
+          this.props.navigation.navigate("MainScreen");
         })
         .catch(error => {
           Alert.alert("Login", error);

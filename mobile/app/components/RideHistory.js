@@ -27,7 +27,7 @@ export default class RideHistory extends Component {
 
   componentDidMount() {
     UserApi.getStoredUser().then(user => {
-      UserApi.getUserTransactions(user.id).then(transactions => {
+      UserApi.getStoredUserTransactions().then(transactions => {
         this.setState({ user, transactions });
       });
     });
