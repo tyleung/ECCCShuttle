@@ -25,7 +25,17 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        return User::create($request->all());
+        try {
+            $user = User::create($request->all());
+            return $user;
+        }
+        catch (\Exception $e) {
+            if ($e->getCode() == "23000") {
+                return response()->json(["Email already taken."], 500);                
+            }
+
+            return response()->json([$e->getMessage()], 500);
+        }
     }
 
     public function updateUser(Request $request, $id)

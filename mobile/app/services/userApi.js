@@ -53,7 +53,20 @@ export default class UserApi {
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+        let errorMessage = "";
+        if (error.response) {
+          if (error.response.status === 500) {
+            errorMessage = error.response.data[0];
+          } else {
+            errorMessage = "Sign up error.";
+          }
+        } else if (error.request) {
+          errorMessage = error.request;
+        } else {
+          errorMessage = error.message;
+        }
+
+        throw errorMessage;
       });
   };
 

@@ -94,7 +94,11 @@ export default class Login extends Component {
       password: this.state.password,
       license_plate: this.state.license_plate
     };
-    UserApi.signUp(user).then(this.hideModal());
+    UserApi.signUp(user)
+      .then(() => this.hideModal())
+      .catch(error => {
+        Alert.alert("Sign up", error);
+      });
   };
 
   render() {
@@ -147,7 +151,7 @@ export default class Login extends Component {
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.c1} onPress={this.showModal}>
             <View>
-            <Text style={styles.button}>Sign up</Text>
+              <Text style={styles.button}>Sign up</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
@@ -386,16 +390,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 5,
     marginRight: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   c2: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 5,
     marginLeft: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   button: {
     borderRadius: 5,
