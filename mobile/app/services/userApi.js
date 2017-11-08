@@ -1,6 +1,6 @@
 import axios from "axios";
 import Storage from "./storage";
-import { API_TOKEN, USER, USER_TRANSACTIONS } from "../utils/constants";
+import { API_TOKEN, USER } from "../utils/constants";
 
 export default class UserApi {
   static login = (email, password) => {
@@ -10,7 +10,6 @@ export default class UserApi {
         password
       })
       .then(response => {
-        Storage.setItem(API_TOKEN, response.data.token);
         return response.data.token;
       })
       .catch(error => {
@@ -43,7 +42,8 @@ export default class UserApi {
   };
 
   static logout = async () => {
-    Storage.removeAll();
+    await Storage.removeItem(API_TOKEN);
+    await Storage.removeItem(USER);
   };
 
   static signUp = user => {
@@ -66,7 +66,6 @@ export default class UserApi {
       })
       .then(response => {
         if (response.data.user) {
-          Storage.setItem(USER, JSON.stringify(response.data.user));
           return response.data.user;
         } else {
           throw Error("Get user error.");
@@ -86,7 +85,6 @@ export default class UserApi {
         }
       })
       .then(response => {
-        Storage.setItem(USER_TRANSACTIONS, JSON.stringify(response.data));
         return response.data;
       })
       .catch(error => {

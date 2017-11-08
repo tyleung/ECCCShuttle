@@ -13,7 +13,9 @@ import {
   BackHandler
 } from "react-native";
 import Modal from "react-native-modal";
+import Storage from "../services/storage";
 import UserApi from "../services/userApi";
+import { API_TOKEN, USER } from "../utils/constants";
 
 import Logo from "./../../assets/logo.png";
 
@@ -57,8 +59,11 @@ export default class Login extends Component {
     if (this.state.email && this.state.password) {
       UserApi.login(this.state.email, this.state.password)
         .then(async token => {
+          await Storage.setItem(API_TOKEN, token);
           const user = await UserApi.getUser(token);
-          await UserApi.getUserTransactions(user.id);
+          await Storage.setItem(USER, JSON.stringify(user));
+          const transactions = await UserApi.getUserTransactions(user.id);
+          await Storage.mergeTransactionsToStorage(user.id, transactions);
           this.props.navigation.navigate("MainScreen");
         })
         .catch(error => {
@@ -78,7 +83,7 @@ export default class Login extends Component {
       !this.state.passwordSignUp ||
       !this.state.license_plate
     ) {
-      console.log("Empty fields");
+      Alert.alert("Sign Up", "Please fill in all fields");
       return;
     }
 

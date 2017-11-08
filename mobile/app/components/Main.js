@@ -80,7 +80,7 @@ export default class Main extends Component {
           You have {this.state.user.current_points} points!
         </Text>
 
-        {/* Update timer */}
+        {/* Update timer TODO */}
         <Text style={[styles.ralewayLight, styles.updateText]}>
           last updated: just now
         </Text>

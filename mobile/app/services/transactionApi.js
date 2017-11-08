@@ -12,8 +12,15 @@ export default class TransactionApi {
         transaction_date: moment().unix(),
         points: 1
       };
-      return TransactionApi.saveTransaction(transaction);
+      return TransactionApi.saveTransactionToStorage(transaction);
     });
+  };
+
+  static saveTransactionToStorage = async transaction => {
+    const userTransactions = await Storage.getStoredUserTransactions();
+    userTransactions.push(transaction);
+    await Storage.setItem(USER_TRANSACTIONS, JSON.stringify(userTransactions));
+    return transaction;
   };
 
   static saveTransaction = async transaction => {
@@ -26,12 +33,6 @@ export default class TransactionApi {
       })
       .then(async response => {
         const savedTransaction = response.data;
-        const userTransactions = await Storage.getStoredUserTransactions();
-        userTransactions.push(savedTransaction);
-        await Storage.setItem(
-          USER_TRANSACTIONS,
-          JSON.stringify(userTransactions)
-        );
         return savedTransaction;
       })
       .catch(error => {
