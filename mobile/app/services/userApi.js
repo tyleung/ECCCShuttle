@@ -37,7 +37,7 @@ export default class UserApi {
 
   static isLoggedIn = () => {
     return Storage.getStoredApiToken().then(token => {
-      return token !== null;
+      return token !== false;
     });
   };
 
