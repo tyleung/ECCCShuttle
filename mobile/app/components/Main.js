@@ -101,6 +101,7 @@ export default class Main extends Component {
               Refresh
             </Text>
           </View>
+          <View style={{flex:0.25}}></View>
         </TouchableOpacity>
       </View>
     );

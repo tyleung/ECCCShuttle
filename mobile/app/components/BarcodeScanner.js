@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 22,
     textAlign: "center",
-    marginTop: 20
+    marginTop: 40
   },
   customBottomText: {
     color: "white",

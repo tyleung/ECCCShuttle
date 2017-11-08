@@ -141,7 +141,9 @@ export default class Login extends Component {
         {/* Signup and Login buttons */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.c1} onPress={this.showModal}>
+            <View>
             <Text style={styles.button}>Sign up</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
             <Text style={styles.button}>Login</Text>
@@ -163,7 +165,7 @@ export default class Login extends Component {
             <TouchableWithoutFeedback>
               <View style={styles.signUpContainer}>
                 <Text
-                  style={[styles.ralewayLight, { fontSize: 25, padding: 28 }]}
+                  style={[styles.ralewayLight, { fontSize: 25, margin: 28 }]}
                 >
                   Sign up
                 </Text>
@@ -300,10 +302,10 @@ export default class Login extends Component {
                     style={{ paddingRight: 20 }}
                     onPress={this.hideModal}
                   >
-                    <Text style={styles.buttonForSignUpPage}>CANCEL</Text>
+                    <Text style={styles.buttonForSignUpPage}>Cancel</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={this.signUpOnPress}>
-                    <Text style={styles.buttonForSignUpPage}>SIGN UP</Text>
+                    <Text style={styles.buttonForSignUpPage}>Sign up</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -378,23 +380,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     borderRadius: 5,
-    marginRight: 5
+    marginRight: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   c2: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 5,
-    marginLeft: 5
+    marginLeft: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
-    height: "100%",
-    backgroundColor: "white",
     borderRadius: 5,
     color: "black",
     // fontFamily: 'Raleway-Light',
-    fontSize: 17,
-    textAlign: "center",
-    textAlignVertical: "center"
+    fontSize: 17
   },
   signUpContainer: {
     flex: 1,
@@ -403,6 +405,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 5
   },
   signUpInput: {
+    marginVertical: 5,
+    borderBottomWidth: 1,
     color: "black",
     // fontFamily: 'Raleway-Light',
     marginHorizontal: 28,
