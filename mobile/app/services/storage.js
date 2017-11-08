@@ -72,21 +72,16 @@ export default class Storage {
     userId,
     serverUserTransactions
   ) => {
-    console.log("MERGEEEEEEEEEEE");
     const storedTransactions = await Storage.getStoredTransactions();
     const storedUserTransactions = await Storage.getStoredUserTransactions();
     const transactionsWithoutUser = storedTransactions.filter(
       t => t.user_id !== userId
     );
-    console.log(storedUserTransactions);
-    console.log(serverUserTransactions);
     if (storedUserTransactions.length <= serverUserTransactions.length) {
       // serverUserTransactions is the most up-to-date.
       const mergedTransactions = transactionsWithoutUser.concat(
         serverUserTransactions
       );
-      console.log("Merged transactions");
-      console.log(mergedTransactions);
       return Storage.setItem(
         USER_TRANSACTIONS,
         JSON.stringify(mergedTransactions)
@@ -94,24 +89,21 @@ export default class Storage {
     } else {
       // storedUserTransactions contains unsynced items.
       const unsyncedTransactions = [];
-      console.log("UNSYNCED");
       await Promise.all(
         storedUserTransactions.map(async storedTransaction => {
           if (!storedTransaction.id) {
-            console.log(storedTransaction);
-            const savedTransaction = await TransactionApi.saveTransaction(storedTransaction);
+            const savedTransaction = await TransactionApi.saveTransaction(
+              storedTransaction
+            );
             unsyncedTransactions.push(savedTransaction);
           }
         })
       );
 
-      console.log(unsyncedTransactions);
       const savedUserTransactions = storedUserTransactions.filter(t => t.id);
       const mergedTransactions = transactionsWithoutUser
         .concat(savedUserTransactions)
         .concat(unsyncedTransactions);
-      console.log("merged");
-      console.log(mergedTransactions);
 
       return Storage.setItem(
         USER_TRANSACTIONS,
