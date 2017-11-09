@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ECCC Shuttle",
-    "icon": "./assets/captainshuttle.png",
+    "icon": "./assets/captain-shuttle-logo.png",
     "version": "1.0.0",
     "slug": "eccc-shuttle",
     "sdkVersion": "21.0.0",
