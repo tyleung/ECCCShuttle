@@ -4,12 +4,12 @@ import {
   StyleSheet,
   Image,
   Keyboard,
-  KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UserApi from "../services/userApi";
 
 import Logo from "./../../assets/logo.png";
@@ -61,7 +61,11 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        enableOnAndroid={true}
+        enableAutoAutomaticScroll={false}
+      >
         {/* Logo */}
         <Image source={Logo} style={styles.image} />
         <View style={styles.logoLine} />
@@ -186,14 +190,14 @@ export default class Signup extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "black"
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
     // fontFamily: 'Raleway-Light'
   },
   form: {
-    marginTop: 40
+    marginTop: 25
   },
   label: {
     marginTop: 10,
