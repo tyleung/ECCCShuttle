@@ -95,7 +95,10 @@ export default class Login extends Component {
       license_plate: this.state.license_plate
     };
     UserApi.signUp(user)
-      .then(() => this.hideModal())
+      .then(() => {
+        this.hideModal();
+        Alert.alert("Success!", "Thank you for being a shuttle member. You may now login.");
+      })
       .catch(error => {
         Alert.alert("Sign up", error);
       });
