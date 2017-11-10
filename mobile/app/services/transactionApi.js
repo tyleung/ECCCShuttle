@@ -9,8 +9,8 @@ export default class TransactionApi {
       const transaction = {
         user_id: user.id,
         type_id: transactionType,
-        transaction_date: moment().unix(),
-        points: 1
+        transaction_date: moment().unix()
+        // Points will be added server side
       };
       return TransactionApi.saveTransactionToStorage(transaction);
     });

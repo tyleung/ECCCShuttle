@@ -22,7 +22,14 @@ class TransactionController extends Controller
     public function createTransaction(Request $request)
     {
         $user = User::findOrFail($request->user_id);
-        $user->current_points += $request->points;
+        $points = 0;
+
+        // Transaction type == ride
+        if ($request->type_id == 1) {
+            $points = 100;
+        }
+
+        $user->current_points += $points;
         $user->save();
 
         $dt = Carbon::createFromTimestampUTC($request->transaction_date);
@@ -32,7 +39,7 @@ class TransactionController extends Controller
         $transaction->user_id = $request->user_id;
         $transaction->type_id = $request->type_id;
         $transaction->transaction_date = $dt->toDateTimeString();
-        $transaction->points = $request->points;
+        $transaction->points = $points;
         $transaction->save();
         return $transaction;
     }
