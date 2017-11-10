@@ -10,6 +10,7 @@ import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
 import Storage from "../services/storage";
 
 import Login from "./Login";
+import Signup from "./Signup";
 import Main from "./Main";
 import RideHistory from "./RideHistory";
 import About from "./About";
@@ -158,6 +159,11 @@ const LoginStackNav = StackNavigator(
     // Stack RouteConfigs
     Login: {
       screen: Login,
+      // Hide header
+      header: { visible: false }
+    },
+    Signup: {
+      screen: Signup,
       // Hide header
       header: { visible: false }
     },

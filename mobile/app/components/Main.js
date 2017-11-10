@@ -77,7 +77,7 @@ export default class Main extends Component {
 
         {/* Point */}
         <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-          You have {this.state.user.current_points === 1 ? 'point' : 'points'}!
+          You have {this.state.user.current_points === 1 ? "point" : "points"}!
         </Text>
 
         {/* Update timer TODO */}
@@ -101,7 +101,7 @@ export default class Main extends Component {
               Refresh
             </Text>
           </View>
-          <View style={{flex:0.25}}></View>
+          <View style={{ flex: 0.25 }} />
         </TouchableOpacity>
       </View>
     );

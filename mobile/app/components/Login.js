@@ -7,12 +7,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
   View,
   BackHandler
 } from "react-native";
-import Modal from "react-native-modal";
 import Storage from "../services/storage";
 import UserApi from "../services/userApi";
 import { API_TOKEN, USER } from "../utils/constants";
@@ -28,11 +26,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalVisible: false,
       email: "",
       password: "",
-      emailSignUp: "",
-      passwordSignUp: "",
       first_name: "",
       last_name: "",
       license_plate: ""
@@ -49,10 +44,6 @@ export default class Login extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress");
   }
-
-  // Modal's show and hide methods
-  showModal = () => this.setState({ isModalVisible: true });
-  hideModal = () => this.setState({ isModalVisible: false });
 
   loginOnPress = () => {
     Keyboard.dismiss();
@@ -72,36 +63,6 @@ export default class Login extends Component {
     } else {
       Alert.alert("Login", "Empty email or password");
     }
-  };
-
-  signUpOnPress = () => {
-    Keyboard.dismiss();
-    if (
-      !this.state.first_name ||
-      !this.state.last_name ||
-      !this.state.emailSignUp ||
-      !this.state.passwordSignUp ||
-      !this.state.license_plate
-    ) {
-      Alert.alert("Sign Up", "Please fill in all fields");
-      return;
-    }
-
-    const user = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.emailSignUp,
-      password: this.state.password,
-      license_plate: this.state.license_plate
-    };
-    UserApi.signUp(user)
-      .then(() => {
-        this.hideModal();
-        Alert.alert("Success!", "Thank you for being a shuttle member. You may now login.");
-      })
-      .catch(error => {
-        Alert.alert("Sign up", error);
-      });
   };
 
   render() {
@@ -152,7 +113,10 @@ export default class Login extends Component {
 
         {/* Signup and Login buttons */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.c1} onPress={this.showModal}>
+          <TouchableOpacity
+            style={styles.c1}
+            onPress={() => this.props.navigation.navigate("Signup")}
+          >
             <View>
               <Text style={styles.button}>Sign up</Text>
             </View>
@@ -161,169 +125,6 @@ export default class Login extends Component {
             <Text style={styles.button}>Login</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Modal for signup page */}
-        <Modal isVisible={this.state.isModalVisible}>
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row"
-            }}
-            activeOpacity={1}
-            onPress={this.hideModal}
-          >
-            <TouchableWithoutFeedback>
-              <View style={styles.signUpContainer}>
-                <Text
-                  style={[styles.ralewayLight, { fontSize: 25, margin: 28 }]}
-                >
-                  Sign up
-                </Text>
-
-                {/* First name input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  First name:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  multiline={false}
-                  autoCapitalize="words"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpLastNameInput.focus()}
-                  ref={input => {
-                    this.signUpFirstNameInput = input;
-                  }}
-                  value={this.state.first_name}
-                  onChangeText={text => this.setState({ first_name: text })}
-                />
-
-                {/* Last name input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  Last name:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  multiline={false}
-                  autoCapitalize="words"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpEmailInput.focus()}
-                  ref={input => {
-                    this.signUpLastNameInput = input;
-                  }}
-                  value={this.state.last_name}
-                  onChangeText={text => this.setState({ last_name: text })}
-                />
-
-                {/* Email input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  Email:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  keyboardType="email-address"
-                  multiline={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpPasswordInput.focus()}
-                  ref={input => {
-                    this.signUpEmailInput = input;
-                  }}
-                  value={this.state.emailSignUp}
-                  onChangeText={text => this.setState({ emailSignUp: text })}
-                />
-
-                {/* Password input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  Password:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  keyboardType="default"
-                  secureTextEntry
-                  multiline={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                  returnKeyType="next"
-                  underlineColorAndroid={"black"}
-                  onSubmitEditing={() => this.signUpLicensePlateInput.focus()}
-                  ref={input => {
-                    this.signUpPasswordInput = input;
-                  }}
-                  value={this.state.passwordSignUp}
-                  onChangeText={text => this.setState({ passwordSignUp: text })}
-                />
-
-                {/* License plate input field */}
-                <Text
-                  style={[
-                    styles.ralewayLight,
-                    { fontSize: 18, paddingLeft: 28 }
-                  ]}
-                >
-                  License plate:
-                </Text>
-                <TextInput
-                  style={styles.signUpInput}
-                  multiline={false}
-                  autoCapitalize="characters"
-                  autoCorrect={false}
-                  returnKeyType="go"
-                  underlineColorAndroid={"black"}
-                  ref={input => {
-                    this.signUpLicensePlateInput = input;
-                  }}
-                  value={this.state.license_plate}
-                  onChangeText={text => this.setState({ license_plate: text })}
-                />
-
-                {/* Cancel and Sign Up account buttons */}
-                <View style={styles.signUpPageButtonsContainer}>
-                  <TouchableOpacity
-                    style={{ paddingRight: 20 }}
-                    onPress={this.hideModal}
-                  >
-                    <Text style={styles.buttonForSignUpPage}>Cancel</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={this.signUpOnPress}>
-                    <Text style={styles.buttonForSignUpPage}>Sign up</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </TouchableWithoutFeedback>
-          </TouchableOpacity>
-        </Modal>
       </KeyboardAvoidingView>
     );
   }
@@ -406,31 +207,6 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 5,
-    color: "black",
-    // fontFamily: 'Raleway-Light',
-    fontSize: 17
-  },
-  signUpContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    borderRadius: 5,
-    marginHorizontal: 5
-  },
-  signUpInput: {
-    marginVertical: 5,
-    borderBottomWidth: 1,
-    color: "black",
-    // fontFamily: 'Raleway-Light',
-    marginHorizontal: 28,
-    textAlign: "center",
-    fontSize: 17
-  },
-  signUpPageButtonsContainer: {
-    padding: 28,
-    flexDirection: "row",
-    justifyContent: "flex-end"
-  },
-  buttonForSignUpPage: {
     color: "black",
     // fontFamily: 'Raleway-Light',
     fontSize: 17
