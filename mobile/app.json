@@ -8,9 +8,6 @@
     "loading": {
       "hideExponentText": true
     },
-    "androidStatusBar": {
-      "backgroundColor": "#000000"
-    },
     "ios": {
       "bundleIdentifier": "ca.eccc.shuttle"
     },

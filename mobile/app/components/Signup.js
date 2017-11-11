@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollViewCompat from "./KeyboardAwareScrollViewCompat";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UserApi from "../services/userApi";
 
 import Logo from "./../../assets/logo.png";
@@ -61,10 +62,8 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView
+      <KeyboardAwareScrollViewCompat
         contentContainerStyle={styles.container}
-        enableOnAndroid={true}
-        enableAutoAutomaticScroll={false}
       >
         {/* Logo */}
         <Image source={Logo} style={styles.image} />
@@ -80,7 +79,6 @@ export default class Signup extends Component {
             <TextInput
               autoCapitalize="words"
               autoCorrect={false}
-              blurOnSubmit={false}
               keyboardType="default"
               multiline={false}
               onChangeText={text => this.setState({ first_name: text })}
@@ -101,7 +99,6 @@ export default class Signup extends Component {
             <TextInput
               autoCapitalize="words"
               autoCorrect={false}
-              blurOnSubmit={false}
               keyboardType="default"
               multiline={false}
               onChangeText={text => this.setState({ last_name: text })}
@@ -190,7 +187,7 @@ export default class Signup extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAwareScrollView>
+      </KeyboardAwareScrollViewCompat>
     );
   }
 }
