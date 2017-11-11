@@ -7,10 +7,11 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   View,
   BackHandler
 } from "react-native";
+import KeyboardAwareScrollViewCompat from "./KeyboardAwareScrollViewCompat";
 import Storage from "../services/storage";
 import UserApi from "../services/userApi";
 import { API_TOKEN, USER } from "../utils/constants";
@@ -67,65 +68,66 @@ export default class Login extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        {/* Logo */}
-        <Image source={Logo} style={styles.image} />
-        <View style={styles.logoLine} />
-        <Text style={styles.title}>
-          <Text style={styles.ralewayLightItalic}>Park & Ride</Text>
-          <Text style={styles.ralewayLight}>&nbsp;Reward Program</Text>
-        </Text>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <KeyboardAwareScrollViewCompat contentContainerStyle={styles.container}>
+          {/* Logo */}
+          <Image source={Logo} style={styles.image} />
+          <View style={styles.logoLine} />
+          <Text style={styles.title}>
+            <Text style={styles.ralewayLightItalic}>Park & Ride</Text>
+            <Text style={styles.ralewayLight}>&nbsp;Reward Program</Text>
+          </Text>
 
-        {/* Email input field */}
-        <TextInput
-          style={styles.emailInput}
-          placeholder="Email address"
-          keyboardType="email-address"
-          multiline={false}
-          autoCapitalize="none"
-          autoCorrect={false}
-          underlineColorAndroid={"transparent"}
-          returnKeyType="next"
-          blurOnSubmit={false}
-          onSubmitEditing={() => this.passwordInput.focus()}
-          value={this.state.email}
-          onChangeText={text => this.setState({ email: text })}
-        />
+          {/* Email input field */}
+          <TextInput
+            style={styles.emailInput}
+            placeholder="Email address"
+            keyboardType="email-address"
+            multiline={false}
+            autoCapitalize="none"
+            autoCorrect={false}
+            underlineColorAndroid={"transparent"}
+            returnKeyType="next"
+            onSubmitEditing={() => this.passwordInput.focus()}
+            value={this.state.email}
+            onChangeText={text => this.setState({ email: text })}
+          />
 
-        {/* Password input field */}
-        <TextInput
-          style={styles.PWInput}
-          placeholder="Password"
-          keyboardType="default"
-          secureTextEntry
-          multiline={false}
-          autoCapitalize="none"
-          autoCorrect={false}
-          underlineColorAndroid={"transparent"}
-          returnKeyType="go"
-          onSubmitEditing={this.loginOnPress}
-          ref={input => {
-            this.passwordInput = input;
-          }}
-          value={this.state.password}
-          onChangeText={text => this.setState({ password: text })}
-        />
+          {/* Password input field */}
+          <TextInput
+            style={styles.PWInput}
+            placeholder="Password"
+            keyboardType="default"
+            secureTextEntry
+            multiline={false}
+            autoCapitalize="none"
+            autoCorrect={false}
+            underlineColorAndroid={"transparent"}
+            returnKeyType="go"
+            onSubmitEditing={this.loginOnPress}
+            ref={input => {
+              this.passwordInput = input;
+            }}
+            value={this.state.password}
+            onChangeText={text => this.setState({ password: text })}
+          />
 
-        {/* Signup and Login buttons */}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.c1}
-            onPress={() => this.props.navigation.navigate("Signup")}
-          >
-            <View>
-              <Text style={styles.button}>Sign up</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
-            <Text style={styles.button}>Login</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+          {/* Signup and Login buttons */}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.c1}
+              onPress={() => this.props.navigation.navigate("Signup")}
+            >
+              <View>
+                <Text style={styles.button}>Sign up</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
+              <Text style={styles.button}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAwareScrollViewCompat>
+      </TouchableWithoutFeedback>
     );
   }
 }
