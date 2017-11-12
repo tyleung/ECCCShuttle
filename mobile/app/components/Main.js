@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   ToolbarAndroid,
+  Platform,
   Image,
   BackHandler
 } from "react-native";
@@ -17,7 +18,7 @@ import Refresh from "./../../assets/refresh.png";
 export default class Main extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "  QR Scanner"
+    drawerLabel: "  QR Scanner",
   };
 
   constructor() {
@@ -45,13 +46,20 @@ export default class Main extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <ToolbarAndroid
+        {/* <ToolbarAndroid
           style={styles.toolbar}
           title=" QR Scanner"
           titleColor="white"
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
-        />
+        /> */}
+        <TouchableOpacity 
+          style={{marginTop: Platform.OS === "ios" ? 23 : 0, marginLeft: 10}}
+          onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+          <View>
+            <Image source={Navicon}/>
+          </View>
+        </TouchableOpacity>
 
         {/* A button that navigates to QRScanner */}
         <TouchableOpacity

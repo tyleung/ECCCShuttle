@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Platform } from "react-native";
 import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
 import Storage from "../services/storage";
 
@@ -20,6 +20,8 @@ import EditName from "./EditName";
 import EditLicensePlate from "./EditLicensePlate";
 
 import ProfileBlack from "../../assets/profileBlack.png";
+
+// import { DrawerNav as dNav } from ".";
 
 // https://reactnavigation.org/docs/navigators/stack
 // A stack navigator that wraps inside of the drawer navigator
@@ -60,7 +62,7 @@ const SettingPageStackNav = StackNavigator(
     EditNameScreen: {
       screen: EditName,
       // Hide header
-      header: { visible: false }
+      header: { visible: true }
     },
     EditLicensePlateScreen: {
       screen: EditLicensePlate,
@@ -71,6 +73,31 @@ const SettingPageStackNav = StackNavigator(
   {
     // Stack configs
     initialRouteName: "SettingsScreen",
+    mode: "card",
+    headerMode: "none"
+  }
+);
+
+export const LoginStackNav = StackNavigator(
+  {
+    // Stack RouteConfigs
+    LoginScreen: {
+      screen: Login,
+      // Hide header
+      header: { visible: false }
+    },
+    SignupScreen: {
+      screen: Signup,
+      // Hide header
+      header: { visible: false }
+    },
+    // MainScreen: {
+    //   screen: dNav
+    // }
+  },
+  {
+    // Stack configs
+    initialRouteName: "LoginScreen",
     mode: "card",
     headerMode: "none"
   }
@@ -93,15 +120,10 @@ class DrawerContent extends Component {
       <View style={styles.container}>
         <View style={styles.profile}>
           <View
-            style={{ flex: 0.4, justifyContent: "center", paddingVertical: 16 }}
-          >
-            <Image source={ProfileBlack} style={styles.image} />
-          </View>
-          <View
-            style={{ flex: 1, justifyContent: "center", paddingVertical: 16 }}
+            style={styles.profileName}
           >
             <Text style={styles.text}>
-              {this.state.user.first_name} {this.state.user.last_name}
+              Hi, {this.state.user.first_name} {this.state.user.last_name}
             </Text>
           </View>
         </View>
@@ -129,7 +151,7 @@ export const DrawerNav = DrawerNavigator(
       screen: SettingPageStackNav
     },
     LoginScreen: {
-      screen: Login
+      screen: LoginStackNav
     }
   },
   {
@@ -137,6 +159,7 @@ export const DrawerNav = DrawerNavigator(
     initialRouteName: "MainScreen",
     drawerPosition: "left",
     drawerWidth: 320,
+
 
     // Drawer stylings
     contentOptions: {
@@ -154,32 +177,8 @@ export const DrawerNav = DrawerNavigator(
   }
 );
 
-const LoginStackNav = StackNavigator(
-  {
-    // Stack RouteConfigs
-    Login: {
-      screen: Login,
-      // Hide header
-      header: { visible: false }
-    },
-    Signup: {
-      screen: Signup,
-      // Hide header
-      header: { visible: false }
-    },
-    MainScreen: {
-      screen: DrawerNav
-    }
-  },
-  {
-    // Stack configs
-    initialRouteName: "Login",
-    mode: "card",
-    headerMode: "none"
-  }
-);
 
-export default LoginStackNav;
+// export default LoginStackNav;
 
 const styles = StyleSheet.create({
   container: {
@@ -188,7 +187,8 @@ const styles = StyleSheet.create({
   profile: {
     borderBottomWidth: 2,
     marginBottom: 8,
-    flexDirection: "row"
+    flexDirection: "row",
+    marginTop: Platform.OS === "ios" ? 20 : 0,
   },
   text: {
     // fontFamily: 'Raleway-Medium',
@@ -199,5 +199,11 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     marginLeft: 25
+  },
+  profileName: {
+    flex: 1,
+    justifyContent: "center",
+    paddingVertical: 16,
+    paddingLeft: 25,
   }
 });
