@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ToolbarAndroid,
   Platform,
   Image,
   BackHandler
@@ -16,9 +15,8 @@ import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
 
 export default class Main extends Component {
-  // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "  QR Scanner",
+    drawerLabel: "  QR Scanner"
   };
 
   constructor() {
@@ -43,28 +41,24 @@ export default class Main extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        {/* <ToolbarAndroid
-          style={styles.toolbar}
-          title=" QR Scanner"
-          titleColor="white"
-          navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
-        /> */}
-        <TouchableOpacity 
-          style={{marginTop: Platform.OS === "ios" ? 23 : 0, marginLeft: 10}}
-          onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+        <TouchableOpacity
+          style={{ marginTop: Platform.OS === "ios" ? 23 : 0, marginLeft: 10 }}
+          onPress={() => {
+            console.log("drawer shold opeb buy not");
+            this.props.navigation.navigate("DrawerOpen");
+          }}
+        >
           <View>
-            <Image source={Navicon}/>
+            <Image source={Navicon} />
           </View>
         </TouchableOpacity>
 
         {/* A button that navigates to QRScanner */}
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => navigate("ScannerScreen")}
+          onPress={() => this.props.navigation.navigate("ScannerScreen")}
         >
           <View style={{ flex: 1 }}>
             <Text style={[styles.ralewayLight, styles.QRButtonText]}>

@@ -11,12 +11,15 @@ import {
   View
 } from "react-native";
 import KeyboardAwareScrollViewCompat from "./KeyboardAwareScrollViewCompat";
-// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UserApi from "../services/userApi";
 
 import Logo from "./../../assets/logo.png";
 
 export default class Signup extends Component {
+  static navigationOptions = {
+    drawerLockMode: "locked-closed"
+  };
+
   constructor(props) {
     super(props);
     this.state = {

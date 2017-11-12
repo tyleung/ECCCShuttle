@@ -19,9 +19,9 @@ import { API_TOKEN, USER } from "../utils/constants";
 import Logo from "./../../assets/logo.png";
 
 export default class Login extends Component {
-  // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "  Logout"
+    drawerLabel: "  Logout",
+    drawerLockMode: "locked-open"
   };
 
   constructor(props) {
@@ -116,7 +116,7 @@ export default class Login extends Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.c1}
-              onPress={() => this.props.navigation.navigate("Signup")}
+              onPress={() => this.props.navigation.navigate("SignupScreen")}
             >
               <View>
                 <Text style={styles.button}>Sign up</Text>

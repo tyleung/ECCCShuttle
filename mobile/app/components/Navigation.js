@@ -1,11 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Image, Platform } from "react-native";
+import { Text, StyleSheet, View, Platform } from "react-native";
 import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
 import Storage from "../services/storage";
 
@@ -19,24 +13,15 @@ import BarcodeScanner from "./BarcodeScanner";
 import EditName from "./EditName";
 import EditLicensePlate from "./EditLicensePlate";
 
-import ProfileBlack from "../../assets/profileBlack.png";
-
-// import { DrawerNav as dNav } from ".";
-
-// https://reactnavigation.org/docs/navigators/stack
-// A stack navigator that wraps inside of the drawer navigator
-// Only for navigation between Main page and QR Scanner
 const MainPageStackNav = StackNavigator(
   {
     // Stack RouteConfigs
     MainScreen: {
       screen: Main,
-      // Hide header
       header: { visible: false }
     },
     ScannerScreen: {
       screen: BarcodeScanner,
-      // Hide header
       header: { visible: false }
     }
   },
@@ -48,56 +33,25 @@ const MainPageStackNav = StackNavigator(
   }
 );
 
-// https://reactnavigation.org/docs/navigators/stack
-// A stack navigator that wraps inside of the drawer navigator
-// Only for navigation between Settings, EditName and Edit license plate page
-const SettingPageStackNav = StackNavigator(
+const SettingsPageStackNav = StackNavigator(
   {
     // Stack RouteConfigs
     SettingsScreen: {
       screen: Settings,
-      // Hide header
       header: { visible: false }
     },
     EditNameScreen: {
       screen: EditName,
-      // Hide header
       header: { visible: true }
     },
     EditLicensePlateScreen: {
       screen: EditLicensePlate,
-      // Hide header
       header: { visible: false }
     }
   },
   {
     // Stack configs
     initialRouteName: "SettingsScreen",
-    mode: "card",
-    headerMode: "none"
-  }
-);
-
-export const LoginStackNav = StackNavigator(
-  {
-    // Stack RouteConfigs
-    LoginScreen: {
-      screen: Login,
-      // Hide header
-      header: { visible: false }
-    },
-    SignupScreen: {
-      screen: Signup,
-      // Hide header
-      header: { visible: false }
-    },
-    // MainScreen: {
-    //   screen: dNav
-    // }
-  },
-  {
-    // Stack configs
-    initialRouteName: "LoginScreen",
     mode: "card",
     headerMode: "none"
   }
@@ -119,9 +73,7 @@ class DrawerContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.profile}>
-          <View
-            style={styles.profileName}
-          >
+          <View style={styles.profileName}>
             <Text style={styles.text}>
               Hi, {this.state.user.first_name} {this.state.user.last_name}
             </Text>
@@ -133,8 +85,6 @@ class DrawerContent extends Component {
   }
 }
 
-// https://reactnavigation.org/docs/navigators/drawer
-// A drawer navigation for Main, Ride History, About, Settings and Login page
 export const DrawerNav = DrawerNavigator(
   {
     // Drawer Route Configs
@@ -148,10 +98,10 @@ export const DrawerNav = DrawerNavigator(
       screen: About
     },
     SettingsScreen: {
-      screen: SettingPageStackNav
+      screen: SettingsPageStackNav
     },
     LoginScreen: {
-      screen: LoginStackNav
+      screen: Login
     }
   },
   {
@@ -159,7 +109,7 @@ export const DrawerNav = DrawerNavigator(
     initialRouteName: "MainScreen",
     drawerPosition: "left",
     drawerWidth: 320,
-
+    contentComponent: DrawerContent,
 
     // Drawer stylings
     contentOptions: {
@@ -171,14 +121,36 @@ export const DrawerNav = DrawerNavigator(
         fontWeight: "normal"
       }
     },
-
-    // Moew Drawer stylings
-    contentComponent: DrawerContent
+    navigationOptions: {
+      drawerLockMode: "locked-open"
+    }
   }
 );
 
+const LoginStackNav = StackNavigator(
+  {
+    // Stack RouteConfigs
+    LoginScreen: {
+      screen: Login,
+      header: { visible: false }
+    },
+    SignupScreen: {
+      screen: Signup,
+      header: { visible: false }
+    },
+    MainScreen: {
+      screen: DrawerNav
+    }
+  },
+  {
+    // Stack configs
+    initialRouteName: "LoginScreen",
+    mode: "card",
+    headerMode: "none"
+  }
+);
 
-// export default LoginStackNav;
+export default LoginStackNav;
 
 const styles = StyleSheet.create({
   container: {
@@ -188,22 +160,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     marginBottom: 8,
     flexDirection: "row",
-    marginTop: Platform.OS === "ios" ? 20 : 0,
-  },
-  text: {
-    // fontFamily: 'Raleway-Medium',
-    fontSize: 22
-  },
-  image: {
-    resizeMode: "contain",
-    width: 45,
-    height: 45,
-    marginLeft: 25
+    marginTop: Platform.OS === "ios" ? 20 : 0
   },
   profileName: {
     flex: 1,
     justifyContent: "center",
     paddingVertical: 16,
-    paddingLeft: 25,
+    paddingLeft: 25
+  },
+  text: {
+    // fontFamily: 'Raleway-Medium',
+    fontSize: 22
   }
 });
