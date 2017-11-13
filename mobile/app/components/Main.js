@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   Platform,
   Image,
-  BackHandler
+  BackHandler,
+  NetInfo,
+  Alert
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
@@ -39,6 +41,14 @@ export default class Main extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress");
   }
+
+  refresh = () => {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      if (!isConnected) {
+        Alert.alert("No Internet", "Please connect to the internet to refresh.");
+      }
+    });
+  };
 
   render() {
     return (
@@ -81,10 +91,10 @@ export default class Main extends Component {
         </Text>
 
         {/* Update timer TODO */}
-        <Text style={styles.updateText}>last updated: just now</Text>
+        <Text style={styles.updateText}>Last updated: just now</Text>
 
         {/* Refresh button */}
-        <TouchableOpacity style={styles.refresh}>
+        <TouchableOpacity style={styles.refresh} onPress={this.refresh}>
           <View
             style={{
               flex: 0.25,

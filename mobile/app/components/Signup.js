@@ -47,12 +47,12 @@ export default class Signup extends Component {
       !this.state.password ||
       !this.state.license_plate
     ) {
-      Alert.alert("Sign Up", "Please fill in all fields");
+      Alert.alert("Sign Up", "Please fill in all fields.");
       return;
     }
 
     if (!this.validateEmail(this.state.email)) {
-      Alert.alert("Sign Up", "Please enter a valid email address");
+      Alert.alert("Sign Up", "Please enter a valid email address.");
       return;
     }
 

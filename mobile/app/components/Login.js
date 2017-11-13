@@ -63,7 +63,7 @@ export default class Login extends Component {
           Alert.alert("Login", error);
         });
     } else {
-      Alert.alert("Login", "Empty email or password");
+      Alert.alert("Login", "Empty email or password.");
     }
   };
 
