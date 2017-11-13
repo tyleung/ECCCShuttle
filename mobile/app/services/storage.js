@@ -1,7 +1,13 @@
 import { AsyncStorage } from "react-native";
+import moment from "moment";
 import UserApi from "./userApi";
 import TransactionApi from "./transactionApi";
-import { API_TOKEN, USER, USER_TRANSACTIONS } from "../utils/constants";
+import {
+  LAST_UPDATE_TIME,
+  API_TOKEN,
+  USER,
+  USER_TRANSACTIONS
+} from "../utils/constants";
 
 export default class Storage {
   static setItem = async (key, value) => {
@@ -10,6 +16,25 @@ export default class Storage {
 
   static removeItem = async key => {
     return AsyncStorage.removeItem(key);
+  };
+
+  static getLastUpdateTime = async () => {
+    try {
+      const lastUpdateTime = await AsyncStorage.getItem(LAST_UPDATE_TIME);
+      if (lastUpdateTime !== null) {
+        return lastUpdateTime;
+      } else {
+        return "Just now";
+      }
+    } catch (e) {
+      return false;
+    }
+  };
+
+  static updateLastUpdateTime = async () => {
+    const lastUpdateTime = moment().format("MMM Do YYYY, h:mm:ss a");
+    await AsyncStorage.setItem(LAST_UPDATE_TIME, lastUpdateTime);
+    return lastUpdateTime;
   };
 
   static getStoredApiToken = async () => {

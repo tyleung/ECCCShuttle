@@ -1,6 +1,6 @@
 import axios from "axios";
 import Storage from "./storage";
-import { API_TOKEN, USER } from "../utils/constants";
+import { LAST_UPDATE_TIME, API_TOKEN, USER } from "../utils/constants";
 
 export default class UserApi {
   static login = (email, password) => {
@@ -42,6 +42,7 @@ export default class UserApi {
   };
 
   static logout = async () => {
+    await Storage.removeItem(LAST_UPDATE_TIME);
     await Storage.removeItem(API_TOKEN);
     await Storage.removeItem(USER);
   };

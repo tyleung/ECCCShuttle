@@ -1,4 +1,5 @@
 // AsyncStorage keys
+export const LAST_UPDATE_TIME = "LAST_UPDATE_TIME";
 export const API_TOKEN = "API_TOKEN";
 export const USER = "USER";
 export const USER_TRANSACTIONS = "USER_TRANSACTIONS";

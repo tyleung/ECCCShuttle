@@ -7,9 +7,13 @@
     "alert": false
   },
   "rules": {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".jsx"] }
+    ],
     "react/prop-types": 0,
     "react/jsx-boolean-value": 0,
+    "react/no-did-mount-set-state": 0,
     "no-use-before-define": ["error", { "variables": false }],
     "linebreak-style": 0,
     "comma-dangle": 0,

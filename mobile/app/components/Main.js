@@ -25,18 +25,19 @@ export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      user: {}
+      user: {},
+      lastUpdateTime: ""
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", () => {
       BackHandler.exitApp();
     });
 
-    Storage.getStoredUser().then(user => {
-      this.setState({ user });
-    });
+    const user = await Storage.getStoredUser();
+    const lastUpdateTime = await Storage.getLastUpdateTime();
+    this.setState({ user, lastUpdateTime });
   }
 
   componentWillUnmount() {
@@ -67,6 +68,9 @@ export default class Main extends Component {
         });
       }
 
+      Storage.updateLastUpdateTime().then(lastUpdateTime => {
+        this.setState({ lastUpdateTime });
+      });
       Alert.alert("Refresh", "Refresh complete.");
     });
   };
@@ -105,14 +109,16 @@ export default class Main extends Component {
           </View>
         </TouchableOpacity>
 
-        {/* Point */}
+        {/* Points */}
         <Text style={styles.pointText}>
           You have {this.state.user.current_points}{" "}
           {this.state.user.current_points === 1 ? "point" : "points"}!
         </Text>
 
-        {/* Update timer TODO */}
-        <Text style={styles.updateText}>Last updated: just now</Text>
+        {/* Update timer */}
+        <Text style={styles.updateText}>
+          Last updated: {this.state.lastUpdateTime}
+        </Text>
 
         {/* Refresh button */}
         <TouchableOpacity style={styles.refresh} onPress={this.refresh}>
