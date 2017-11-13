@@ -37,16 +37,22 @@ export default class RideHistory extends Component {
     <View>
       <TouchableOpacity style={styles.historyContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={[styles.ralewayLight, styles.historyText]}>
-            {item.transaction_date}
-          </Text>
+          <Text style={styles.historyText}>{item.transaction_date}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={[styles.ralewayLight, styles.historyText]}>
-            {item.points} {item.points > 1 ? "pts" : "pt"}
+          <Text style={styles.historyText}>
+            {item.points} {item.points === 1 ? "pt" : "pts"}
           </Text>
         </View>
       </TouchableOpacity>
+    </View>
+  );
+
+  renderEmptyItem = () => (
+    <View>
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>No Ride History!</Text>
+      </View>
     </View>
   );
 
@@ -60,11 +66,15 @@ export default class RideHistory extends Component {
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        <FlatList
-          data={this.state.transactions}
-          keyExtractor={item => item.id}
-          renderItem={this.renderItem}
-        />
+        {this.state.transactions.length > 0 ? (
+          <FlatList
+            data={this.state.transactions}
+            keyExtractor={item => item.id}
+            renderItem={this.renderItem}
+          />
+        ) : (
+          <FlatList data={[{ key: 0 }]} renderItem={this.renderEmptyItem} />
+        )}
       </View>
     );
   }
@@ -87,8 +97,15 @@ const styles = StyleSheet.create({
     color: "black",
     paddingVertical: 17
   },
-  ralewayLight: {
-    // fontFamily: 'Raleway-Light'
+  emptyContainer: {
+    flex: 1
+  },
+  emptyText: {
+    fontStyle: "italic",
+    textAlign: "center",
+    fontSize: 17,
+    color: "dimgray",
+    paddingVertical: 17
   },
   toolbar: {
     backgroundColor: "black",
