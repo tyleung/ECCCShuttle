@@ -12,7 +12,7 @@ import {
   StackNavigator,
   NavigationActions
 } from "react-navigation";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
 
 import Login from "./Login";
@@ -116,7 +116,7 @@ class DrawerContent extends Component {
         >
           <View style={styles.footer}>
             <Text style={styles.drawerText}>Logout</Text>
-            <Ionicons name="md-exit" size={22} />
+            <MaterialIcons name="exit-to-app" size={22} />
           </View>
         </TouchableNativeFeedback>
       </View>

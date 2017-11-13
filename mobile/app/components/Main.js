@@ -8,9 +8,9 @@ import {
   Image,
   BackHandler
 } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
 
-import Navicon from "./../../assets/navicon.png";
 import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
 
@@ -44,13 +44,13 @@ export default class Main extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={{ marginTop: Platform.OS === "ios" ? 23 : 0, marginLeft: 10 }}
+          style={{ marginTop: Platform.OS === "ios" ? 23 : 10, marginLeft: 10 }}
           onPress={() => {
             this.props.navigation.navigate("DrawerOpen");
           }}
         >
           <View>
-            <Image source={Navicon} />
+            <MaterialIcons name="menu" size={40} />
           </View>
         </TouchableOpacity>
 
@@ -60,9 +60,7 @@ export default class Main extends Component {
           onPress={() => this.props.navigation.navigate("ScannerScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.QRButtonText]}>
-              Scan QR Code
-            </Text>
+            <Text style={styles.QRButtonText}>Scan QR Code</Text>
           </View>
           <View
             style={{
@@ -77,14 +75,13 @@ export default class Main extends Component {
         </TouchableOpacity>
 
         {/* Point */}
-        <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-          You have {this.state.user.current_points} {this.state.user.current_points === 1 ? "point" : "points"}!
+        <Text style={styles.pointText}>
+          You have {this.state.user.current_points}{" "}
+          {this.state.user.current_points === 1 ? "point" : "points"}!
         </Text>
 
         {/* Update timer TODO */}
-        <Text style={[styles.ralewayLight, styles.updateText]}>
-          last updated: just now
-        </Text>
+        <Text style={styles.updateText}>last updated: just now</Text>
 
         {/* Refresh button */}
         <TouchableOpacity style={styles.refresh}>
@@ -98,9 +95,7 @@ export default class Main extends Component {
             <Image source={Refresh} style={styles.refreshImage} />
           </View>
           <View style={{ flex: 0.65 }}>
-            <Text style={[styles.ralewayLight, styles.refreshButtonText]}>
-              Refresh
-            </Text>
+            <Text style={styles.refreshButtonText}>Refresh</Text>
           </View>
           <View style={{ flex: 0.25 }} />
         </TouchableOpacity>
@@ -128,16 +123,10 @@ const styles = StyleSheet.create({
     paddingLeft: 21,
     paddingVertical: 17
   },
-  ralewayLight: {
-    // fontFamily: 'Raleway-Light'
-  },
   image: {
     resizeMode: "contain",
     width: 30,
     height: 30
-  },
-  ralewayLightItalic: {
-    // fontFamily: 'Raleway-LightItalic'
   },
   pointText: {
     marginTop: 46,
