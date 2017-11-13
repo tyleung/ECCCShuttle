@@ -1,6 +1,18 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Platform } from "react-native";
-import { DrawerItems, DrawerNavigator, StackNavigator } from "react-navigation";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Platform,
+  TouchableOpacity
+} from "react-native";
+import {
+  DrawerItems,
+  DrawerNavigator,
+  StackNavigator,
+  NavigationActions
+} from "react-navigation";
+import { Ionicons } from "@expo/vector-icons";
 import Storage from "../services/storage";
 
 import Login from "./Login";
@@ -23,6 +35,9 @@ const MainPageStackNav = StackNavigator(
     ScannerScreen: {
       screen: BarcodeScanner,
       header: { visible: false }
+    },
+    LoginScreen: {
+      screen: Login
     }
   },
   {
@@ -47,6 +62,9 @@ const SettingsPageStackNav = StackNavigator(
     EditLicensePlateScreen: {
       screen: EditLicensePlate,
       header: { visible: false }
+    },
+    LoginScreen: {
+      screen: Login
     }
   },
   {
@@ -71,15 +89,31 @@ class DrawerContent extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.profile}>
-          <View style={styles.profileName}>
-            <Text style={styles.text}>
+      <View style={styles.drawer}>
+        <View style={styles.drawerItemsTop}>
+          <View style={styles.profile}>
+            <Text style={styles.drawerText}>
               Hi, {this.state.user.first_name} {this.state.user.last_name}
             </Text>
           </View>
+          <DrawerItems {...this.props} />
         </View>
-        <DrawerItems {...this.props} />
+        <TouchableOpacity
+          style={styles.footer}
+          onPress={() => {
+            const resetAction = NavigationActions.reset({
+              index: 0,
+              actions: [
+                NavigationActions.navigate({ routeName: "LoginScreen" })
+              ],
+              key: null
+            });
+            this.props.navigation.dispatch(resetAction);
+          }}
+        >
+          <Text style={styles.drawerText}>Logout</Text>
+          <Ionicons name="md-exit" size={22} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -99,9 +133,6 @@ export const DrawerNav = DrawerNavigator(
     },
     SettingsScreen: {
       screen: SettingsPageStackNav
-    },
-    LoginScreen: {
-      screen: Login
     }
   },
   {
@@ -115,14 +146,13 @@ export const DrawerNav = DrawerNavigator(
     contentOptions: {
       activeTintColor: "black",
       style: {},
+      itemStyle: {},
       labelStyle: {
+        paddingHorizontal: 10,
         fontSize: 22,
         // fontFamily: 'Raleway-Light',
         fontWeight: "normal"
       }
-    },
-    navigationOptions: {
-      drawerLockMode: "locked-open"
     }
   }
 );
@@ -153,23 +183,31 @@ const LoginStackNav = StackNavigator(
 export default LoginStackNav;
 
 const styles = StyleSheet.create({
-  container: {
+  drawer: {
+    flex: 1,
+    justifyContent: "space-between"
+  },
+  drawerItemsTop: {
     flex: 1
   },
+  drawerText: {
+    fontSize: 22,
+    padding: 7
+  },
   profile: {
-    borderBottomWidth: 2,
-    marginBottom: 8,
     flexDirection: "row",
-    marginTop: Platform.OS === "ios" ? 20 : 0
-  },
-  profileName: {
-    flex: 1,
-    justifyContent: "center",
+    marginTop: Platform.OS === "ios" ? 20 : 0,
+    marginBottom: 8,
+    paddingHorizontal: 20,
     paddingVertical: 16,
-    paddingLeft: 25
+    borderBottomWidth: 2
   },
-  text: {
-    // fontFamily: 'Raleway-Medium',
-    fontSize: 22
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: 8
   }
 });

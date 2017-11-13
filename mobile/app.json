@@ -8,6 +8,9 @@
     "loading": {
       "hideExponentText": true
     },
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    },
     "ios": {
       "bundleIdentifier": "ca.eccc.shuttle"
     },

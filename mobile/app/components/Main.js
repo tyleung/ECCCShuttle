@@ -16,7 +16,7 @@ import Refresh from "./../../assets/refresh.png";
 
 export default class Main extends Component {
   static navigationOptions = {
-    drawerLabel: "  QR Scanner"
+    drawerLabel: "QR Scanner"
   };
 
   constructor() {

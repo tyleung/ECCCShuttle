@@ -14,7 +14,7 @@ import Navicon from "./../../assets/navicon.png";
 export default class RideHistory extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "  Ride History"
+    drawerLabel: "Ride History"
   };
 
   constructor() {

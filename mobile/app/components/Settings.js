@@ -16,7 +16,7 @@ import Pencil from "./../../assets/pencil.png";
 export default class Settings extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "  Settings"
+    drawerLabel: "Settings"
   };
 
   constructor() {

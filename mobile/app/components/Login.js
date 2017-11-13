@@ -20,8 +20,9 @@ import Logo from "./../../assets/logo.png";
 
 export default class Login extends Component {
   static navigationOptions = {
-    drawerLabel: "  Logout",
-    drawerLockMode: "locked-open"
+    drawerLabel: "Logout",
+    drawerLockMode: "locked-closed",
+    gesturesEnabled: false
   };
 
   constructor(props) {
