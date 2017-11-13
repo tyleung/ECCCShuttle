@@ -139,7 +139,7 @@ export const DrawerNav = DrawerNavigator(
     // Drawer configs
     initialRouteName: "MainScreen",
     drawerPosition: "left",
-    drawerWidth: 320,
+    drawerWidth: 300,
     contentComponent: DrawerContent,
 
     // Drawer stylings
