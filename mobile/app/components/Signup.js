@@ -33,6 +33,11 @@ export default class Signup extends Component {
     };
   }
 
+  validateEmail = email => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
   signUpOnPress = () => {
     Keyboard.dismiss();
     if (
@@ -43,6 +48,11 @@ export default class Signup extends Component {
       !this.state.license_plate
     ) {
       Alert.alert("Sign Up", "Please fill in all fields");
+      return;
+    }
+
+    if (!this.validateEmail(this.state.email)) {
+      Alert.alert("Sign Up", "Please enter a valid email address");
       return;
     }
 

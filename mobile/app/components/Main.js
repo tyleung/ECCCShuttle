@@ -46,7 +46,6 @@ export default class Main extends Component {
         <TouchableOpacity
           style={{ marginTop: Platform.OS === "ios" ? 23 : 0, marginLeft: 10 }}
           onPress={() => {
-            console.log("drawer shold opeb buy not");
             this.props.navigation.navigate("DrawerOpen");
           }}
         >
