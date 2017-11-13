@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Platform,
-  TouchableOpacity
+  TouchableNativeFeedback
 } from "react-native";
 import {
   DrawerItems,
@@ -98,8 +98,11 @@ class DrawerContent extends Component {
           </View>
           <DrawerItems {...this.props} />
         </View>
-        <TouchableOpacity
-          style={styles.footer}
+        <TouchableNativeFeedback
+          background={TouchableNativeFeedback.Ripple(
+            "rgba(0, 0, 0, .32)",
+            false
+          )}
           onPress={() => {
             const resetAction = NavigationActions.reset({
               index: 0,
@@ -111,9 +114,11 @@ class DrawerContent extends Component {
             this.props.navigation.dispatch(resetAction);
           }}
         >
-          <Text style={styles.drawerText}>Logout</Text>
-          <Ionicons name="md-exit" size={22} />
-        </TouchableOpacity>
+          <View style={styles.footer}>
+            <Text style={styles.drawerText}>Logout</Text>
+            <Ionicons name="md-exit" size={22} />
+          </View>
+        </TouchableNativeFeedback>
       </View>
     );
   }
