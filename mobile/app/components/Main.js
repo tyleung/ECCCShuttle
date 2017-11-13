@@ -79,7 +79,7 @@ export default class Main extends Component {
 
         {/* Point */}
         <Text style={[styles.ralewayLightItalic, styles.pointText]}>
-          You have {this.state.user.current_points === 1 ? "point" : "points"}!
+          You have {this.state.user.current_points} {this.state.user.current_points === 1 ? "point" : "points"}!
         </Text>
 
         {/* Update timer TODO */}
