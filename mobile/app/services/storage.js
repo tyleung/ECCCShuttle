@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import moment from "moment";
+import UserApi from "./userApi";
 import TransactionApi from "./transactionApi";
 import { API_TOKEN, USER, USER_TRANSACTIONS } from "../utils/constants";
 
@@ -105,6 +105,10 @@ export default class Storage {
         .concat(savedUserTransactions)
         .concat(unsyncedTransactions);
 
+      // User has been updated with points, so we need to update it
+      const token = await Storage.getStoredApiToken();
+      const user = await UserApi.getUser(token);
+      await Storage.setItem(USER, JSON.stringify(user));
       return Storage.setItem(
         USER_TRANSACTIONS,
         JSON.stringify(mergedTransactions)

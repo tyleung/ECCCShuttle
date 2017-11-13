@@ -41,7 +41,8 @@ export default class BarcodeScanner extends React.Component {
       );
 
       const now = moment();
-      if (decrypted === now.format("YYYY-MM-DD")) {
+      const nowYYYYMMDD = now.format("YYYY-MM-DD");
+      if (decrypted === nowYYYYMMDD) {
         UserApi.getLastUserTransaction()
           .then(async lastUserTransaction => {
             // If there's no previous transaction found, or if the last
@@ -63,8 +64,10 @@ export default class BarcodeScanner extends React.Component {
           .catch(error => {
             Alert.alert("Scanner", error);
           });
-      } else {
+      } else if (decrypted < nowYYYYMMDD) {
         Alert.alert("Alert", "The code is expired!");
+      } else {
+        Alert.alert("Alert", "The code is invalid!");
       }
     } catch (e) {
       Alert.alert("Alert", "The code is invalid!");

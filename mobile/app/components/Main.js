@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
+import UserApi from "../services/userApi";
 
 import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
@@ -43,10 +44,30 @@ export default class Main extends Component {
   }
 
   refresh = () => {
-    NetInfo.isConnected.fetch().then(isConnected => {
+    NetInfo.isConnected.fetch().then(async isConnected => {
       if (!isConnected) {
-        Alert.alert("No Internet", "Please connect to the internet to refresh.");
+        Alert.alert(
+          "No Internet",
+          "Please connect to the internet to refresh."
+        );
+        return;
       }
+
+      const storedUserTransactions = await Storage.getStoredUserTransactions();
+      if (storedUserTransactions.some(t => !t.id)) {
+        const transactions = await UserApi.getUserTransactions(
+          this.state.user.id
+        );
+        await Storage.mergeTransactionsToStorage(
+          this.state.user.id,
+          transactions
+        );
+        Storage.getStoredUser().then(user => {
+          this.setState({ user });
+        });
+      }
+
+      Alert.alert("Refresh", "Refresh complete.");
     });
   };
 
