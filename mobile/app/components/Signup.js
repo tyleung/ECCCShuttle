@@ -11,7 +11,9 @@ import {
   View
 } from "react-native";
 import KeyboardAwareScrollViewCompat from "./KeyboardAwareScrollViewCompat";
+import Storage from "../services/storage";
 import UserApi from "../services/userApi";
+import { API_TOKEN, USER } from "../utils/constants";
 
 import Logo from "./../../assets/logo.png";
 
@@ -44,20 +46,33 @@ export default class Signup extends Component {
       return;
     }
 
-    const user = {
+    const newUser = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password,
       license_plate: this.state.license_plate
     };
-    UserApi.signUp(user)
+    UserApi.signUp(newUser)
       .then(() => {
-        Alert.alert(
-          "Success!",
-          "Thank you for being a shuttle member. You may now login."
-        );
-        this.props.navigation.goBack();
+        UserApi.login(this.state.email, this.state.password)
+          .then(async token => {
+            await Storage.setItem(API_TOKEN, token);
+            const user = await UserApi.getUser(token);
+            await Storage.setItem(USER, JSON.stringify(user));
+            const transactions = await UserApi.getUserTransactions(user.id);
+            await Storage.mergeTransactionsToStorage(user.id, transactions);
+          })
+          .then(() => {
+            Alert.alert(
+              "Success!",
+              "Welcome! Thank you for being a shuttle member."
+            );
+            this.props.navigation.navigate("MainScreen");
+          })
+          .catch(error => {
+            Alert.alert("Login", error);
+          });
       })
       .catch(error => {
         Alert.alert("Sign up", error);
@@ -172,8 +187,7 @@ export default class Signup extends Component {
                 ref={input => {
                   this.licensePlateInput = input;
                 }}
-                returnKeyType="go"
-                onSubmitEditing={this.signUpOnPress}
+                returnKeyType="done"
                 style={styles.textInput}
                 underlineColorAndroid={"transparent"}
                 value={this.state.license_plate}
