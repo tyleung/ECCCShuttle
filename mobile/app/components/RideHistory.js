@@ -7,6 +7,7 @@ import {
   ToolbarAndroid,
   FlatList
 } from "react-native";
+import moment from "moment";
 import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
@@ -37,7 +38,7 @@ export default class RideHistory extends Component {
     <View>
       <TouchableOpacity style={styles.historyContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.historyText}>{item.transaction_date}</Text>
+          <Text style={styles.historyText}>{moment(item.transaction_date).format("MMM Do YYYY, h:mm:ss a")}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.historyText}>
