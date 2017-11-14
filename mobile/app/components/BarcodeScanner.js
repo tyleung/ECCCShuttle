@@ -2,13 +2,16 @@ import React from "react";
 import {
   Alert,
   Dimensions,
+  NetInfo,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from "react-native";
+import { NavigationActions } from "react-navigation";
 import { BarCodeScanner, Permissions } from "expo";
 import moment from "moment";
+import Storage from "../services/storage";
 import TransactionApi from "../services/transactionApi";
 import UserApi from "../services/userApi";
 import { CRYPTO_KEY, TransactionType } from "../utils/constants";
@@ -30,7 +33,12 @@ export default class BarcodeScanner extends React.Component {
   }
 
   _handleBarCodeRead = ({ data }) => {
-    this.props.navigation.goBack();
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
+    });
+    this.props.navigation.dispatch(resetAction);
+
     try {
       const decrypted = JSON.parse(
         CryptoJS.AES
@@ -53,10 +61,20 @@ export default class BarcodeScanner extends React.Component {
                 now.format("YYYY-MM-DD hh:mm:ss")
             ) {
               await TransactionApi.createTransaction(TransactionType.RIDE);
-              Alert.alert(
-                "Alert",
-                "Success! Thank you for taking the shuttle!"
-              );
+
+              // Save transaction to server if there's internet.
+              NetInfo.isConnected.fetch().then(async isConnected => {
+                if (isConnected) {
+                  const user = await Storage.getStoredUser();
+                  await Storage.mergeTransactionsToStorage(user.id);
+                }
+
+                this.props.navigation.dispatch(resetAction);
+                Alert.alert(
+                  "Alert",
+                  "Success! Thank you for taking the shuttle!"
+                );
+              });
             } else {
               Alert.alert("Alert", "You've already scanned the code today!");
             }

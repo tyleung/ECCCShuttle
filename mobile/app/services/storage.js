@@ -93,10 +93,8 @@ export default class Storage {
     }
   };
 
-  static mergeTransactionsToStorage = async (
-    userId,
-    serverUserTransactions
-  ) => {
+  static mergeTransactionsToStorage = async userId => {
+    const serverUserTransactions = await UserApi.getUserTransactions(userId);
     const storedTransactions = await Storage.getStoredTransactions();
     const storedUserTransactions = await Storage.getStoredUserTransactions();
     const transactionsWithoutUser = storedTransactions.filter(

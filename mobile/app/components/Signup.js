@@ -70,8 +70,7 @@ export default class Signup extends Component {
             await Storage.setItem(API_TOKEN, token);
             const user = await UserApi.getUser(token);
             await Storage.setItem(USER, JSON.stringify(user));
-            const transactions = await UserApi.getUserTransactions(user.id);
-            await Storage.mergeTransactionsToStorage(user.id, transactions);
+            await Storage.mergeTransactionsToStorage(user.id);
           })
           .then(() => {
             Alert.alert(
