@@ -38,7 +38,9 @@ export default class RideHistory extends Component {
     <View>
       <TouchableOpacity style={styles.historyContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.historyText}>{moment(item.transaction_date).format("MMM Do YYYY, h:mm:ss a")}</Text>
+          <Text style={styles.historyText}>
+            {moment(item.transaction_date).format("MMM Do YYYY, h:mm:ss a")}
+          </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.historyText}>
