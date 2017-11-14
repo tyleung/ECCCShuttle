@@ -67,6 +67,7 @@ export default class BarcodeScanner extends React.Component {
                 if (isConnected) {
                   const user = await Storage.getStoredUser();
                   await Storage.mergeTransactionsToStorage(user.id);
+                  await Storage.updateLastUpdateTime();
                 }
 
                 this.props.navigation.dispatch(resetAction);
