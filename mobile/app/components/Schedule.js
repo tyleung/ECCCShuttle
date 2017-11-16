@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, ToolbarAndroid } from "react-native";
+import { StyleSheet, Text, View, ToolbarAndroid } from "react-native";
 
 import Navicon from "./../../assets/navicon.png";
 
@@ -19,6 +19,9 @@ export default class Schedule extends Component {
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
+        <Text style={styles.textSchedule}>9:15 am – 10:00 am</Text>
+        <Text style={styles.textSchedule}>10:45 am – 11:30 am</Text>
+        <Text style={styles.textSchedule}>12:30 pm – 1:15 pm</Text>
       </View>
     );
   }
@@ -33,5 +36,11 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     height: 56,
     alignSelf: "stretch"
-  }
+  },
+  textSchedule: {
+    fontSize: 22,
+    padding: 10,
+    color: "black",
+    textAlign: "center"
+  },
 });
