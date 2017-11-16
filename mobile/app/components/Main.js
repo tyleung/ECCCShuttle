@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
+import Helpers from "../utils/helpers";
 
 import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
@@ -25,7 +26,7 @@ export default class Main extends Component {
     super();
     this.state = {
       user: {},
-      lastUpdateTime: ""
+      isSynced: false
     };
   }
 
@@ -35,8 +36,8 @@ export default class Main extends Component {
     });
 
     const user = await Storage.getStoredUser();
-    const lastUpdateTime = await Storage.getLastUpdateTime();
-    this.setState({ user, lastUpdateTime });
+    const isSynced = await Helpers.isSynced();
+    this.setState({ user, isSynced });
   }
 
   componentWillUnmount() {
@@ -53,17 +54,15 @@ export default class Main extends Component {
         return;
       }
 
-      const storedUserTransactions = await Storage.getStoredUserTransactions();
-      if (storedUserTransactions.some(t => !t.id)) {
+      const isSynced = await Helpers.isSynced();
+      if (!isSynced) {
         await Storage.mergeTransactionsToStorage(this.state.user.id);
         Storage.getStoredUser().then(user => {
           this.setState({ user });
         });
       }
 
-      Storage.updateLastUpdateTime().then(lastUpdateTime => {
-        this.setState({ lastUpdateTime });
-      });
+      this.setState({ isSynced: true });
       Alert.alert("Refresh", "Refresh complete.");
     });
   };
@@ -109,9 +108,11 @@ export default class Main extends Component {
         </Text>
 
         {/* Update timer */}
-        <Text style={styles.updateText}>
-          Last updated: {this.state.lastUpdateTime}
-        </Text>
+        {this.state.isSynced ? (
+          <Text style={styles.textSynced}>Up to date!</Text>
+        ) : (
+          <Text style={styles.textUnsynced}>Unsynced. Refresh to update.</Text>
+        )}
 
         {/* Refresh button */}
         <TouchableOpacity style={styles.refresh} onPress={this.refresh}>
@@ -164,10 +165,16 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center"
   },
-  updateText: {
+  textSynced: {
     marginTop: 8,
     fontSize: 15,
-    color: "black",
+    color: "green",
+    textAlign: "center"
+  },
+  textUnsynced: {
+    marginTop: 8,
+    fontSize: 15,
+    color: "red",
     textAlign: "center"
   },
   refresh: {
