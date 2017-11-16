@@ -26,18 +26,20 @@ export default class Main extends Component {
     super();
     this.state = {
       user: {},
-      isSynced: false
+      isSynced: false,
+      isLoading: false
     };
   }
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
     BackHandler.addEventListener("hardwareBackPress", () => {
       BackHandler.exitApp();
     });
 
     const user = await Storage.getStoredUser();
     const isSynced = await Helpers.isSynced();
-    this.setState({ user, isSynced });
+    this.setState({ user, isSynced, isLoading: false });
   }
 
   componentWillUnmount() {
@@ -65,6 +67,20 @@ export default class Main extends Component {
       this.setState({ isSynced: true });
       Alert.alert("Refresh", "Refresh complete.");
     });
+  };
+
+  renderSyncMessage = () => {
+    if (!this.state.isLoading) {
+      if (this.state.isSynced) {
+        return <Text style={styles.textSynced}>Up to date!</Text>;
+      } else {
+        return (
+          <Text style={styles.textUnsynced}>Unsynced. Refresh to update.</Text>
+        );
+      }
+    }
+
+    return null;
   };
 
   render() {
@@ -108,11 +124,7 @@ export default class Main extends Component {
         </Text>
 
         {/* Update timer */}
-        {this.state.isSynced ? (
-          <Text style={styles.textSynced}>Up to date!</Text>
-        ) : (
-          <Text style={styles.textUnsynced}>Unsynced. Refresh to update.</Text>
-        )}
+        {this.renderSyncMessage()}
 
         {/* Refresh button */}
         <TouchableOpacity style={styles.refresh} onPress={this.refresh}>
