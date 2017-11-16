@@ -38,13 +38,19 @@ export default class RideHistory extends Component {
     <View>
       <TouchableOpacity style={styles.historyContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.historyText}>
-            {moment(item.transaction_date).format("MMM Do YYYY, h:mm:ss a")}
+          <Text style={item.id ? styles.historyText : styles.unsyncedText}>
+            {item.id
+              ? moment(item.transaction_date).format("MMM Do YYYY, h:mm:ss a")
+              : moment
+                  .unix(item.transaction_date)
+                  .format("MMM Do YYYY, h:mm:ss a")}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={styles.historyText}>
-            {item.points} {item.points === 1 ? "pt" : "pts"}
+          <Text style={item.id ? styles.historyText : styles.unsyncedText}>
+            {item.id
+              ? `${item.points} ${item.points === 1 ? "pt" : "pts"}`
+              : "—"}
           </Text>
         </View>
       </TouchableOpacity>
@@ -72,7 +78,7 @@ export default class RideHistory extends Component {
         {this.state.transactions.length > 0 ? (
           <FlatList
             data={this.state.transactions}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id + item.transaction_date}
             renderItem={this.renderItem}
           />
         ) : (
@@ -98,6 +104,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 22,
     color: "black",
+    paddingVertical: 17
+  },
+  unsyncedText: {
+    fontStyle: "italic",
+    textAlign: "center",
+    fontSize: 22,
+    color: "dimgray",
     paddingVertical: 17
   },
   emptyContainer: {
