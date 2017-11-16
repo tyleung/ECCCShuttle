@@ -23,7 +23,8 @@ export default class BarcodeScanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasCameraPermission: null
+      hasCameraPermission: null,
+      isProcessing: false
     };
   }
 
@@ -33,63 +34,69 @@ export default class BarcodeScanner extends React.Component {
   }
 
   _handleBarCodeRead = ({ data }) => {
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
-    });
-    this.props.navigation.dispatch(resetAction);
+    this.setState({ isProcessing: true }, () => {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
+      });
 
-    try {
-      const decrypted = JSON.parse(
-        CryptoJS.AES
-          .decrypt(data, CRYPTO_KEY, {
-            format: CryptoJSAesJson
-          })
-          .toString(CryptoJS.enc.Utf8)
-      );
+      try {
+        const decrypted = JSON.parse(
+          CryptoJS.AES
+            .decrypt(data, CRYPTO_KEY, {
+              format: CryptoJSAesJson
+            })
+            .toString(CryptoJS.enc.Utf8)
+        );
 
-      const now = moment();
-      const nowYYYYMMDD = now.format("YYYY-MM-DD");
-      if (decrypted === nowYYYYMMDD) {
-        UserApi.getLastUserTransaction()
-          .then(async lastUserTransaction => {
-            // If there's no previous transaction found, or if the last
-            // transaction wasn't today, save a new transaction.
-            if (
-              !lastUserTransaction.transaction_date ||
-              lastUserTransaction.transaction_date <
-                now.format("YYYY-MM-DD hh:mm:ss")
-            ) {
-              await TransactionApi.createTransaction(TransactionType.RIDE);
+        const now = moment();
+        const nowYYYYMMDD = now.format("YYYY-MM-DD");
+        if (decrypted === nowYYYYMMDD) {
+          UserApi.getLastUserTransaction()
+            .then(async lastUserTransaction => {
+              // If there's no previous transaction found, or if the last
+              // transaction wasn't today, save a new transaction.
+              if (
+                !lastUserTransaction.transaction_date ||
+                lastUserTransaction.transaction_date <
+                  now.format("YYYY-MM-DD hh:mm:ss")
+              ) {
+                await TransactionApi.createTransaction(TransactionType.RIDE);
 
-              // Save transaction to server if there's internet.
-              NetInfo.isConnected.fetch().then(async isConnected => {
-                if (isConnected) {
-                  const user = await Storage.getStoredUser();
-                  await Storage.mergeTransactionsToStorage(user.id);
-                }
+                // Save transaction to server if there's internet.
+                NetInfo.isConnected.fetch().then(async isConnected => {
+                  if (isConnected) {
+                    const user = await Storage.getStoredUser();
+                    await Storage.mergeTransactionsToStorage(user.id);
+                  }
 
-                this.props.navigation.dispatch(resetAction);
-                Alert.alert(
-                  "Alert",
-                  "Success! Thank you for taking the shuttle!"
-                );
-              });
-            } else {
-              Alert.alert("Alert", "You've already scanned the code today!");
-            }
-          })
-          .catch(error => {
-            Alert.alert("Scanner", error);
-          });
-      } else if (decrypted < nowYYYYMMDD) {
-        Alert.alert("Alert", "The code is expired!");
-      } else {
+                  this.props.navigation.dispatch(resetAction);
+                  this.setState({ isProcessing: false });
+                  Alert.alert(
+                    "Alert",
+                    "Success! Thank you for taking the shuttle!"
+                  );
+                });
+              } else {
+                Alert.alert("Alert", "You've already scanned the code today!");
+              }
+            })
+            .catch(error => {
+              Alert.alert("Scanner", error);
+            });
+        } else if (decrypted < nowYYYYMMDD) {
+          Alert.alert("Alert", "The code is expired!");
+          this.props.navigation.dispatch(resetAction);
+          this.setState({ isProcessing: false });
+        } else {
+          Alert.alert("Alert", "The code is invalid!");
+          this.props.navigation.dispatch(resetAction);
+          this.setState({ isProcessing: false });
+        }
+      } catch (e) {
         Alert.alert("Alert", "The code is invalid!");
       }
-    } catch (e) {
-      Alert.alert("Alert", "The code is invalid!");
-    }
+    });
   };
 
   render() {
@@ -103,35 +110,37 @@ export default class BarcodeScanner extends React.Component {
       const { navigate } = this.props.navigation;
       return (
         <View style={{ flex: 1 }}>
-          <BarCodeScanner
-            onBarCodeRead={this._handleBarCodeRead}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            style={StyleSheet.absoluteFill}
-          >
-            <View style={styles.customRectangleContainer}>
-              <View style={styles.customOutsideMarker}>
-                <Text style={styles.customTitleText}>Scan QR Code</Text>
-              </View>
-              <View style={{ height: 250, flexDirection: "row" }}>
-                <View style={styles.customOutsideMarker} />
-                <View style={styles.customRectangle} />
-                <View style={styles.customOutsideMarker} />
-              </View>
-              <View
-                style={[
-                  styles.customOutsideMarker,
-                  { justifyContent: "flex-end", alignItems: "center" }
-                ]}
-              >
-                <TouchableOpacity
-                  style={{ marginBottom: 50 }}
-                  onPress={() => navigate("MainScreen")}
+          {!this.state.isProcessing ? (
+            <BarCodeScanner
+              onBarCodeRead={this._handleBarCodeRead}
+              barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+              style={StyleSheet.absoluteFill}
+            >
+              <View style={styles.customRectangleContainer}>
+                <View style={styles.customOutsideMarker}>
+                  <Text style={styles.customTitleText}>Scan QR Code</Text>
+                </View>
+                <View style={{ height: 250, flexDirection: "row" }}>
+                  <View style={styles.customOutsideMarker} />
+                  <View style={styles.customRectangle} />
+                  <View style={styles.customOutsideMarker} />
+                </View>
+                <View
+                  style={[
+                    styles.customOutsideMarker,
+                    { justifyContent: "flex-end", alignItems: "center" }
+                  ]}
                 >
-                  <Text style={styles.customBottomText}>Cancel</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{ marginBottom: 50 }}
+                    onPress={() => navigate("MainScreen")}
+                  >
+                    <Text style={styles.customBottomText}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          </BarCodeScanner>
+            </BarCodeScanner>
+          ) : null}
         </View>
       );
     }
@@ -139,10 +148,6 @@ export default class BarcodeScanner extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  zeroContainer: {
-    height: 0,
-    flex: 0
-  },
   customRectangleContainer: {
     flex: 0,
     height: Dimensions.get("window").height,
