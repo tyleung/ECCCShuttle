@@ -10,7 +10,6 @@ import {
 import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
-import ProfileGrey from "./../../assets/profileGrey.png";
 import Pencil from "./../../assets/pencil.png";
 
 export default class Settings extends Component {
@@ -43,10 +42,6 @@ export default class Settings extends Component {
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        {/* Profile icon */}
-        <View style={{ marginVertical: 30, marginLeft: 40 }}>
-          <Image source={ProfileGrey} style={styles.profileIcon} />
-        </View>
 
         {/* Show user's email address */}
         <TouchableOpacity
@@ -56,13 +51,7 @@ export default class Settings extends Component {
           ]}
         >
           <View style={{ flex: 1 }}>
-            <Text
-              style={[
-                styles.ralewayLight,
-                styles.profileText,
-                { paddingRight: 21 }
-              ]}
-            >
+            <Text style={[styles.profileText, { paddingRight: 21 }]}>
               {this.state.user.email}
             </Text>
           </View>
@@ -74,9 +63,7 @@ export default class Settings extends Component {
           onPress={() => navigate("EditNameScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText]}>
-              {this.state.user.first_name}
-            </Text>
+            <Text style={styles.profileText}>{this.state.user.first_name}</Text>
           </View>
           <View
             style={{
@@ -95,9 +82,7 @@ export default class Settings extends Component {
           onPress={() => navigate("EditNameScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText]}>
-              {this.state.user.last_name}
-            </Text>
+            <Text style={styles.profileText}>{this.state.user.last_name}</Text>
           </View>
           <View
             style={{
@@ -116,7 +101,7 @@ export default class Settings extends Component {
           onPress={() => navigate("EditLicensePlateScreen")}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.ralewayLight, styles.profileText]}>
+            <Text style={styles.profileText}>
               {this.state.user.license_plate}
             </Text>
           </View>
@@ -145,12 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor: "#223E4A"
   },
-  ralewayLight: {
-    // fontFamily: 'Raleway-Light'
-  },
-  ralewayLightItalic: {
-    // fontFamily: 'Raleway-LightItalic'
-  },
   toolbar: {
     backgroundColor: "black",
     height: 56,
@@ -166,11 +145,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 30,
     height: 30
-  },
-  profileIcon: {
-    resizeMode: "contain",
-    width: 70,
-    height: 70
   },
   modalContainer: {
     backgroundColor: "white",
