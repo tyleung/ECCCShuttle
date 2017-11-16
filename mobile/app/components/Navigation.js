@@ -19,7 +19,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Main from "./Main";
 import RideHistory from "./RideHistory";
-import About from "./About";
+import Schedule from "./Schedule";
 import Settings from "./Settings";
 import BarcodeScanner from "./BarcodeScanner";
 import EditName from "./EditName";
@@ -133,8 +133,8 @@ export const DrawerNav = DrawerNavigator(
     RideHistoryScreen: {
       screen: RideHistory
     },
-    AboutScreen: {
-      screen: About
+    ScheduleScreen: {
+      screen: Schedule
     },
     SettingsScreen: {
       screen: SettingsPageStackNav

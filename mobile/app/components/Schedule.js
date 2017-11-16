@@ -3,10 +3,10 @@ import { StyleSheet, View, ToolbarAndroid } from "react-native";
 
 import Navicon from "./../../assets/navicon.png";
 
-export default class About extends Component {
+export default class Schedule extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "About"
+    drawerLabel: "Schedule"
   };
 
   render() {
@@ -14,7 +14,7 @@ export default class About extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" About"
+          title=" Schedule"
           titleColor="white"
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
@@ -28,12 +28,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5"
-  },
-  ralewayLight: {
-    // fontFamily: 'Raleway-Light'
-  },
-  ralewayLightItalic: {
-    // fontFamily: 'Raleway-LightItalic'
   },
   toolbar: {
     backgroundColor: "black",
