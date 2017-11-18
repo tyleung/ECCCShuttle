@@ -1,12 +1,27 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ToolbarAndroid } from "react-native";
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  View,
+  ToolbarAndroid,
+  TouchableOpacity
+} from "react-native";
 
 import Navicon from "./../../assets/navicon.png";
+import Timetable from "./../../assets/timetable.jpg";
 
 export default class Schedule extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: "Schedule"
+  };
+
+  onSchedulePress = () => {
+    Linking.openURL(
+      "https://docs.google.com/spreadsheets/d/1iwjPaej1k6bvxmqZ6uVUOJLP8x65YFzafIEy9K2gZrU/edit?usp=drivesdk"
+    );
   };
 
   render() {
@@ -19,9 +34,15 @@ export default class Schedule extends Component {
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
-        <Text style={styles.textSchedule}>9:15 am – 10:00 am</Text>
-        <Text style={styles.textSchedule}>10:45 am – 11:30 am</Text>
-        <Text style={styles.textSchedule}>12:30 pm – 1:15 pm</Text>
+        <Image source={Timetable} style={styles.image} />
+        <View style={styles.linkContainer}>
+          <TouchableOpacity
+            style={styles.linkButton}
+            onPress={this.onSchedulePress}
+          >
+            <Text style={styles.text}>View full schedule</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -37,10 +58,27 @@ const styles = StyleSheet.create({
     height: 56,
     alignSelf: "stretch"
   },
-  textSchedule: {
+  image: {
+    flex: 0.5,
+    justifyContent: "flex-start",
+    margin: 10,
+    width: null,
+    height: null,
+    resizeMode: "contain"
+  },
+  linkContainer: {
+    flex: 0.5
+  },
+  linkButton: {
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderRadius: 23,
+    borderWidth: 1,
+    alignSelf: "center"
+  },
+  text: {
     fontSize: 22,
-    padding: 10,
     color: "black",
     textAlign: "center"
-  },
+  }
 });
