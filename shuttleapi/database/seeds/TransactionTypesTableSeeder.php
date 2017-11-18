@@ -14,6 +14,7 @@ class TransactionTypesTableSeeder extends Seeder
     {
         DB::table('transaction_types')->insert([
             'type' => 'ride',
+            'value' => 100,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
