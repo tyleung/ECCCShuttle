@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Transaction;
+use App\TransactionType;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,12 +23,9 @@ class TransactionController extends Controller
     public function createTransaction(Request $request)
     {
         $user = User::findOrFail($request->user_id);
-        $points = 0;
 
-        // Transaction type == ride
-        if ($request->type_id == 1) {
-            $points = 100;
-        }
+        $transactionType = TransactionType::findOrFail($request->type_id);
+        $points = $transactionType->value;
 
         $user->current_points += $points;
         $user->save();
