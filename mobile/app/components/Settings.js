@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
   View,
   Text,
+  TextInput,
   ToolbarAndroid,
-  TouchableOpacity,
-  Image
+  TouchableOpacity
 } from "react-native";
 import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
-import Pencil from "./../../assets/pencil.png";
 
 export default class Settings extends Component {
   // Name the drawerLabel for this page
@@ -31,6 +31,10 @@ export default class Settings extends Component {
     });
   }
 
+  editPassword = () => {
+    Alert.alert("Alert", "Oi you pressed the password field");
+  };
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -43,80 +47,58 @@ export default class Settings extends Component {
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
 
-        <Text style={styles.profileText}>Profile</Text>
+        <Text style={styles.header}>Account Settings</Text>
 
-        {/* Show user's email address */}
-        <TouchableOpacity
-          style={[
-            styles.profileContainer,
-            { borderTopWidth: 1, borderBottomWidth: 1 }
-          ]}
-        >
-          <View style={{ flex: 1 }}>
-            <Text style={[styles.profileText, { paddingRight: 21 }]}>
-              {this.state.user.email}
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* Show user's first name and button that navigates to EditName */}
-        <TouchableOpacity
-          style={[styles.profileContainer, { borderBottomWidth: 1 }]}
-          onPress={() => navigate("EditNameScreen")}
-        >
-          <View style={{ flex: 1 }}>
-            <Text style={styles.profileText}>{this.state.user.first_name}</Text>
-          </View>
-          <View
-            style={{
-              alignItems: "flex-end",
-              marginHorizontal: 15,
-              justifyContent: "center"
-            }}
+        <View style={styles.fields}>
+          <TouchableOpacity
+            style={styles.fieldGroup}
+            onPress={this.editPassword}
           >
-            <Image source={Pencil} style={styles.pencilIcon} />
-          </View>
-        </TouchableOpacity>
+            <Text style={styles.fieldLabel}>First Name</Text>
+            <Text style={styles.fieldText}>{this.state.user.first_name}</Text>
+          </TouchableOpacity>
 
-        {/* Show user's last name and button that navigates to EditName */}
-        <TouchableOpacity
-          style={[styles.profileContainer, { borderBottomWidth: 1 }]}
-          onPress={() => navigate("EditNameScreen")}
-        >
-          <View style={{ flex: 1 }}>
-            <Text style={styles.profileText}>{this.state.user.last_name}</Text>
-          </View>
-          <View
-            style={{
-              alignItems: "flex-end",
-              marginHorizontal: 15,
-              justifyContent: "center"
-            }}
+          <TouchableOpacity
+            style={styles.fieldGroup}
+            onPress={this.editPassword}
           >
-            <Image source={Pencil} style={styles.pencilIcon} />
-          </View>
-        </TouchableOpacity>
+            <Text style={styles.fieldLabel}>Last Name</Text>
+            <Text style={styles.fieldText}>{this.state.user.last_name}</Text>
+          </TouchableOpacity>
 
-        {/* Show user's license plate and button that navigates to EditLicensePlate */}
-        <TouchableOpacity
-          style={[styles.profileContainer, { borderBottomWidth: 1 }]}
-          onPress={() => navigate("EditLicensePlateScreen")}
-        >
-          <View style={{ flex: 1 }}>
-            <Text style={styles.profileText}>
+          <TouchableOpacity
+            style={styles.fieldGroup}
+            onPress={this.editPassword}
+          >
+            <Text style={styles.fieldLabel}>Email</Text>
+            <Text style={styles.fieldText}>{this.state.user.email}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.fieldGroup}
+            onPress={this.editPassword}
+          >
+            <Text style={styles.fieldLabel}>Password</Text>
+            <TextInput
+              editable={false}
+              onPress={() => this.editPassword}
+              secureTextEntry
+              style={styles.fieldText}
+              underlineColorAndroid={"transparent"}
+              value="*******"
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.fieldGroup}
+            onPress={this.editPassword}
+          >
+            <Text style={styles.fieldLabel}>License Plate</Text>
+            <Text style={styles.fieldText}>
               {this.state.user.license_plate}
             </Text>
-          </View>
-          <View
-            style={{
-              alignItems: "flex-end",
-              marginHorizontal: 15,
-              justifyContent: "center"
-            }}
-          >
-            <Image source={Pencil} style={styles.pencilIcon} />
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -125,27 +107,35 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5"
+    backgroundColor: "white"
   },
-  profileContainer: {
-    flexDirection: "row",
+  header: {
     backgroundColor: "white",
-    borderColor: "#223E4A"
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
-  },
-  profileText: {
     fontSize: 22,
     color: "black",
     paddingLeft: 21,
     paddingVertical: 17
   },
-  pencilIcon: {
-    resizeMode: "contain",
-    width: 30,
-    height: 30
+  fields: {
+    backgroundColor: "#F5F5F5"
+  },
+  fieldGroup: {
+    backgroundColor: "white",
+    paddingLeft: 21,
+    paddingVertical: 17
+  },
+  fieldLabel: {
+    color: "#888",
+    fontSize: 14,
+    paddingBottom: 5
+  },
+  fieldText: {
+    color: "black",
+    fontSize: 22
+  },
+  toolbar: {
+    backgroundColor: "black",
+    height: 56,
+    alignSelf: "stretch"
   }
 });
