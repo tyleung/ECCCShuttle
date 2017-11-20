@@ -43,6 +43,8 @@ export default class Settings extends Component {
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
         />
 
+        <Text style={styles.profileText}>Profile</Text>
+
         {/* Show user's email address */}
         <TouchableOpacity
           style={[
@@ -145,33 +147,5 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 30,
     height: 30
-  },
-  modalContainer: {
-    backgroundColor: "white",
-    borderRadius: 5
-  },
-  modalTitle: {
-    // fontFamily: 'Raleway-Medium',
-    fontSize: 22,
-    padding: 15,
-    paddingTop: 20,
-    color: "red"
-  },
-  modalText: {
-    // fontFamily: 'Raleway-Light',
-    fontSize: 18,
-    paddingHorizontal: 15
-  },
-  modalButtonsContainer: {
-    flexDirection: "row",
-    paddingVertical: 15
-  },
-  modalButtonContainer: {
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  modalButtonText: {
-    // fontFamily: 'Raleway-Medium',
-    fontSize: 18
   }
 });
