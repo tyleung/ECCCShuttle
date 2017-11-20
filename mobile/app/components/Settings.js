@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Alert,
   StyleSheet,
   View,
   Text,
@@ -31,9 +30,15 @@ export default class Settings extends Component {
     });
   }
 
-  editPassword = () => {
-    Alert.alert("Alert", "Oi you pressed the password field");
-  };
+  editFirstName = () => {};
+
+  editLastName = () => {};
+
+  editEmail = () => {};
+
+  editPassword = () => {};
+
+  editLicensePlate = () => {};
 
   render() {
     const { navigate } = this.props.navigation;
@@ -52,7 +57,7 @@ export default class Settings extends Component {
         <View style={styles.fields}>
           <TouchableOpacity
             style={styles.fieldGroup}
-            onPress={this.editPassword}
+            onPress={this.editFirstName}
           >
             <Text style={styles.fieldLabel}>First Name</Text>
             <Text style={styles.fieldText}>{this.state.user.first_name}</Text>
@@ -60,16 +65,13 @@ export default class Settings extends Component {
 
           <TouchableOpacity
             style={styles.fieldGroup}
-            onPress={this.editPassword}
+            onPress={this.editLastName}
           >
             <Text style={styles.fieldLabel}>Last Name</Text>
             <Text style={styles.fieldText}>{this.state.user.last_name}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editPassword}
-          >
+          <TouchableOpacity style={styles.fieldGroup} onPress={this.editEmail}>
             <Text style={styles.fieldLabel}>Email</Text>
             <Text style={styles.fieldText}>{this.state.user.email}</Text>
           </TouchableOpacity>
@@ -91,7 +93,7 @@ export default class Settings extends Component {
 
           <TouchableOpacity
             style={styles.fieldGroup}
-            onPress={this.editPassword}
+            onPress={this.editLicensePlate}
           >
             <Text style={styles.fieldLabel}>License Plate</Text>
             <Text style={styles.fieldText}>
