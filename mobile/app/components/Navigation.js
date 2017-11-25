@@ -22,7 +22,7 @@ import RideHistory from "./RideHistory";
 import Schedule from "./Schedule";
 import Settings from "./Settings";
 import BarcodeScanner from "./BarcodeScanner";
-import EditName from "./EditName";
+import EditAccount from "./EditAccount";
 import EditLicensePlate from "./EditLicensePlate";
 
 const MainPageStackNav = StackNavigator(
@@ -55,13 +55,9 @@ const SettingsPageStackNav = StackNavigator(
       screen: Settings,
       header: { visible: false }
     },
-    EditNameScreen: {
-      screen: EditName,
+    EditAccountScreen: {
+      screen: EditAccount,
       header: { visible: true }
-    },
-    EditLicensePlateScreen: {
-      screen: EditLicensePlate,
-      header: { visible: false }
     },
     LoginScreen: {
       screen: Login

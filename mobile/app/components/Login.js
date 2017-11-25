@@ -115,15 +115,15 @@ export default class Login extends Component {
           {/* Signup and Login buttons */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={styles.c1}
+              style={styles.button1}
               onPress={() => this.props.navigation.navigate("SignupScreen")}
             >
               <View>
-                <Text style={styles.button}>Sign up</Text>
+                <Text style={styles.buttonText}>Sign up</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.c2} onPress={this.loginOnPress}>
-              <Text style={styles.button}>Login</Text>
+            <TouchableOpacity style={styles.button2} onPress={this.loginOnPress}>
+              <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>
         </KeyboardAwareScrollViewCompat>
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 39.5
   },
-  c1: {
+  button1: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 5,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  c2: {
+  button2: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 5,
@@ -207,10 +207,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  button: {
-    borderRadius: 5,
+  buttonText: {
     color: "black",
-    // fontFamily: 'Raleway-Light',
     fontSize: 17
   }
 });

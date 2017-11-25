@@ -11,7 +11,7 @@ import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
 
-export default class Settings extends Component {
+export default class EditAccount extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
     drawerLabel: "Settings"
@@ -30,17 +30,9 @@ export default class Settings extends Component {
     });
   }
 
-  editFirstName = () => {
-    this.props.navigation.navigate("EditNameScreen");
-  };
-
-  editLastName = () => {};
-
-  editEmail = () => {};
-
-  editPassword = () => {};
-
-  editLicensePlate = () => {};
+  save = () => {
+    this.props.navigation.goBack();
+  }
 
   render() {
     return (
@@ -103,10 +95,16 @@ export default class Settings extends Component {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => this.props.navigation.navigate("EditAccountScreen")}
+            style={[styles.button, { marginRight: 5 }]}
+            onPress={() => this.props.navigation.goBack()}
           >
-            <Text style={styles.buttonText}>Edit</Text>
+            <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.save}
+          >
+            <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
