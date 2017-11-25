@@ -11,7 +11,7 @@ import {
   View,
   BackHandler
 } from "react-native";
-import KeyboardAwareScrollViewCompat from "./KeyboardAwareScrollViewCompat";
+import KeyboardAwareScrollViewCompat from "./common/KeyboardAwareScrollViewCompat";
 import Storage from "../services/storage";
 import UserApi from "../services/userApi";
 import { API_TOKEN, USER } from "../utils/constants";

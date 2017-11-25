@@ -11,6 +11,7 @@ import {
 import { NavigationActions } from "react-navigation";
 import { BarCodeScanner, Permissions } from "expo";
 import moment from "moment";
+import Spinner from "./common/Spinner";
 import Storage from "../services/storage";
 import TransactionApi from "../services/transactionApi";
 import UserApi from "../services/userApi";
@@ -42,11 +43,9 @@ export default class BarcodeScanner extends React.Component {
 
       try {
         const decrypted = JSON.parse(
-          CryptoJS.AES
-            .decrypt(data, CRYPTO_KEY, {
-              format: CryptoJSAesJson
-            })
-            .toString(CryptoJS.enc.Utf8)
+          CryptoJS.AES.decrypt(data, CRYPTO_KEY, {
+            format: CryptoJSAesJson
+          }).toString(CryptoJS.enc.Utf8)
         );
 
         const now = moment();
@@ -109,7 +108,7 @@ export default class BarcodeScanner extends React.Component {
     } else {
       const { navigate } = this.props.navigation;
       return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
           {!this.state.isProcessing ? (
             <BarCodeScanner
               onBarCodeRead={this._handleBarCodeRead}
@@ -140,7 +139,9 @@ export default class BarcodeScanner extends React.Component {
                 </View>
               </View>
             </BarCodeScanner>
-          ) : null}
+          ) : (
+            <Spinner />
+          )}
         </View>
       );
     }
@@ -148,6 +149,9 @@ export default class BarcodeScanner extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   customRectangleContainer: {
     flex: 0,
     height: Dimensions.get("window").height,
