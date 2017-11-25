@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
     height: 39.5,
     backgroundColor: "white",
     color: "black",
-    // fontFamily: 'Raleway-Light',
     fontSize: 17,
     textAlignVertical: "center",
     borderRadius: 5

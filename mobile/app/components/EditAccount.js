@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import Storage from "../services/storage";
+import KeyboardAwareScrollViewCompat from "./common/KeyboardAwareScrollViewCompat";
 
 import Navicon from "./../../assets/navicon.png";
 
@@ -25,13 +27,26 @@ export default class EditAccount extends Component {
     });
   }
 
+  onChangeText = (name, text) => {
+    const user = {
+      ...this.state.user,
+      [name]: text
+    };
+
+    this.setState({ user });
+  };
+
+  editEmail = () => {
+    Alert.alert("Edit Account", "Email can't be edited.");
+  };
+
   save = () => {
     this.props.navigation.goBack();
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAwareScrollViewCompat contentContainerStyle={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
           title="Edit Account"
@@ -41,48 +56,67 @@ export default class EditAccount extends Component {
         />
 
         <View style={styles.fields}>
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editFirstName}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>First Name</Text>
-            <Text style={styles.fieldText}>{this.state.user.first_name}</Text>
-          </TouchableOpacity>
+            <TextInput
+              autoCapitalize="words"
+              autoCorrect={false}
+              keyboardType="default"
+              multiline={false}
+              onChangeText={text => this.onChangeText("first_name", text)}
+              style={styles.textInput}
+              underlineColorAndroid={"transparent"}
+              value={this.state.user.first_name}
+            />
+          </View>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editLastName}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>Last Name</Text>
-            <Text style={styles.fieldText}>{this.state.user.last_name}</Text>
-          </TouchableOpacity>
+            <TextInput
+              autoCapitalize="words"
+              autoCorrect={false}
+              keyboardType="default"
+              multiline={false}
+              onChangeText={text => this.onChangeText("last_name", text)}
+              style={styles.textInput}
+              underlineColorAndroid={"transparent"}
+              value={this.state.user.last_name}
+            />
+          </View>
 
-          <TouchableOpacity style={styles.fieldGroup} onPress={this.editEmail}>
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>Email</Text>
-            <Text style={styles.fieldText}>{this.state.user.email}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={this.editEmail}>
+              <Text style={[styles.fieldText, { color: "#888" }]}>
+                {this.state.user.email}
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editPassword}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>Password</Text>
             <TextInput
-              editable={false}
-              onPress={() => this.editPassword}
+              onChangeText={text => this.onChangeText("password", text)}
               secureTextEntry
-              style={styles.fieldText}
+              style={styles.textInput}
               underlineColorAndroid={"transparent"}
               value="*******"
             />
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity style={styles.fieldGroup}>
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>License Plate</Text>
-            <Text style={styles.fieldText}>
-              {this.state.user.license_plate}
-            </Text>
-          </TouchableOpacity>
+            <TextInput
+              autoCapitalize="words"
+              autoCorrect={false}
+              keyboardType="default"
+              multiline={false}
+              onChangeText={text => this.onChangeText("license_plate", text)}
+              style={styles.textInput}
+              underlineColorAndroid={"transparent"}
+              value={this.state.user.license_plate}
+            />
+          </View>
         </View>
 
         <View style={styles.buttons}>
@@ -96,14 +130,14 @@ export default class EditAccount extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAwareScrollViewCompat>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: "white"
   },
   header: {
@@ -122,13 +156,13 @@ const styles = StyleSheet.create({
   },
   fieldGroup: {
     backgroundColor: "white",
-    paddingLeft: 21,
-    paddingVertical: 17
+    paddingHorizontal: 21,
+    paddingVertical: 15
   },
   fieldLabel: {
     color: "#888",
     fontSize: 14,
-    paddingBottom: 5
+    paddingBottom: 10
   },
   fieldText: {
     color: "black",
@@ -138,6 +172,15 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     height: 56,
     alignSelf: "stretch"
+  },
+  textInput: {
+    backgroundColor: "white",
+    color: "black",
+    fontSize: 22,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    padding: 5,
+    margin: -5
   },
   buttons: {
     flex: 1,
