@@ -105,6 +105,24 @@ export default class UserApi {
       });
   };
 
+  static saveUser = async user => {
+    console.log(user);
+    const token = await Storage.getStoredApiToken();
+    return axios
+      .post(`http://shuttle.eccc.ca/api/v1/users/${user.id}`, user, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response);
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   static getLastUserTransaction = async () => {
     const userTransactions = await Storage.getStoredUserTransactions();
     if (userTransactions.length > 0) {

@@ -9,6 +9,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import Storage from "../services/storage";
+import UserApi from "../services/userApi";
+import { USER } from "../utils/constants";
 import KeyboardAwareScrollViewCompat from "./common/KeyboardAwareScrollViewCompat";
 
 import Navicon from "./../../assets/navicon.png";
@@ -17,7 +19,8 @@ export default class EditAccount extends Component {
   constructor() {
     super();
     this.state = {
-      user: {}
+      user: {},
+      password: ""
     };
   }
 
@@ -40,7 +43,13 @@ export default class EditAccount extends Component {
     Alert.alert("Edit Account", "Email can't be edited.");
   };
 
-  save = () => {
+  save = async () => {
+    const user = {
+      ...this.state.user,
+      password: this.state.password
+    };
+    const savedUser = await UserApi.saveUser(user);
+    await Storage.setItem(USER, JSON.stringify(savedUser));
     this.props.navigation.goBack();
   };
 
@@ -94,13 +103,15 @@ export default class EditAccount extends Component {
           </View>
 
           <View style={styles.fieldGroup}>
-            <Text style={styles.fieldLabel}>Password</Text>
+            <Text style={styles.fieldLabel}>
+              New Password (Leave blank if unchanged)
+            </Text>
             <TextInput
               onChangeText={text => this.onChangeText("password", text)}
               secureTextEntry
               style={styles.textInput}
               underlineColorAndroid={"transparent"}
-              value="*******"
+              value={this.state.password}
             />
           </View>
 

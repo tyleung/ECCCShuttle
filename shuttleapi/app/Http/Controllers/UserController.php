@@ -44,7 +44,9 @@ class UserController extends Controller
             $user = User::find($id);
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
-            $user->password = $request->password;
+            if (strlen($request->password) > 0) {
+                $user->password = $request->password;
+            }
             $user->license_plate = $request->license_plate;
             $user->save();
         } finally {
