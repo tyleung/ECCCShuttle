@@ -29,7 +29,7 @@ export default class Schedule extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" Schedule"
+          title="Schedule"
           titleColor="white"
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}

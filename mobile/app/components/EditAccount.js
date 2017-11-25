@@ -12,11 +12,6 @@ import Storage from "../services/storage";
 import Navicon from "./../../assets/navicon.png";
 
 export default class EditAccount extends Component {
-  // Name the drawerLabel for this page
-  static navigationOptions = {
-    drawerLabel: "Settings"
-  };
-
   constructor() {
     super();
     this.state = {
@@ -39,7 +34,7 @@ export default class EditAccount extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" Settings"
+          title="Edit Account"
           titleColor="white"
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}

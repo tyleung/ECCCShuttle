@@ -20,7 +20,7 @@ import Signup from "./Signup";
 import Main from "./Main";
 import RideHistory from "./RideHistory";
 import Schedule from "./Schedule";
-import Settings from "./Settings";
+import Account from "./Account";
 import BarcodeScanner from "./BarcodeScanner";
 import EditAccount from "./EditAccount";
 import EditLicensePlate from "./EditLicensePlate";
@@ -48,11 +48,11 @@ const MainPageStackNav = StackNavigator(
   }
 );
 
-const SettingsPageStackNav = StackNavigator(
+const AccountPageStackNav = StackNavigator(
   {
     // Stack RouteConfigs
-    SettingsScreen: {
-      screen: Settings,
+    AccountScreen: {
+      screen: Account,
       header: { visible: false }
     },
     EditAccountScreen: {
@@ -65,7 +65,7 @@ const SettingsPageStackNav = StackNavigator(
   },
   {
     // Stack configs
-    initialRouteName: "SettingsScreen",
+    initialRouteName: "AccountScreen",
     mode: "card",
     headerMode: "none"
   }
@@ -132,8 +132,8 @@ export const DrawerNav = DrawerNavigator(
     ScheduleScreen: {
       screen: Schedule
     },
-    SettingsScreen: {
-      screen: SettingsPageStackNav
+    AccountScreen: {
+      screen: AccountPageStackNav
     }
   },
   {

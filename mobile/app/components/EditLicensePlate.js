@@ -13,7 +13,7 @@ export default class EditLicensePlate extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" Edit License Plate"
+          title="Edit License Plate"
           titleColor="white"
           navIcon={BackIcon}
           onIconClicked={() => goBack()}

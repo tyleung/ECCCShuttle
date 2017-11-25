@@ -11,10 +11,10 @@ import Storage from "../services/storage";
 
 import Navicon from "./../../assets/navicon.png";
 
-export default class Settings extends Component {
+export default class Account extends Component {
   // Name the drawerLabel for this page
   static navigationOptions = {
-    drawerLabel: "Settings"
+    drawerLabel: "Account"
   };
 
   constructor() {
@@ -47,7 +47,7 @@ export default class Settings extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" Settings"
+          title="Account"
           titleColor="white"
           navIcon={Navicon}
           onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}

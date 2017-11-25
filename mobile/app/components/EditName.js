@@ -13,7 +13,7 @@ export default class EditName extends Component {
       <View style={styles.container}>
         <ToolbarAndroid
           style={styles.toolbar}
-          title=" Edit Name"
+          title="Edit Name"
           titleColor="white"
           navIcon={BackIcon}
           onIconClicked={() => goBack()}
