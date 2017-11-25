@@ -30,18 +30,6 @@ export default class Account extends Component {
     });
   }
 
-  editFirstName = () => {
-    this.props.navigation.navigate("EditNameScreen");
-  };
-
-  editLastName = () => {};
-
-  editEmail = () => {};
-
-  editPassword = () => {};
-
-  editLicensePlate = () => {};
-
   render() {
     return (
       <View style={styles.container}>
@@ -54,31 +42,22 @@ export default class Account extends Component {
         />
 
         <View style={styles.fields}>
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editFirstName}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>First Name</Text>
             <Text style={styles.fieldText}>{this.state.user.first_name}</Text>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editLastName}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>Last Name</Text>
             <Text style={styles.fieldText}>{this.state.user.last_name}</Text>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity style={styles.fieldGroup} onPress={this.editEmail}>
+          <View style={styles.fieldGroup} onPress={this.editEmail}>
             <Text style={styles.fieldLabel}>Email</Text>
             <Text style={styles.fieldText}>{this.state.user.email}</Text>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editPassword}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>Password</Text>
             <TextInput
               editable={false}
@@ -88,17 +67,14 @@ export default class Account extends Component {
               underlineColorAndroid={"transparent"}
               value="*******"
             />
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editLicensePlate}
-          >
+          <View style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>License Plate</Text>
             <Text style={styles.fieldText}>
               {this.state.user.license_plate}
             </Text>
-          </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.buttons}>

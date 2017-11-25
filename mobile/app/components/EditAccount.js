@@ -27,7 +27,7 @@ export default class EditAccount extends Component {
 
   save = () => {
     this.props.navigation.goBack();
-  }
+  };
 
   render() {
     return (
@@ -77,10 +77,7 @@ export default class EditAccount extends Component {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.fieldGroup}
-            onPress={this.editLicensePlate}
-          >
+          <TouchableOpacity style={styles.fieldGroup}>
             <Text style={styles.fieldLabel}>License Plate</Text>
             <Text style={styles.fieldText}>
               {this.state.user.license_plate}
@@ -95,10 +92,7 @@ export default class EditAccount extends Component {
           >
             <Text style={styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.save}
-          >
+          <TouchableOpacity style={styles.button} onPress={this.save}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>

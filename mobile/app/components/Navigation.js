@@ -23,7 +23,6 @@ import Schedule from "./Schedule";
 import Account from "./Account";
 import BarcodeScanner from "./BarcodeScanner";
 import EditAccount from "./EditAccount";
-import EditLicensePlate from "./EditLicensePlate";
 
 const MainPageStackNav = StackNavigator(
   {
