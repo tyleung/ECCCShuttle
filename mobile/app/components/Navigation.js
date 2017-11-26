@@ -78,9 +78,9 @@ class DrawerContent extends Component {
     };
   }
 
-  //componentDidMount() {
-  //  Storage.getStoredUser().then(user => this.setState({ user }));
-  //}
+  componentDidMount() {
+    Storage.getStoredUser().then(user => this.setState({ user }));
+  }
 
   componentWillReceiveProps() {
     Storage.getStoredUser().then(user => this.setState({ user }));
