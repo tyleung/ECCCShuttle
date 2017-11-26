@@ -8,6 +8,7 @@ import {
   ToolbarAndroid,
   TouchableOpacity
 } from "react-native";
+import { NavigationActions } from "react-navigation";
 import Storage from "../services/storage";
 import UserApi from "../services/userApi";
 import { USER } from "../utils/constants";
@@ -50,7 +51,11 @@ export default class EditAccount extends Component {
     };
     const savedUser = await UserApi.saveUser(user);
     await Storage.setItem(USER, JSON.stringify(savedUser));
-    this.props.navigation.goBack();
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "AccountScreen" })]
+    });
+    this.props.navigation.dispatch(resetAction);
   };
 
   render() {
@@ -107,7 +112,7 @@ export default class EditAccount extends Component {
               New Password (Leave blank if unchanged)
             </Text>
             <TextInput
-              onChangeText={text => this.onChangeText("password", text)}
+              onChangeText={text => this.setState({ password: text })}
               secureTextEntry
               style={styles.textInput}
               underlineColorAndroid={"transparent"}
