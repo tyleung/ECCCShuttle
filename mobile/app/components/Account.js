@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
+  NetInfo,
   View,
   Text,
   TextInput,
@@ -29,6 +31,19 @@ export default class Account extends Component {
       this.setState({ user });
     });
   }
+
+  edit = () => {
+    NetInfo.isConnected.fetch().then(async isConnected => {
+      if (!isConnected) {
+        Alert.alert(
+          "No Internet",
+          "Please connect to the internet to edit."
+        );
+      } else {
+        this.props.navigation.navigate("EditAccountScreen");
+      }
+    });
+  };
 
   render() {
     return (
@@ -78,10 +93,7 @@ export default class Account extends Component {
         </View>
 
         <View style={styles.buttons}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this.props.navigation.navigate("EditAccountScreen")}
-          >
+          <TouchableOpacity style={styles.button} onPress={this.edit}>
             <Text style={styles.buttonText}>Edit</Text>
           </TouchableOpacity>
         </View>
