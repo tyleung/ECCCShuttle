@@ -21,6 +21,10 @@ import CryptoJSAesJson from "../utils/CryptoJSAesJson";
 const CryptoJS = require("crypto-js");
 
 export default class BarcodeScanner extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "QR Scanner"
+  };
+
   constructor(props) {
     super(props);
     this.state = {
