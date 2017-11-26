@@ -2,7 +2,7 @@
   "expo": {
     "name": "ECCC Shuttle",
     "icon": "./assets/captain-shuttle-logo.png",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "slug": "eccc-shuttle",
     "sdkVersion": "21.0.0",
     "loading": {
@@ -15,7 +15,8 @@
       "bundleIdentifier": "ca.eccc.shuttle"
     },
     "android": {
-      "package": "ca.eccc.shuttle"
+      "package": "ca.eccc.shuttle",
+      "versionCode": 2
     }
   }
 }
