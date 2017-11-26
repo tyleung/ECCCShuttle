@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import Navicon from "./../../assets/navicon.png";
-import Timetable from "./../../assets/timetable.jpg";
+import Timetable from "./../../assets/timetable.png";
 
 export default class Schedule extends Component {
   // Name the drawerLabel for this page
