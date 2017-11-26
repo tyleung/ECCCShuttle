@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   fieldLabel: {
     color: "#888",
     fontSize: 14,
-    paddingBottom: 10
+    paddingBottom: 5
   },
   fieldText: {
     color: "black",
@@ -178,9 +178,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 22,
     borderBottomColor: "black",
-    borderBottomWidth: 1,
-    padding: 5,
-    margin: -5
+    borderBottomWidth: 1
   },
   buttons: {
     flex: 1,
