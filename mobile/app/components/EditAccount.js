@@ -5,7 +5,6 @@ import {
   View,
   Text,
   TextInput,
-  ToolbarAndroid,
   TouchableOpacity
 } from "react-native";
 import { NavigationActions } from "react-navigation";
@@ -13,10 +12,13 @@ import Storage from "../services/storage";
 import UserApi from "../services/userApi";
 import { USER } from "../utils/constants";
 import KeyboardAwareScrollViewCompat from "./common/KeyboardAwareScrollViewCompat";
-
-import Navicon from "./../../assets/navicon.png";
+import Header from "./common/Header";
 
 export default class EditAccount extends Component {
+  static navigationOptions = {
+    drawerLabel: "Account"
+  };
+
   constructor() {
     super();
     this.state = {
@@ -61,12 +63,10 @@ export default class EditAccount extends Component {
   render() {
     return (
       <KeyboardAwareScrollViewCompat contentContainerStyle={styles.container}>
-        <ToolbarAndroid
-          style={styles.toolbar}
-          title="Edit Account"
-          titleColor="white"
-          navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
+        <Header
+          label="Edit Account"
+          iconName="arrow-back"
+          onPress={() => this.props.navigation.goBack()}
         />
 
         <View style={styles.fields}>
@@ -156,17 +156,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "white"
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    paddingHorizontal: 21,
-    paddingVertical: 17
-  },
-  headerText: {
-    fontSize: 25,
-    color: "black"
-  },
   fields: {
     backgroundColor: "#F5F5F5"
   },
@@ -183,11 +172,6 @@ const styles = StyleSheet.create({
   fieldText: {
     color: "black",
     fontSize: 22
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
   },
   textInput: {
     backgroundColor: "white",

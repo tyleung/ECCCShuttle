@@ -4,13 +4,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ToolbarAndroid,
   FlatList
 } from "react-native";
 import moment from "moment";
 import Storage from "../services/storage";
-
-import Navicon from "./../../assets/navicon.png";
+import Header from "./common/Header";
 
 export default class RideHistory extends Component {
   // Name the drawerLabel for this page
@@ -68,13 +66,11 @@ export default class RideHistory extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarAndroid
-          style={styles.toolbar}
-          title="Ride History"
-          titleColor="white"
-          navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
+        <Header
+          label="Ride History"
+          onPress={() => this.props.navigation.navigate("DrawerOpen")}
         />
+
         {this.state.transactions.length > 0 ? (
           <FlatList
             data={this.state.transactions}
@@ -122,10 +118,5 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: "dimgray",
     paddingVertical: 17
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
   }
 });

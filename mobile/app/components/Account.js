@@ -6,12 +6,10 @@ import {
   View,
   Text,
   TextInput,
-  ToolbarAndroid,
   TouchableOpacity
 } from "react-native";
 import Storage from "../services/storage";
-
-import Navicon from "./../../assets/navicon.png";
+import Header from "./common/Header";
 
 export default class Account extends Component {
   // Name the drawerLabel for this page
@@ -35,10 +33,7 @@ export default class Account extends Component {
   edit = () => {
     NetInfo.isConnected.fetch().then(async isConnected => {
       if (!isConnected) {
-        Alert.alert(
-          "No Internet",
-          "Please connect to the internet to edit."
-        );
+        Alert.alert("No Internet", "Please connect to the internet to edit.");
       } else {
         this.props.navigation.navigate("EditAccountScreen");
       }
@@ -48,12 +43,9 @@ export default class Account extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarAndroid
-          style={styles.toolbar}
-          title="Account"
-          titleColor="white"
-          navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
+        <Header
+          label="Account"
+          onPress={() => this.props.navigation.navigate("DrawerOpen")}
         />
 
         <View style={styles.fields}>
@@ -107,17 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white"
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    paddingHorizontal: 21,
-    paddingVertical: 17
-  },
-  headerText: {
-    fontSize: 25,
-    color: "black"
-  },
   fields: {
     backgroundColor: "#F5F5F5"
   },
@@ -134,11 +115,6 @@ const styles = StyleSheet.create({
   fieldText: {
     color: "black",
     fontSize: 22
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
   },
   buttons: {
     flex: 1,

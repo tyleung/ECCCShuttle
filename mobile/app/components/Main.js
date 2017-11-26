@@ -4,16 +4,15 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Platform,
   Image,
   BackHandler,
   NetInfo,
   Alert
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../services/storage";
 import Helpers from "../utils/helpers";
 
+import Header from "./common/Header";
 import QRIcon from "./../../assets/qricon.png";
 import Refresh from "./../../assets/refresh.png";
 
@@ -86,16 +85,11 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={{ marginTop: Platform.OS === "ios" ? 23 : 10, marginLeft: 10 }}
-          onPress={() => {
-            this.props.navigation.navigate("DrawerOpen");
-          }}
-        >
-          <View>
-            <MaterialIcons name="menu" size={40} />
-          </View>
-        </TouchableOpacity>
+        <Header
+          label=""
+          page="main"
+          onPress={() => this.props.navigation.navigate("DrawerOpen")}
+        />
 
         {/* A button that navigates to QRScanner */}
         <TouchableOpacity
@@ -206,10 +200,5 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 30,
     height: 30
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
   }
 });

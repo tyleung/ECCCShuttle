@@ -5,11 +5,10 @@ import {
   StyleSheet,
   Text,
   View,
-  ToolbarAndroid,
   TouchableOpacity
 } from "react-native";
 
-import Navicon from "./../../assets/navicon.png";
+import Header from "./common/Header";
 import Timetable from "./../../assets/timetable.png";
 
 export default class Schedule extends Component {
@@ -27,12 +26,9 @@ export default class Schedule extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarAndroid
-          style={styles.toolbar}
-          title="Schedule"
-          titleColor="white"
-          navIcon={Navicon}
-          onIconClicked={() => this.props.navigation.navigate("DrawerOpen")}
+        <Header
+          label="Schedule"
+          onPress={() => this.props.navigation.navigate("DrawerOpen")}
         />
         <Image source={Timetable} style={styles.image} />
         <View style={styles.linkContainer}>
@@ -52,11 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5"
-  },
-  toolbar: {
-    backgroundColor: "black",
-    height: 56,
-    alignSelf: "stretch"
   },
   image: {
     flex: 0.5,
