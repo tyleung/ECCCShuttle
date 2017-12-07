@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Platform,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  TouchableOpacity
 } from "react-native";
 import {
   DrawerItems,
@@ -23,6 +24,57 @@ import Schedule from "./Schedule";
 import Account from "./Account";
 import BarcodeScanner from "./BarcodeScanner";
 import EditAccount from "./EditAccount";
+
+
+const ButtonWrapper = ({onPress, navigation}) => {
+  // All Android Buttons should have the ripple effect
+  if (Platform.OS === 'android') {
+    return (
+      <TouchableNativeFeedback
+      background={TouchableNativeFeedback.Ripple(
+        "rgba(0, 0, 0, .32)",
+        false
+      )}
+      onPress={() => {
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: "LoginScreen" })
+          ],
+          key: null
+        });
+        navigation.dispatch(resetAction);
+      }}
+      >
+      <View style={styles.footer}>
+        <Text style={styles.drawerText}>Logout</Text>
+        <MaterialIcons name="exit-to-app" size={22} />
+      </View>
+      </TouchableNativeFeedback>
+    );
+  }
+  return (
+    <TouchableOpacity
+    onPress={() => {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: "LoginScreen" })
+        ],
+        key: null
+      });
+      navigation.dispatch(resetAction);
+    }}
+    >
+    <View style={styles.footer}>
+      <Text style={styles.drawerText}>Logout</Text>
+      <MaterialIcons name="exit-to-app" size={22} />
+    </View>
+    </TouchableOpacity>
+  );
+};
+
+
 
 const MainPageStackNav = StackNavigator(
   {
@@ -97,27 +149,7 @@ class DrawerContent extends Component {
           </View>
           <DrawerItems {...this.props} />
         </View>
-        <TouchableNativeFeedback
-          background={TouchableNativeFeedback.Ripple(
-            "rgba(0, 0, 0, .32)",
-            false
-          )}
-          onPress={() => {
-            const resetAction = NavigationActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({ routeName: "LoginScreen" })
-              ],
-              key: null
-            });
-            this.props.navigation.dispatch(resetAction);
-          }}
-        >
-          <View style={styles.footer}>
-            <Text style={styles.drawerText}>Logout</Text>
-            <MaterialIcons name="exit-to-app" size={22} />
-          </View>
-        </TouchableNativeFeedback>
+        <ButtonWrapper {...this.props} />
       </View>
     );
   }
