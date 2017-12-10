@@ -136,6 +136,7 @@ class DrawerContent extends Component {
           <DrawerItems {...this.props} />
         </View>
         <ButtonWrapper {...this.props} />
+        <Text style={styles.version}>v1.0.1</Text>
       </View>
     );
   }
@@ -229,7 +230,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginBottom: 8
+    paddingVertical: 10
+  },
+  version: {
+    textAlign: "right",
+    paddingHorizontal: 10,
+    marginBottom: 5,
+    fontSize: 10,
+    color: "dimgray"
   }
 });
