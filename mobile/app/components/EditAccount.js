@@ -22,6 +22,7 @@ export default class EditAccount extends Component {
   constructor() {
     super();
     this.state = {
+      isLoading: false,
       user: {},
       password: ""
     };
@@ -47,6 +48,7 @@ export default class EditAccount extends Component {
   };
 
   save = async () => {
+    this.setState({ isLoading: true });
     const user = {
       ...this.state.user,
       password: this.state.password
@@ -58,6 +60,7 @@ export default class EditAccount extends Component {
       actions: [NavigationActions.navigate({ routeName: "AccountScreen" })]
     });
     this.props.navigation.dispatch(resetAction);
+    this.setState({ isLoading: false });
   };
 
   render() {
@@ -139,10 +142,15 @@ export default class EditAccount extends Component {
           <TouchableOpacity
             style={[styles.button, { marginRight: 5 }]}
             onPress={() => this.props.navigation.goBack()}
+            disabled={this.state.isLoading}
           >
             <Text style={styles.buttonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.save}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.save}
+            disabled={this.state.isLoading}
+          >
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>

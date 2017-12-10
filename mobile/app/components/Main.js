@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
   BackHandler,
-  NetInfo,
   Alert
 } from "react-native";
 import Storage from "../services/storage";
@@ -46,7 +45,8 @@ export default class Main extends Component {
   }
 
   refresh = () => {
-    NetInfo.isConnected.fetch().then(async isConnected => {
+    this.setState({ isLoading: true });
+    Helpers.isNetworkConnected().then(async isConnected => {
       if (!isConnected) {
         Alert.alert(
           "No Internet",
@@ -63,7 +63,7 @@ export default class Main extends Component {
         });
       }
 
-      this.setState({ isSynced: true });
+      this.setState({ isLoading: false, isSynced: true });
       Alert.alert("Refresh", "Refresh complete.");
     });
   };
@@ -79,7 +79,7 @@ export default class Main extends Component {
       }
     }
 
-    return null;
+    return <Text style={styles.textSynced}>&nbsp;</Text>;
   };
 
   render() {
@@ -121,7 +121,11 @@ export default class Main extends Component {
         {this.renderSyncMessage()}
 
         {/* Refresh button */}
-        <TouchableOpacity style={styles.refresh} onPress={this.refresh}>
+        <TouchableOpacity
+          style={styles.refresh}
+          onPress={this.refresh}
+          disabled={this.state.isLoading}
+        >
           <View
             style={{
               flex: 0.25,

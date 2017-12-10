@@ -2,7 +2,6 @@ import React from "react";
 import {
   Alert,
   Dimensions,
-  NetInfo,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,6 +16,7 @@ import TransactionApi from "../services/transactionApi";
 import UserApi from "../services/userApi";
 import { CRYPTO_KEY, TransactionType } from "../utils/constants";
 import CryptoJSAesJson from "../utils/CryptoJSAesJson";
+import Helpers from "../utils/helpers";
 
 const CryptoJS = require("crypto-js");
 
@@ -67,7 +67,7 @@ export default class BarcodeScanner extends React.Component {
                 await TransactionApi.createTransaction(TransactionType.RIDE);
 
                 // Save transaction to server if there's internet.
-                NetInfo.isConnected.fetch().then(async isConnected => {
+                Helpers.isNetworkConnected().then(async isConnected => {
                   if (isConnected) {
                     const user = await Storage.getStoredUser();
                     await Storage.mergeTransactionsToStorage(user.id);

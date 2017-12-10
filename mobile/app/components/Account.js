@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import {
   Alert,
   StyleSheet,
-  NetInfo,
   View,
   Text,
   TextInput,
   TouchableOpacity
 } from "react-native";
 import Storage from "../services/storage";
+import Helpers from "../utils/helpers";
 import Header from "./common/Header";
 
 export default class Account extends Component {
@@ -31,7 +31,7 @@ export default class Account extends Component {
   }
 
   edit = () => {
-    NetInfo.isConnected.fetch().then(async isConnected => {
+    Helpers.isNetworkConnected().then(async isConnected => {
       if (!isConnected) {
         Alert.alert("No Internet", "Please connect to the internet to edit.");
       } else {
