@@ -25,56 +25,42 @@ import Account from "./Account";
 import BarcodeScanner from "./BarcodeScanner";
 import EditAccount from "./EditAccount";
 
+const ButtonWrapper = props => {
+  const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: "LoginScreen" })],
+    key: null
+  });
 
-const ButtonWrapper = ({onPress, navigation}) => {
   // All Android Buttons should have the ripple effect
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     return (
       <TouchableNativeFeedback
-      background={TouchableNativeFeedback.Ripple(
-        "rgba(0, 0, 0, .32)",
-        false
-      )}
-      onPress={() => {
-        const resetAction = NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: "LoginScreen" })
-          ],
-          key: null
-        });
-        navigation.dispatch(resetAction);
-      }}
+        background={TouchableNativeFeedback.Ripple("rgba(0, 0, 0, .32)", false)}
+        onPress={() => {
+          props.navigation.dispatch(resetAction);
+        }}
       >
-      <View style={styles.footer}>
-        <Text style={styles.drawerText}>Logout</Text>
-        <MaterialIcons name="exit-to-app" size={22} />
-      </View>
+        <View style={styles.footer}>
+          <Text style={styles.drawerText}>Logout</Text>
+          <MaterialIcons name="exit-to-app" size={22} />
+        </View>
       </TouchableNativeFeedback>
     );
   }
   return (
     <TouchableOpacity
-    onPress={() => {
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: "LoginScreen" })
-        ],
-        key: null
-      });
-      navigation.dispatch(resetAction);
-    }}
+      onPress={() => {
+        props.navigation.dispatch(resetAction);
+      }}
     >
-    <View style={styles.footer}>
-      <Text style={styles.drawerText}>Logout</Text>
-      <MaterialIcons name="exit-to-app" size={22} />
-    </View>
+      <View style={styles.footer}>
+        <Text style={styles.drawerText}>Logout</Text>
+        <MaterialIcons name="exit-to-app" size={22} />
+      </View>
     </TouchableOpacity>
   );
 };
-
-
 
 const MainPageStackNav = StackNavigator(
   {
