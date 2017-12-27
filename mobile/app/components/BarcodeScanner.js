@@ -61,8 +61,9 @@ export default class BarcodeScanner extends React.Component {
               // transaction wasn't today, save a new transaction.
               if (
                 !lastUserTransaction.transaction_date ||
-                lastUserTransaction.transaction_date <
-                  now.format("YYYY-MM-DD hh:mm:ss")
+                moment(lastUserTransaction.transaction_date).format(
+                  "YYYY-MM-DD"
+                ) < nowYYYYMMDD
               ) {
                 await TransactionApi.createTransaction(TransactionType.RIDE);
 
