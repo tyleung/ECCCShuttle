@@ -136,7 +136,7 @@ class DrawerContent extends Component {
           <DrawerItems {...this.props} />
         </View>
         <ButtonWrapper {...this.props} />
-        <Text style={styles.version}>v1.0.1</Text>
+        <Text style={styles.version}>v1.1.0</Text>
       </View>
     );
   }
