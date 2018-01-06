@@ -19,7 +19,7 @@ export default class Schedule extends Component {
 
   onSchedulePress = () => {
     Linking.openURL(
-      "https://docs.google.com/spreadsheets/d/1iwjPaej1k6bvxmqZ6uVUOJLP8x65YFzafIEy9K2gZrU/edit?usp=drivesdk"
+      "https://docs.google.com/spreadsheets/d/1dXbVbj6q4szmH2i-3heBU1uTLhINbqA0-yqorLe8gbg/edit#gid=1758874583"
     );
   };
 
